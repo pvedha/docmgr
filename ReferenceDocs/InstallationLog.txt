@@ -1,0 +1,10 @@
+<dependency>
+		    <groupId>com.oracle</groupId>
+		    <artifactId>ojdbc14</artifactId>
+		    <version>10.2.0.1.0</version>
+</dependency>
+
+
+To Install Oracle ojdbc14.jar
+mvn install:install-file -Dfile="D:/softwares/oracle/ojdbc14.jar" -DgroupId="com.oracle" -DartifactId=ojdbc14 -Dversion="10.2.0.1.0" -Dpackaging=jar
+

@@ -1,0 +1,13 @@
+insert into post values(1, 'hello','first message', 'pvedha', sysdate, 'sachin century', 'sports');
+insert into post values(2, 'hello','first message', 'pvedha', sysdate, 'sachin century', 'sports');
+insert into post values(3, 'cinema news','some actor acted on some moview', 'pvedha', sysdate, 'someactor somemoview', 'entertainment');
+
+create table post (post_id number(5), title nvarchar2(250), message nvarchar2(1000), posted_by nvarchar2(50), posted_on date, tags nvarchar2(100), category nvarchar2(50), 
+constraint fk_user FOREIGN KEY (POSTED_BY) REFERENCES BLOGUSER(userid), constraint pk_postid PRIMARY KEY(post_id));
+
+insert into bloguser values ('pvedha','Praveen Vedha','1','A software engineer who knows nothing');
+
+
+drop table post;
+
+ALTER TABLE POST FOREIGN KEY FK_USER ("POSTED_BY") REFERENCES BLOGUSER ("USERID")
