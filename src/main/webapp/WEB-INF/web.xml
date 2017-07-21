@@ -22,6 +22,6 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>jersey</servlet-name>
-		<url-pattern>/blog/*</url-pattern>
+		<url-pattern>/doc/*</url-pattern>
 	</servlet-mapping>
 </web-app>

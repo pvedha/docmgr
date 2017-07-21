@@ -192,10 +192,6 @@ function authenticate(userId, password) {
         accept: 'application/json',
         global: false,
         success: function (response) {
-            //$("#viewForm").hide();
-            //            console.log("Valid user");
-            //<img id='current-user-icon' src='img/48px-User_icon_2.svg.png'/> 
-            //$("#current-user-icon").css("filter", "none");
             loadMainPage(response);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -353,12 +349,22 @@ function loadMainPage(response) {
     $("#post-comment-button").prop("disabled", false);
     $("#comment-textarea").prop("disabled", false);
 
-    //Chat.initialize();
-    setTimeout(function () {
-        Chat.loginMessage("Just logged in.")
-    }, 3000);
+    loadDashboardLinks(response.jobtitle);
+
 }
 
+function loadDashboardLinks(jobtitle) {
+    if (jobtitle == "Administrator") {
+        dashBoardLinkHtml = "<a class='quicklink-links' href='#' onClick=readAllUsers()>My Action Items</a>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllUsers()>Show All Users</a>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Show All Students</a>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Load All Posts</a>";
+        $("#dashboard-links").html(dashBoardLinkHtml);
+        $("#category-links").html(dashBoardLinkHtml);
+        console.log(dashBoardLinkHtml);
+
+    }
+}
 
 function loadContents() {
     retrieveCategory();

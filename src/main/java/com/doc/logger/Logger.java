@@ -1,4 +1,4 @@
-package com.blog.logger;
+package com.doc.logger;
 
 public class Logger {
 	

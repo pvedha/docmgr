@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!--    <link rel="icon" href="../../favicon.ico">-->
-    <title>My Very Own Blog Site</title>
+    <title>kriyAdveSin Document Manager</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -22,7 +22,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src='js/angular.js'></script>
     <script src='js/blogAngular.js'></script>
-    <script src="js/signing.js"></script>
+    <script src="js/access.js"></script>
     <script src="js/post.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/blogModal.js"></script>
@@ -45,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">CMAD Blog Site</a>
+                <a class="navbar-brand" href="#">kriyAdveSin Doc Mgr</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form id="LoginForm" class="navbar-form navbar-right">
@@ -140,25 +140,24 @@
                         <div>
                             <div class="panel panel-info">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Quick Links</h3>
+                                    <h3 class="panel-title">My Dashboard</h3>
                                 </div>
                             </div>
-                            <a class='quicklink-links' href='#' onClick=readAllPosts()>Load All Posts</a>
-                            <h4>By Category</h4>
-                            <div id="category-links"></div>
+                            <div id="dashboard-links">
+<!--                                <a class='quicklink-links' href='#' onClick=readAllPosts()>Load All Posts</a>-->
+                                <h4>By Category</h4>
+                                <div id="category-links"></div>
+                            </div>
                         </div>
-                        <div>
-                            <h4>Favourite Posts</h4>
-                            <div id="favourite-links"></div>
-                        </div>
+
                     </div>
                 </div>
-                <div id="main-contents-div" ondragstart="drag(event)" draggable="true" class="col-md-8">
+                <div id="main-contents-div" ondragstart="drag(event)" draggable="true" class="col-md-10">
                     <div id="main-content-draggable-div">
                         <div id="post-div">
                             <div class="panel panel-info affixed">
                                 <div class="panel-heading">
-                                    <h3 id="posts-heading" class="panel-title center">Latest Posts</h3>
+                                    <h3 id="posts-heading" class="panel-title center">Welcome to kriyAdveSin Document Management</h3>
                                 </div>
                             </div>
                             <h4 id="post-info"></h4>
@@ -263,34 +262,6 @@
                         </div>
                     </div>
                 </div>
-                <div id="chat-div" draggable="true" ondragstart="drag(event)" class="col-md-2 main-content-div">
-                    <div id="chat-div-draggable" class="affixed">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Blog Chat</h3>
-                            </div>
-                        </div>
-                        <div id="show-chat-div" class="sub-content-div">
-                            <p id="chat-connection"></p>
-                            <div id="BlogChatController-Div" ng-controller="BlogPostController">
-
-                                <table class="table">
-                                    <tr ng-repeat='c in chats'>
-                                        <td>
-                                            <p class='chat-message'> {{c.message}} </p>
-                                            <p class='chat-detail'> <span class='glyphicon glyphicon-user'></span> <b>{{c.userName}},</b>
-                                                <span class='glyphicon glyphicon-time'></span>{{c.time}}
-                                        </td>
-
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <textarea name="new-chat-message" id="new-chat-message" rows="3" title="Your chat message and press Enter to send" placeholder="Your chat message..." class="form-control"></textarea>
-                        <!--                        <button type="button" class="btn btn-success" id="newChat-submit-button">send</button>-->
-                    </div>
-                </div>
-
             </div>
         </div>
         <hr>
@@ -324,7 +295,8 @@
         </div>
 
         <footer>
-            <p align="center">A <a id="showAbout">project</a> by Praveen Vedha and Aswin Kuppusami, &copy; 2017 Bogus Inc.</p>
+            <!--            <p align="center">A <a id="showAbout">project</a> by Praveen Vedha and Aswin Kuppusami, &copy; 2017 Bogus Inc.</p>-->
+            <p align="center">A project for kriyAdveSin, &copy; 2017 Bogus Inc.</p>
         </footer>
     </div>
     <!-- /container -->

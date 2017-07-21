@@ -1,10 +1,10 @@
-package com.blog.dto;
+package com.doc.dto;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.blog.logger.Logger;
+import com.doc.logger.Logger;
 
 public class AuthenticationDto {
 
