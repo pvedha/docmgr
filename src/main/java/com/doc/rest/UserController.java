@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import com.doc.dto.AuthenticationDto;
 import com.doc.mgr.UserManager;
 
@@ -23,10 +24,7 @@ public class UserController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public Response readAllUsers() {
-		// Blog blog = new Blog();
-		// ArrayList<BlogUser> blogUsers = blog.readAllUsers();
-		// return Response.ok().entity(blogUsers).build();
-		return Response.ok().entity("ONEMAN").build();
+		return Response.ok().entity(mgr.readAllUsers()).build();
 	}
 
 	@GET
@@ -40,5 +38,17 @@ public class UserController {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/validate")
+	public Response validateSession(@HeaderParam("userId") String userId, @HeaderParam("token") String token) {
+		AuthenticationDto response = mgr.validateSession(userId, token);
+		if (response == null) {
+			return Response.status(Status.FORBIDDEN).build();
+		}
+		return Response.ok().entity(response).build();
+	}
+
 
 }

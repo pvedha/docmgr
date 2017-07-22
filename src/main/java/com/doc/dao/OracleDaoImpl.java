@@ -28,10 +28,14 @@ public class OracleDaoImpl implements DAO {
 		return 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DocUser> readAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = factory.createEntityManager();
+		ArrayList<DocUser> docUsers = (ArrayList<DocUser>) em
+				.createNativeQuery("select * from docuser", DocUser.class).getResultList();
+		em.close();
+		return docUsers;
 	}
 
 	@Override
@@ -58,8 +62,10 @@ public class OracleDaoImpl implements DAO {
 
 	@Override
 	public DocUser getUser(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = factory.createEntityManager();
+		DocUser user = em.find(DocUser.class, userId);
+		em.close();
+		return user;
 	}
 
 	@Override

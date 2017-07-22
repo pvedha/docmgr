@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="BlogPostApp">
+<html lang="en" ng-app="DocApp">
 
 <head>
     <meta charset="utf-8">
@@ -21,9 +21,11 @@
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src='js/angular.js'></script>
-    <script src='js/blogAngular.js'></script>
+    <script src='js/docAngular.js'></script>
     <script src="js/access.js"></script>
     <script src="js/post.js"></script>
+    <script src="js/views.js"></script>
+    <script src="js/users.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/blogModal.js"></script>
 
@@ -144,9 +146,11 @@
                                 </div>
                             </div>
                             <div id="dashboard-links">
-<!--                                <a class='quicklink-links' href='#' onClick=readAllPosts()>Load All Posts</a>-->
+                                <!--                                <a class='quicklink-links' href='#' onClick=readAllPosts()>Load All Posts</a>-->
+                                <!--
                                 <h4>By Category</h4>
                                 <div id="category-links"></div>
+-->
                             </div>
                         </div>
 
@@ -154,19 +158,43 @@
                 </div>
                 <div id="main-contents-div" ondragstart="drag(event)" draggable="true" class="col-md-10">
                     <div id="main-content-draggable-div">
-                        <div id="post-div">
+                        <div id="main-page-div">
                             <div class="panel panel-info affixed">
                                 <div class="panel-heading">
                                     <h3 id="posts-heading" class="panel-title center">Welcome to kriyAdveSin Document Management</h3>
                                 </div>
                             </div>
-                            <h4 id="post-info"></h4>
-                            <div id="BlogPostController-Div" ng-controller="BlogPostController">
 
+                            <div id="WelcomePage-Div">
+                                <h3>Welcome to kriyAdveSin Doc Manager</h3>
+                                <h4>Something goes here. TODO</h4>
+                                <p>Some intro about this app. TODO</p>
+                            </div>
+                            <div id="DocController-Div" ng-controller="DocController">
                                 <table class="table">
-                                    <!--				<tr><th>Title</th><th>Message</th></tr>-->
-                                    <tr ng-repeat='p in posts'>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Title</th>
+                                        <th>About</th>
+                                        <th>Email ID</th>
+                                        <th>Phone</th>
+                                        <th>Actions</th>
+                                        <th>Reset Pwd</th>
+                                    </tr>
+                                    <tr ng-repeat='u in users'>
+                                        <td>{{u.userId}}</td>
+                                        <td>{{u.userName}}</td>
+                                        <td>{{u.jobTitle}}</td>
+                                        <td>{{u.about}}</td>
+                                        <td>{{u.email}}</td>
+                                        <td>{{u.phone}}</td>
+                                        <td>{{u.actions}}</td>
                                         <td>
+                                            <button id="reset-pwd-button" class="btn1">Reset Pwd</button>
+                                        </td>
+
+                                        <!--
                                             <a href="#" onclick=viewPost({{p.postId}})>
                                                 <p class='post-title'>{{p.title}}</p>
                                             </a>
@@ -174,54 +202,39 @@
                                             <p class='post-detail'> <span class='glyphicon glyphicon-user'></span> <b>{{p.userName}}</b> ,
                                                 <span>   </span> <span class='glyphicon glyphicon-time'></span> : {{p.postedOn}} ,
                                                 <span class='glyphicon glyphicon-comment'></span> <span class='badge'>{{p.commentsCount}}</span></p>
-                                        </td>
-
+-->
+                                        <!--                                        </td>-->
                                     </tr>
                                 </table>
                             </div>
                             <div class="panel panel-info">
                                 <div class="panel-heading">
-                                    <div id="loading-more">
+                                    <div id="status-message-div">
                                         <center>
-                                            <h3 class="panel-title">Loading More Posts .... <img style="width:24px;height:24px;" src="img/loading_128.gif"> </h3>
-                                        </center>
-                                    </div>
-                                    <div id="thats-all">
-                                        <center>
-                                            <h3 class="panel-title">Thats all for now. Go get a life!</h3>
+                                            <h3 id="status-message" class="panel-title"></h3>
                                         </center>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="view-post-div">
+                        <div id="user-profile-div">
                             <div class="panel panel-info">
                                 <div class="panel-heading">
-                                    <h3 id="posts-heading" class="panel-title center">View Post</h3>
+                                    <h3 class="panel-title center">Your Profile</h3>
                                 </div>
                             </div>
-                            <h4 id="view-post-info"></h4>
-                            <p id="view-post-title" class="view-post-title">Title Comes here</p>
-                            <p id="view-post-message" class="post-message">The post message comes here</p>
-                            <div class="view-post-detail-div">
-                                <p id="view-post-by" class="view-post-detail">Posted by : <b>User Name</b> </p>
-                                <p id="view-post-time" class="view-post-detail">Posted On : <b>time comes here</b></p>
-                                <p id="view-post-tags" class="view-post-detail">Tags : <b>tags comes here</b></p>
-                                <p id="view-post-category" class="view-post-detail">Category : <b>category comes here</b></p>
+                            <h4 id="user-profile-info"></h4>
+                            <div id="user-profile-contents">
+                                <form class="signin-form" id="user-profile-form">
+                                    <div id="user-profile-fixed" title="Non editable fields">User ID : <b>PVedha</b>
+                                        <br>Name : <b>Praveen Vedha</b></div>
+                                    <input type="text" name="view-profile-newPassword" class="" id="view-profile-newPassword" placeholder="Your new password, leave it blank not to update" /> About Yourself :
+                                    <textarea name="view-profile-about" id="view-profile-about" rows="3" placeholder="Few lines about yourself"></textarea>
+                                    <button type="button" class="disabled-button" id="user-profile-update" onClick="updateProfile()">Update</button>
+                                </form>
                             </div>
-                            <hr>
-                            <div id="add-favourite-div"></div>
-                            <hr>
-                            <p class="quicklink-title"> Comments </p>
-                            <div id="view-post-comments-div"></div>
-                            <hr>
-                            <form id="post-comment-form" class="signin-form">
-                                <textarea id="comment-textarea" placeholder="Enter your comment"></textarea>
-                                <button id="post-comment-button" class="btn1">Post Comment</button>
-                                <h4 id="new-comment-info"></h4>
-                            </form>
-                            <div id="view-post-comments"></div>
                         </div>
+                        <!--
                         <div id="new-post-div">
                             <div class="panel panel-info">
                                 <div class="panel-heading">
@@ -242,24 +255,9 @@
                                 </form>
                             </div>
                         </div>
+-->
 
-                        <div id="user-profile-div">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title center">Your Profile</h3>
-                                </div>
-                            </div>
-                            <h4 id="user-profile-info"></h4>
-                            <div id="user-profile-contents">
-                                <form class="signin-form" id="user-profile-form">
-                                    <div id="user-profile-fixed" title="Non editable fields">User ID : <b>PVedha</b>
-                                        <br>Name : <b>Praveen Vedha</b></div>
-                                    <input type="text" name="view-profile-newPassword" class="" id="view-profile-newPassword" placeholder="Your new password, leave it blank not to update" /> About Yourself :
-                                    <textarea name="view-profile-about" id="view-profile-about" rows="3" placeholder="Few lines about yourself"></textarea>
-                                    <button type="button" class="disabled-button" id="user-profile-update" onClick="updateProfile()">Update</button>
-                                </form>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

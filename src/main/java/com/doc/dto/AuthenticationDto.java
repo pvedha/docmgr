@@ -6,12 +6,16 @@ import java.security.NoSuchAlgorithmException;
 
 import com.doc.logger.Logger;
 
+import lombok.Data;
+
+@Data
 public class AuthenticationDto {
 
 	private String userId;
 	private String name;
 	private String about;
 	private String token;
+	private String jobTitle;
 	
 	public String genToken(String userId) {
 		
@@ -35,45 +39,14 @@ public class AuthenticationDto {
 		
 	}
 	
-	public AuthenticationDto(String userId, String name, String about) {
+	public AuthenticationDto(String userId, String name, String about, String jobTitle) {
 		super();
 		this.userId = userId;
 		this.name = name;
 		this.about = about;
 		this.setToken(this.genToken(userId));
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getAbout() {
-		return about;
-	}
-
-	public void setAbout(String about) {
-		this.about = about;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
+		this.jobTitle = jobTitle;
+	}	
 
 	public AuthenticationDto() {
 		// do nothing, needed for bean		

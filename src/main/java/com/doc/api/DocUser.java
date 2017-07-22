@@ -23,6 +23,10 @@ public class DocUser {
 	protected String name;
 	@FormParam("password")
 	protected String password;
+	@FormParam("email")
+	protected String email;
+	@FormParam("phone")
+	protected String phone;
 	@FormParam("about")
 	protected String about;
 	@FormParam("jobtitle")
@@ -34,5 +38,8 @@ public class DocUser {
 		
 	}
 
+	public String getJobTitleString(){
+		return jobtitle.getTitle();
+	}
 
 }

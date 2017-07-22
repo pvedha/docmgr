@@ -13,7 +13,7 @@ var currentPost;
 var currentUserFavouriteList = [];
 var userHasFavourites = false;
 var loadSamePost = false;
-var postControllerAngular; // = angular.element($('#BlogPostController-Div')).scope();
+var docControllerAngular; // = angular.element($('#BlogPostController-Div')).scope();
 
 
 //Dev settings
@@ -91,7 +91,7 @@ $(document).ready(function () {
             addComment();
         });
 
-    postControllerAngular = angular.element($('#BlogPostController-Div')).scope();
+    docControllerAngular = angular.element($('#DocController-Div')).scope();
 
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -206,7 +206,6 @@ function validateSession() {
     var userId = localStorage.getItem("userId");
     var token = localStorage.getItem("token");
     $.ajax({
-
         url: baseURL + '/user/validate',
         type: 'get',
         accept: 'application/json',
@@ -216,17 +215,11 @@ function validateSession() {
             "userId": userId
         },
         success: function (response) {
-            //$("#viewForm").hide();
-            //            console.log("user logged in already");
-            //<img id='current-user-icon' src='img/48px-User_icon_2.svg.png'/> 
-            //$("#current-user-icon").css("filter", "none");
             loadMainPage(response);
 
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             log("Invalid user credentials");
-            //$("#loginMessage").html("Invalid crendentials, please try again");
-            //$("#login-message").css({ 'color': 'green', 'font-size': '100%' });
             showLoginPage();
             $("#Logged").hide();
             $("#LoggedInForm").hide();
@@ -327,42 +320,13 @@ function signOut() {
 }
 
 
-
-
-function loadMainPage(response) {
-    token = response.token; //new token?
-    $("#current-user-icon").html("<img src='img/48px-User_icon_2.svg.png' class='img-normal'/>");
-    $("#user-detail-div").html("<b>" + response.name + "</b><p><i>" + response.about);
-    currentUserId = response.userId;
-    currentUserDetails = response;
-    $("#user-button").html("<span class='glyphicon glyphicon-user' > </span>" + response.name);
-    localStorage.setItem("userId", response.userId);
-    localStorage.setItem("token", response.token);
-    //    console.log("user id assigned" + currentUserId + "complete response " + response);
-    $("#LoginForm").hide();
-    $("#NotLogged").hide();
-    $("#LoggedInForm").show();
-    $("#mainPage").show().fadeIn(50000); //to be removed in new version
-    $("#mainPage").fadeIn(5000); // to be removed in new version.   
-    //$("#newChat - submit - button").prop("disabled", false);
-    $("#new-chat-message").prop("disabled", false);
-    $("#post-comment-button").prop("disabled", false);
-    $("#comment-textarea").prop("disabled", false);
-
-    loadDashboardLinks(response.jobtitle);
-
-}
-
-function loadDashboardLinks(jobtitle) {
-    if (jobtitle == "Administrator") {
-        dashBoardLinkHtml = "<a class='quicklink-links' href='#' onClick=readAllUsers()>My Action Items</a>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllUsers()>Show All Users</a>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Show All Students</a>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Load All Posts</a>";
+function loadDashboardLinks(jobTitle) {
+    if (jobTitle == "Administrator") {
+        dashBoardLinkHtml = "<a class='quicklink-links' href='#' onClick=readAllUsers()>My Action Items</a><p>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllUsers()>Show All Users</a><p>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Show All Students</a><p>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Load All Posts</a><p>";
         $("#dashboard-links").html(dashBoardLinkHtml);
-        $("#category-links").html(dashBoardLinkHtml);
-        console.log(dashBoardLinkHtml);
-
     }
 }
 
