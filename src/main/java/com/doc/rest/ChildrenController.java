@@ -20,25 +20,23 @@ import com.doc.utilities.Logger;
 @Path("/child")
 public class ChildrenController {
 	private ChildrenManager mgr = new ChildrenManager();
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
 	public Response readAllChildren() {
 		return Response.ok().entity(mgr.readAllChildren()).build();
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/addChild")
-	public Response addChild(ChildrenDto childDto) throws InvalidUserException, DuplicateUserException {	
-		Logger.log("Adding child in controller");
-		try {
-			Logger.log(childDto.toString());
-			int number = mgr.addChild(childDto);			
+	public Response addChild(ChildrenDto childDto) throws DuplicateUserException {
+		try{
+			int number = mgr.addChild(childDto);
 			return Response.ok().entity(Integer.toString(number)).build();
 		} catch (Exception e) {
-			return Response.status(Status.CONFLICT).entity("Invalid User Details").build();
+			throw new DuplicateUserException("Why this happening");
 		}
 	}
 }

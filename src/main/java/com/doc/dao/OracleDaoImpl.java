@@ -63,7 +63,7 @@ public class OracleDaoImpl implements DAO {
 	public int addChild(ChildrenDto child){
 		EntityManager em = factory.createEntityManager();
 		if(em.find(Children.class, child.getId())  != null ){
-			throw new DuplicateUserException();
+			throw new DuplicateUserException(child.getId() + "");
 		};
 		DocUser teacher = em.find(DocUser.class, child.getTeacher());
 		if(teacher == null){
