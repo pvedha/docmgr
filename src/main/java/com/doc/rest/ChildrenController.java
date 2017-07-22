@@ -31,8 +31,10 @@ public class ChildrenController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/addChild")
-	public Response addStaff(ChildrenDto childDto) throws InvalidUserException, DuplicateUserException {	
+	public Response addChild(ChildrenDto childDto) throws InvalidUserException, DuplicateUserException {	
+		Logger.log("Adding child in controller");
 		try {
+			Logger.log(childDto.toString());
 			int number = mgr.addChild(childDto);			
 			return Response.ok().entity(Integer.toString(number)).build();
 		} catch (Exception e) {

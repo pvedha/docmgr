@@ -65,23 +65,21 @@ public class OracleDaoImpl implements DAO {
 		if(em.find(Children.class, child.getId())  != null ){
 			throw new DuplicateUserException();
 		};
-		
 		DocUser teacher = em.find(DocUser.class, child.getTeacher());
 		if(teacher == null){
 			throw new StaffNotFoundException(child.getTeacher());
 		}
-		
 		DocUser councillor = em.find(DocUser.class, child.getCouncillor());
 		if(councillor == null){
 			throw new StaffNotFoundException(child.getCouncillor());
 		}
-		
 		DocUser therapist = em.find(DocUser.class, child.getTherapist());
 		if(therapist == null){
 			throw new StaffNotFoundException(child.getTherapist());
-		}
+		}	
 		Children children = new Children();
 		children.setId(child.getId());
+		children.setName(child.getName());
 		children.setDob(Utilities.getTimeStamp(child.getDob()));
 		children.setDoj(Utilities.getTimeStamp(child.getDoj()));
 		children.setRemarks(child.getRemarks());

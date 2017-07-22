@@ -9,4 +9,7 @@ public class Logger {
 		System.out.println(message);
 	}
 
+	public static void log(int message){
+		System.out.println(message);
+	}
 }

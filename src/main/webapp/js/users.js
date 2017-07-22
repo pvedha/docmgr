@@ -6,9 +6,28 @@ function initAllUsers() {
         global: false,
         success: function (response) {
             staffs = response;
+            setStaffRoles();
         }
     })
 };
+
+function setStaffRoles() {
+    var teachers = document.getElementById("child-teacher");
+    var councillors = document.getElementById("child-councillor");
+    var therapists = document.getElementById("child-therapist");
+    for (i = 0; i < staffs.length; i++) {
+        addStaffRoleToSelect(teachers, staffs[i]);
+        addStaffRoleToSelect(councillors, staffs[i]);
+        addStaffRoleToSelect(therapists, staffs[i]);
+    }
+}
+
+function addStaffRoleToSelect(selectOption, staff) {
+    var option = document.createElement("option");
+    option.text = staff.userName + "(" + staff.userId + ")";
+    option.value = staff.userId;
+    selectOption.add(option);
+}
 
 function readAllUsers() {
     $.ajax({
@@ -94,6 +113,7 @@ function displayChildren(response) {
 
 function addChild() {
 
+    var option = $("#child-therapist");
     var id = $("#child-roll-no").val();
     var name = $("#child-name").val();
     var dob = $("#child-dob").val();
@@ -124,7 +144,7 @@ function addChild() {
         tags: tags
     };
     $.ajax({
-        url: baseURL + '/user/addChild',
+        url: baseURL + '/child/addChild',
         type: 'post',
         contentType: 'application/json',
         global: false,

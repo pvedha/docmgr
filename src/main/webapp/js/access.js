@@ -22,7 +22,6 @@ var staffs = [];
 var infiniteScroll = true;
 var currentOffset = 1;
 var debugMode = false;
-var loadMoreContents = true;
 
 
 $(document).ready(function () {
@@ -286,7 +285,6 @@ function viewProfile() {
 }
 
 
-
 function validateUser(value) {
     //console.log(value);
     if (userIdsResponseReceived) {
@@ -339,6 +337,7 @@ function loadDashboardLinks(jobTitle) {
 
 function loadContents() {
     retrieveJobTitles();
+    initAllUsers();
 }
 
 function showLoginPage() {
