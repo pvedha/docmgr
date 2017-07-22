@@ -584,8 +584,3 @@ function getLinkTextFor(postId) {
         }
     }
 }
-
-function log(message) {
-    if (debugMode)
-        console.log(message);
-}

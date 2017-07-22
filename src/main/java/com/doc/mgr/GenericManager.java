@@ -1,5 +1,9 @@
 package com.doc.mgr;
 
+import java.util.ArrayList;
+
+import com.doc.api.Jobtitle;
+import com.doc.dao.OracleDaoImpl;
 
 public class GenericManager {
 
@@ -11,6 +15,8 @@ public class GenericManager {
 	
 	public void initTrial(){
 		//dao.initTry();
-	};
+	}
+
+	
 	
 }

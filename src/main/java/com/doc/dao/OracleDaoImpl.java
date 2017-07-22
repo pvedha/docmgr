@@ -8,10 +8,14 @@ import javax.persistence.Persistence;
 
 import com.doc.logger.Logger;
 import com.doc.api.DocUser;
+import com.doc.api.Jobtitle;
+import com.doc.dto.UserDto;
+import com.doc.exceptions.DuplicateUserException;
+import com.doc.exceptions.JobTitleNotValidException;
 
 public class OracleDaoImpl implements DAO {
 	
-	//private static final OracleDaoImpl instance = new OracleDaoImpl();
+//	private static final OracleDaoImpl instance = new OracleDaoImpl();
 	
 	static EntityManagerFactory factory = Persistence.createEntityManagerFactory("doc");
 	
@@ -22,6 +26,35 @@ public class OracleDaoImpl implements DAO {
 //	private OracleDaoImpl() {
 //	}
 //	
+	
+	public OracleDaoImpl() {
+	}
+
+	public int addStaff(UserDto user){
+		EntityManager em = factory.createEntityManager();
+		if(em.find(DocUser.class, user.getUserId())  != null ){
+			throw new DuplicateUserException();
+		};
+		Jobtitle jobtitle = em.find(Jobtitle.class, user.getJobTitle());
+		if(jobtitle == null){
+			throw new JobTitleNotValidException();
+		}
+		//TODO try to standardize the annoying userid UserId userId thingy
+		DocUser docUser = new DocUser();
+		docUser.setName(user.getUserName());
+		docUser.setUserid(user.getUserId());
+		docUser.setPassword(user.getUserId());
+		docUser.setAbout(user.getAbout());
+		docUser.setEmail(user.getEmail());
+		docUser.setPhone(user.getPhone());
+		docUser.setJobtitle(jobtitle);		
+		em.getTransaction().begin();
+		em.persist(docUser);
+		em.getTransaction().commit();
+		em.close();		
+		return 0;
+	}
+	
 	@Override
 	public int userCreate(DocUser user) {
 		// TODO Auto-generated method stub
@@ -79,9 +112,9 @@ public class OracleDaoImpl implements DAO {
 		jobQuery = "insert into jobtitle values ('Therapist',4,4,4)";
 		em.createNativeQuery(jobQuery).executeUpdate();
 		
-		String userQuery = "insert into docuser values ('p','p','p','p','Administrator')";
+		String userQuery = "insert into docuser values ('p','p','p','p','Administrator','pvedha@gmail.com', '0123456789')";
 		em.createNativeQuery(userQuery).executeUpdate();
-		userQuery = "insert into docuser values ('admin','admin','admin','p','Administrator')";
+		userQuery = "insert into docuser values ('admin','admin','admin','p','Administrator','admin@gmail.com', '9876543210')";
 		em.createNativeQuery(userQuery).executeUpdate();		
 					
 		em.getTransaction().commit();
@@ -100,5 +133,15 @@ public class OracleDaoImpl implements DAO {
 		em.close();
 		Logger.log("Init success");
 		return 0;
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<Jobtitle> getJobTitles() {
+		EntityManager em = factory.createEntityManager();
+		ArrayList<Jobtitle> jobTitles = (ArrayList<Jobtitle>) em
+				.createNativeQuery("select * from jobtitle", Jobtitle.class).getResultList();
+		em.close();
+		return jobTitles;
+//		return new ArrayList<Jobtitle>();
 	}
 }

@@ -21,12 +21,25 @@ function showWelcomePage() {
     $("#WelcomePage-Div").show();
 }
 
-function hideAllPages() {
-    $("#WelcomePage-Div").hide();
-    $("#DocController-Div").hide();
-}
-
 function showUsersPage() {
     hideAllPages();
     $("#DocController-Div").show();
+}
+
+function showAddStaffPage() {
+    hideAllPages();
+    $("#AddStaff-Div").show();
+}
+
+function showAddChildrenPage() {
+    hideAllPages();
+    $("#AddChildren-Div").show();
+}
+
+function hideAllPages() {
+    $("#status-message").html("");
+    $("#WelcomePage-Div").hide();
+    $("#DocController-Div").hide();
+    $("#AddStaff-Div").hide();
+    $("#AddChildren-Div").hide();
 }

@@ -25,13 +25,14 @@
     <script src="js/access.js"></script>
     <script src="js/post.js"></script>
     <script src="js/views.js"></script>
+    <script src="js/utilities.js"></script>
     <script src="js/users.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/blogModal.js"></script>
 
     <script type="application/javascript">
         jQuery(document).ready(function($) {
-
+            showWelcomePage();
         });
 
     </script>
@@ -161,7 +162,7 @@
                         <div id="main-page-div">
                             <div class="panel panel-info affixed">
                                 <div class="panel-heading">
-                                    <h3 id="posts-heading" class="panel-title center">Welcome to kriyAdveSin Document Management</h3>
+                                    <h3 id="page-heading" class="panel-title center">Welcome to kriyAdveSin Document Management</h3>
                                 </div>
                             </div>
 
@@ -207,6 +208,29 @@
                                     </tr>
                                 </table>
                             </div>
+
+
+                            <div id="AddStaff-Div">
+                                <form class="signin-form">
+                                    <!--TODO email and phone validations -->
+                                    <input type="text" name="staff-name" class="" id="staff-name" placeholder="Staff Name" />
+                                    <input type="text" name="staff-userId" class="" id="staff-userId" placeholder="Staff User Id" />
+                                    <input type="text" name="staff-about" class="" id="staff-about" placeholder="Info about this staff if any" />
+                                    <input type="text" name="staff-email" class="" id="staff-email" placeholder="Staff email" />
+                                    <input type="text" name="staff-phone" class="" id="staff-phone" placeholder="Staff phone" />
+                                    <select name="JobTitle" id="staff-job-title" placeholder="Select Job title">
+                                    </select>
+                                    <button type="button" class="btn1" id="addStaff-submit-button">Add Staff
+                                    </button>
+                                </form>
+                            </div>
+
+
+
+
+
+
+
                             <div class="panel panel-info">
                                 <div class="panel-heading">
                                     <div id="status-message-div">

@@ -13,7 +13,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.doc.api.DocUser;
+import com.doc.api.Jobtitle;
 import com.doc.dto.AuthenticationDto;
+import com.doc.dto.UserDto;
+import com.doc.exceptions.DuplicateUserException;
+import com.doc.exceptions.InvalidUserException;
+import com.doc.logger.Logger;
 import com.doc.mgr.UserManager;
 
 @Path("/user")
@@ -50,5 +56,17 @@ public class UserController {
 		return Response.ok().entity(response).build();
 	}
 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/addStaff")
+	public Response addStaff(UserDto userDto) throws InvalidUserException, DuplicateUserException {	
+		try {
+			int number = mgr.addStaff(userDto);			
+			return Response.ok().entity(Integer.toString(number)).build();
+		} catch (Exception e) {
+			Logger.log("In add staff" + e.getMessage());
+			return Response.status(Status.CONFLICT).entity("Invalid User Details").build();
+		}
+	}
 
 }

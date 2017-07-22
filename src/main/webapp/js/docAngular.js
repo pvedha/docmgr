@@ -4,6 +4,7 @@ docModule.controller("DocController", function ($scope) {
     $scope.users = [];
 
     $scope.addUsers = function (response) {
+        $scope.users = [];
         for (i = 0; i < response.length; i++) {
             var user = response[i];
             $scope.users.push({

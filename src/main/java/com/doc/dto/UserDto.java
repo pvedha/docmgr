@@ -23,4 +23,7 @@ public class UserDto {
 		this.jobTitle = docUser.getJobtitle().getTitle();
 	}
 
+	public UserDto(){
+		
+	}
 }

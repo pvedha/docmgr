@@ -1,7 +1,5 @@
 package com.doc.api;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;

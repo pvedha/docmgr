@@ -14,7 +14,7 @@ var currentUserFavouriteList = [];
 var userHasFavourites = false;
 var loadSamePost = false;
 var docControllerAngular; // = angular.element($('#BlogPostController-Div')).scope();
-
+var jobTitles = [];
 
 //Dev settings
 var infiniteScroll = true;
@@ -77,6 +77,10 @@ $(document).ready(function () {
     $('#newPost-submit-button').click(
         function () {
             newPost();
+        });
+    $('#addStaff-submit-button').click(
+        function () {
+            addStaff();
         });
     //    $('#newChat-submit-button').click(
     //        function () {
@@ -274,14 +278,7 @@ function viewProfile() {
 
 }
 
-function sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > milliseconds) {
-            break;
-        }
-    }
-}
+
 
 function validateUser(value) {
     //console.log(value);
@@ -326,24 +323,15 @@ function loadDashboardLinks(jobTitle) {
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllUsers()>Show All Users</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Show All Students</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Load All Posts</a><p>";
+        dashBoardLinkHtml += "<br>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=showAddStaffPage()>Add Staff</a><p>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=showAddChildrenPage()>Add Children</a><p>";
         $("#dashboard-links").html(dashBoardLinkHtml);
     }
 }
 
 function loadContents() {
-    retrieveCategory();
-    if (infiniteScroll) {
-        readLimitedPosts();
-    } else {
-        readAllPosts();
-    }
-    if (currentUserId != "") {
-        retrieveFavourites();
-    }
-    window.setInterval(function () {
-        //readChats();
-    }, 3000);
-    //readChats();
+    retrieveJobTitles();
 }
 
 function showLoginPage() {
@@ -386,47 +374,30 @@ function skipLogin() {
     retrieveCategory();
 }
 
-function allowDrop(ev) {
-    ev.preventDefault();
-    //    console.log("Allowdrop ID " + ev.target.id);
+
+
+function retrieveJobTitles() {
+    $.ajax({
+        url: baseURL + '/gen/jobTitles',
+        type: 'get',
+        accept: 'application/json',
+        global: false,
+        success: function (response) {
+            jobTitles = response;
+            setJobTitles();
+            //            console.log("added items");
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            log("Error Loading categories");
+        }
+    })
 }
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-    //    console.log("Event Target ID " + ev.target.id);
+function setJobTitles() {
+    var jobTitle = document.getElementById("staff-job-title");
+    for (i = 0; i < jobTitles.length; i++) {
+        var option = document.createElement("option");
+        option.text = jobTitles[i].title;
+        jobTitle.add(option);
+    }
 }
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    var targetId = "";
-    var offsetParentItem = ev.target;
-    while (true) {
-        targetId = offsetParentItem.id;
-        if (targetId == "main-contents-div" || targetId == "chat-div" || targetId == "quicklinks-div") {
-            document.getElementById("droppable-div").insertBefore(document.getElementById(data), document.getElementById(targetId)); //sort of works, identify before item dynamically.
-            break;
-        }
-        if (targetId == "body") {
-            break;
-        }
-        offsetParentItem = offsetParentItem.offsetParent;
-    }
-
-}
-
-$(window).scroll(function () {
-    // This is the function used to detect if the element is scrolled into view
-    function elementScrolled(elem) {
-        var docViewTop = $(window).scrollTop();
-        var docViewBottom = docViewTop + $(window).height();
-        var elemTop = $(elem).offset().top;
-        return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
-    }
-    if (elementScrolled('#loading-more')) {
-        if (loadMoreContents) {
-            readLimitedPosts();
-            loadMoreContents = false;
-        }
-    }
-});
