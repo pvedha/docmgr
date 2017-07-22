@@ -20,9 +20,9 @@ function doNothing() {
 
 }
 
-function doAjax(url, httpType, data, successMessage, successFunction, errorMessage, errorFunction) {
-    doAjax(url, httpType, data, successMessage, successFunction, errorMessage, doNothing);
-}
+//function doAjax(url, httpType, data, successMessage, successFunction, errorMessage) {
+//    doAjax(url, httpType, data, successMessage, successFunction, errorMessage, doNothing);
+//}
 
 function doAjax(url, httpType, data, successMessage, successFunction, errorMessage, errorFunction) {
     $.ajax({

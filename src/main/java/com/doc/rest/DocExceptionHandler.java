@@ -9,7 +9,6 @@ import com.doc.exceptions.DuplicateUserException;
 import com.doc.exceptions.InvalidUserException;
 import com.doc.exceptions.JobTitleNotValidException;
 import com.doc.exceptions.StaffNotFoundException;
-import com.doc.utilities.Logger;
 
 @Provider
 public class DocExceptionHandler implements ExceptionMapper<DocMgrException> {
@@ -17,7 +16,6 @@ public class DocExceptionHandler implements ExceptionMapper<DocMgrException> {
 	@Override
 	public Response toResponse(DocMgrException e) {
  		Response.Status httpStatus = Response.Status.INTERNAL_SERVER_ERROR;
- 		Logger.log("Exception mapper " + e.getMessage());
  		if(e instanceof InvalidUserException){
  			httpStatus = Response.Status.NOT_ACCEPTABLE;
  		} else if(e instanceof DuplicateUserException){

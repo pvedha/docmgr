@@ -144,7 +144,7 @@ function addChild() {
         tags: tags
     };
 
-    doAjax('/child/addChild', httpPost, data, "Child successfully added", showWelcomePage, "Error adding, please check the details");
+    doAjax('/child/addChild', httpPost, data, "Child successfully added", showWelcomePage, "Error adding, please check the details", doNothing);
     //    $.ajax({
     //        url: baseURL + '/child/addChild',
     //        type: 'post',
