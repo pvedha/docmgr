@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import lombok.Data;
 
-
 @Entity
 @XmlRootElement
 @Data
@@ -28,13 +27,25 @@ public class Children {
 	protected String remarks;
 	protected String message;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "teacher", referencedColumnName="userid")	
+	@JoinColumn(name = "teacher", referencedColumnName = "userid")
 	protected DocUser teacher;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "councillor", referencedColumnName="userid")	
+	@JoinColumn(name = "councillor", referencedColumnName = "userid")
 	protected DocUser councillor;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "therapist", referencedColumnName="userid")	
+	@JoinColumn(name = "therapist", referencedColumnName = "userid")
 	protected DocUser therapist;
 	protected String tags;
+
+	public String getTeacherName() {
+		return teacher.getName() + "(" + teacher.getUserid() + ")";
+	}
+	
+	public String getCouncillorName() {
+		return councillor.getName() + "(" + councillor.getUserid() + ")";
+	}
+	
+	public String getTherapistName() {
+		return therapist.getName() + "(" + therapist.getUserid() + ")";
+	}
 }

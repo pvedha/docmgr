@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.doc.logger.Logger;
+import com.doc.api.Children;
 import com.doc.api.DocUser;
 import com.doc.api.Jobtitle;
 import com.doc.dto.UserDto;
@@ -71,6 +72,15 @@ public class OracleDaoImpl implements DAO {
 		return docUsers;
 	}
 
+	@SuppressWarnings("unchecked")
+	public ArrayList<Children> readAllChildren() {
+		EntityManager em = factory.createEntityManager();
+		ArrayList<Children> childrens = (ArrayList<Children>) em
+				.createNativeQuery("select * from children", Children.class).getResultList();
+		em.close();
+		return childrens;
+	}
+	
 	@Override
 	public ArrayList<String> readUserIds() {
 		// TODO Auto-generated method stub

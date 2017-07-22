@@ -1,5 +1,4 @@
 function readAllUsers() {
-    //    console.log("receiving user ids");
     $.ajax({
         url: baseURL + '/user/all',
         type: 'get',
@@ -12,10 +11,33 @@ function readAllUsers() {
 };
 
 function displayUsers(response) {
-    console.log(response);
     docControllerAngular.addUsers(response);
     docControllerAngular.$apply();
     showUsersPage();
+}
+
+function readAllChildren() {
+    $.ajax({
+        url: baseURL + '/child/all',
+        type: 'get',
+        accept: 'application/json',
+        global: false,
+        success: function (response) {
+            displayChildren(response);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus + "Error Retrieving children" + errorThrown);
+            $("#status-message").html("Error Retrieving children");
+        }
+    })
+};
+
+
+function displayChildren(response) {
+    console.log(response);
+    childControllerAngular.addChildren(response);
+    childControllerAngular.$apply();
+    showChildrenPage();
 }
 
 function addStaff() {

@@ -20,6 +20,26 @@ docModule.controller("DocController", function ($scope) {
     };
 
 
+    $scope.children = [];
+
+    $scope.addChildren = function (response) {
+        $scope.children = [];
+        for (i = 0; i < response.length; i++) {
+            var child = response[i];
+            $scope.children.push({
+                id: child.id,
+                name: child.name,
+                dob: child.dob,
+                doj: child.doj,
+                remarks: child.remarks,
+                message: child.message,
+                teacher: child.teacher,
+                councillor: child.councillor,
+                therapist: child.therapist,
+                tags: child.tags
+            });
+        }
+    };
 
 
     $scope.posts = [];

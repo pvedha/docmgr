@@ -209,6 +209,34 @@
                                 </table>
                             </div>
 
+                            <div id="ChildController-Div" ng-controller="DocController">
+                                <table class="table">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>DoB</th>
+                                        <th>DoJ</th>
+                                        <th>Remarks</th>
+                                        <th>Message</th>
+                                        <th>Teacher</th>
+                                        <th>Councillor</th>
+                                        <th>Therapist</th>
+                                        <th>Tags</th>
+                                    </tr>
+                                    <tr ng-repeat='c in children'>
+                                        <td>{{c.id}}</td>
+                                        <td>{{c.name}}</td>
+                                        <td>{{c.dob}}</td>
+                                        <td>{{c.doj}}</td>
+                                        <td>{{c.remarks}}</td>
+                                        <td>{{c.message}}</td>
+                                        <td>{{c.teacher}}</td>
+                                        <td>{{c.councillor}}</td>
+                                        <td>{{c.therapist}}</td>
+                                        <td>{{c.tags}}</td>
+                                    </tr>
+                                </table>
+                            </div>
 
                             <div id="AddStaff-Div">
                                 <form class="signin-form">

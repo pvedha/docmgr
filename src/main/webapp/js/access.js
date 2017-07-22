@@ -14,6 +14,7 @@ var currentUserFavouriteList = [];
 var userHasFavourites = false;
 var loadSamePost = false;
 var docControllerAngular; // = angular.element($('#BlogPostController-Div')).scope();
+var childControllerAngular;
 var jobTitles = [];
 
 //Dev settings
@@ -96,6 +97,7 @@ $(document).ready(function () {
         });
 
     docControllerAngular = angular.element($('#DocController-Div')).scope();
+    childControllerAngular = angular.element($('#ChildController-Div')).scope();
 
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -321,7 +323,7 @@ function loadDashboardLinks(jobTitle) {
     if (jobTitle == "Administrator") {
         dashBoardLinkHtml = "<a class='quicklink-links' href='#' onClick=readAllUsers()>My Action Items</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllUsers()>Show All Users</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Show All Students</a><p>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllChildren()>Show All Students</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllPosts()>Load All Posts</a><p>";
         dashBoardLinkHtml += "<br>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=showAddStaffPage()>Add Staff</a><p>";

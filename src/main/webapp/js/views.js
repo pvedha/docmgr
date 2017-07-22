@@ -26,6 +26,11 @@ function showUsersPage() {
     $("#DocController-Div").show();
 }
 
+function showChildrenPage() {
+    hideAllPages();
+    $('#ChildController-Div').show();
+}
+
 function showAddStaffPage() {
     hideAllPages();
     $("#AddStaff-Div").show();
@@ -40,6 +45,7 @@ function hideAllPages() {
     $("#status-message").html("");
     $("#WelcomePage-Div").hide();
     $("#DocController-Div").hide();
+    $('#ChildController-Div').hide();
     $("#AddStaff-Div").hide();
     $("#AddChildren-Div").hide();
 }

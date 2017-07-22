@@ -6,9 +6,11 @@ import com.doc.logger.Logger;
 
 import java.util.ArrayList;
 
+import com.doc.api.Children;
 import com.doc.api.DocUser;
 import com.doc.api.Jobtitle;
 import com.doc.dto.AuthenticationDto;
+import com.doc.dto.ChildrenDto;
 import com.doc.dto.UserDto;
 
 public class UserManager {
@@ -41,6 +43,19 @@ public class UserManager {
 		}
 		return userDtos;
 	}
+	
+	public  ArrayList<ChildrenDto> readAllChildren(){
+		ArrayList<Children> childrens = dao.readAllChildren();
+		return getChildrenDtos(childrens);
+	}
+	private ArrayList<ChildrenDto> getChildrenDtos(ArrayList<Children> childrens){
+		ArrayList<ChildrenDto> childrenDtos = new ArrayList<>();
+		for(Children children: childrens){
+			childrenDtos.add(new ChildrenDto(children));
+		}
+		return childrenDtos;
+	}
+	
 	public AuthenticationDto validateLogin(String userId, String password) {
 		DocUser user = dao.validateLogin(userId, password);
 		AuthenticationDto token = null;
