@@ -48,4 +48,5 @@ function hideAllPages() {
     $('#ChildController-Div').hide();
     $("#AddStaff-Div").hide();
     $("#AddChildren-Div").hide();
+    $("#user-profile-div").hide();
 }

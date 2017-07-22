@@ -13,9 +13,9 @@ import com.doc.dto.AuthenticationDto;
 import com.doc.dto.ChildrenDto;
 import com.doc.dto.UserDto;
 
-public class UserManager {
+public class UserManager extends DocManager {
 
-	private OracleDaoImpl dao = new OracleDaoImpl();//OracleDaoImpl.getInstance(); // = new OracleDAOImpl();
+	//private OracleDaoImpl dao = new OracleDaoImpl();//OracleDaoImpl.getInstance(); // = new OracleDAOImpl();
 	// TODO see if we can use the interface and init inside the constructor. or singleton
 
 	public UserManager() {
@@ -88,13 +88,6 @@ public class UserManager {
 	
 	private AuthenticationDto makeAuthDto(DocUser user) {
 		return (new AuthenticationDto(user.getUserid(), user.getName(), user.getAbout(), user.getJobtitle().getTitle()));
-	}
+	}		
 	
-	public ArrayList<Jobtitle> getJobTitles() {
-		return dao.getJobTitles();
-	};
-	
-	public void initDB(){
-		dao.initDB();
-	}
 }

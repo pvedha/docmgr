@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.doc.api.Jobtitle;
 import com.doc.dao.OracleDaoImpl;
 
-public class GenericManager {
+public class GenericManager extends DocManager{
 
 	//private OracleDaoImpl dao = OracleDaoImpl.getInstance(); 
 	
@@ -14,9 +14,15 @@ public class GenericManager {
 	};
 	
 	public void initTrial(){
-		//dao.initTry();
+		dao.initTry();
+	}
+	
+	public void initDB(){
+		dao.initDB();
 	}
 
-	
+	public ArrayList<Jobtitle> getJobTitles() {
+		return dao.getJobTitles();
+	};
 	
 }

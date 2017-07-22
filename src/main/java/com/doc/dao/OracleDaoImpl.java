@@ -122,11 +122,14 @@ public class OracleDaoImpl implements DAO {
 		jobQuery = "insert into jobtitle values ('Therapist',4,4,4)";
 		em.createNativeQuery(jobQuery).executeUpdate();
 		
-		String userQuery = "insert into docuser values ('p','p','p','p','Administrator','pvedha@gmail.com', '0123456789')";
+		String userQuery = "insert into docuser values ('p','p','p','p','Administrator','praveen.vedha@gmail.com', '0123456789')";
 		em.createNativeQuery(userQuery).executeUpdate();
 		userQuery = "insert into docuser values ('admin','admin','admin','p','Administrator','admin@gmail.com', '9876543210')";
 		em.createNativeQuery(userQuery).executeUpdate();		
-					
+		
+		String childQuery = "insert into CHILDREN values (1, sysdate, sysdate, 'message', 'cname', 'remarks', 'tag1, tag2', 'p', 'p', 'p')";
+		em.createNativeQuery(childQuery).executeUpdate();	
+		
 		em.getTransaction().commit();
 		em.close();
 		Logger.log("Init success");

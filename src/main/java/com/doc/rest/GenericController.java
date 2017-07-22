@@ -6,25 +6,26 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.doc.mgr.GenericManager;
 import com.doc.mgr.UserManager;
 
 @Path("/gen")
 public class GenericController {
 
-	private UserManager mgr = new UserManager();
+	private GenericManager mgr = new GenericManager();
 	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/init")
 	public Response initSystem() {
-		mgr.initDB();
+		mgr.initTrial();
 		return Response.ok().entity("Generic").build();
 	}	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/initTry")
+	@Path("/initDB")
 	public Response initTrial() {
 		//mgr.initTrial();
 		return Response.ok().entity("GenericTrial").build();
@@ -33,11 +34,9 @@ public class GenericController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/jobTitles")
-	public Response getJobTitles() {
-		
+	public Response getJobTitles() {		
 		return Response.ok().entity(mgr.getJobTitles()).build();
 	}	
-	
 	
 	
 }
