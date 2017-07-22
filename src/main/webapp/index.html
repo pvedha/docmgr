@@ -244,7 +244,7 @@
                                     <input type="text" name="staff-name" class="" id="staff-name" placeholder="Staff Name" />
                                     <input type="text" name="staff-userId" class="" id="staff-userId" placeholder="Staff User Id" />
                                     <input type="text" name="staff-about" class="" id="staff-about" placeholder="Info about this staff if any" />
-                                    <input type="text" name="staff-email" class="" id="staff-email" placeholder="Staff email" />
+                                    <input type="email" name="staff-email" class="" id="staff-email" placeholder="Staff email" />
                                     <input type="text" name="staff-phone" class="" id="staff-phone" placeholder="Staff phone" />
                                     <select name="JobTitle" id="staff-job-title" placeholder="Select Job title">
                                     </select>
@@ -253,7 +253,24 @@
                                 </form>
                             </div>
 
-
+                            <div id="AddChild-Div">
+                                <form class="signin-form">
+                                    <!--TODO email and phone validations -->
+                                    <input type="text" name="child-roll-no" class="" id="child-roll-no" placeholder="Child Roll No / Id" />
+                                    <input type="text" name="child-name" class="" id="child-name" placeholder="Child Name" />
+                                    <input type="date" name="child-dob" class="" id="child-dob" placeholder="Date of Birth" />
+                                    <input type="date" name="child-doj" class="" id="child-doj" placeholder="Date of Joining or Inclusion" />
+                                    <input type="text" name="child-remarks" class="" id="child-remarks" placeholder="Specific remarks or identification about the child" />
+                                    <input type="text" name="child-message" class="" id="child-message" placeholder="Message to other users if any about this child" />
+                                    <select name="child-teacher" id="child-teacher" placeholder="Select the Teacher name"> </select>
+                                    <select name="child-councillor" id="child-councillor" placeholder="Select the Councillor name"> </select>
+                                    <select name="child-therapist" id="child-therapist" placeholder="Select the Therapist name"> </select>
+                                    <input type="text" name="child-tags" class="" id="child-tags" placeholder="Tags for this child, can be used for searching" />
+                                    <!--                                    TODO Multiple therapist selection needed?-->
+                                    <button type="button" class="btn1" id="addChild-submit-button">Add Child
+                                    </button>
+                                </form>
+                            </div>
 
 
 

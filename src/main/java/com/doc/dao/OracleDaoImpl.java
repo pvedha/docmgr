@@ -6,13 +6,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.doc.logger.Logger;
 import com.doc.api.Children;
 import com.doc.api.DocUser;
 import com.doc.api.Jobtitle;
+import com.doc.dto.ChildrenDto;
 import com.doc.dto.UserDto;
 import com.doc.exceptions.DuplicateUserException;
 import com.doc.exceptions.JobTitleNotValidException;
+import com.doc.exceptions.StaffNotFoundException;
+import com.doc.utilities.Logger;
+import com.doc.utilities.Utilities;
 
 public class OracleDaoImpl implements DAO {
 	
@@ -55,6 +58,45 @@ public class OracleDaoImpl implements DAO {
 		em.close();		
 		return 0;
 	}
+	
+	
+	public int addChild(ChildrenDto child){
+		EntityManager em = factory.createEntityManager();
+		if(em.find(Children.class, child.getId())  != null ){
+			throw new DuplicateUserException();
+		};
+		
+		DocUser teacher = em.find(DocUser.class, child.getTeacher());
+		if(teacher == null){
+			throw new StaffNotFoundException(child.getTeacher());
+		}
+		
+		DocUser councillor = em.find(DocUser.class, child.getCouncillor());
+		if(councillor == null){
+			throw new StaffNotFoundException(child.getCouncillor());
+		}
+		
+		DocUser therapist = em.find(DocUser.class, child.getTherapist());
+		if(therapist == null){
+			throw new StaffNotFoundException(child.getTherapist());
+		}
+		Children children = new Children();
+		children.setId(child.getId());
+		children.setDob(Utilities.getTimeStamp(child.getDob()));
+		children.setDoj(Utilities.getTimeStamp(child.getDoj()));
+		children.setRemarks(child.getRemarks());
+		children.setMessage(child.getMessage());
+		children.setTeacher(teacher);
+		children.setCouncillor(councillor);
+		children.setTherapist(therapist);
+		children.setTags(child.getTags());
+		em.getTransaction().begin();
+		em.persist(children);
+		em.getTransaction().commit();
+		em.close();		
+		return 0;
+	}
+	
 	
 	@Override
 	public int userCreate(DocUser user) {

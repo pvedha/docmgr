@@ -2,7 +2,6 @@ package com.doc.mgr;
 
 import com.doc.dao.DAO;
 import com.doc.dao.OracleDaoImpl;
-import com.doc.logger.Logger;
 
 import java.util.ArrayList;
 
@@ -12,6 +11,7 @@ import com.doc.api.Jobtitle;
 import com.doc.dto.AuthenticationDto;
 import com.doc.dto.ChildrenDto;
 import com.doc.dto.UserDto;
+import com.doc.utilities.Logger;
 
 public class UserManager extends DocManager {
 
@@ -44,17 +44,7 @@ public class UserManager extends DocManager {
 		return userDtos;
 	}
 	
-	public  ArrayList<ChildrenDto> readAllChildren(){
-		ArrayList<Children> childrens = dao.readAllChildren();
-		return getChildrenDtos(childrens);
-	}
-	private ArrayList<ChildrenDto> getChildrenDtos(ArrayList<Children> childrens){
-		ArrayList<ChildrenDto> childrenDtos = new ArrayList<>();
-		for(Children children: childrens){
-			childrenDtos.add(new ChildrenDto(children));
-		}
-		return childrenDtos;
-	}
+	
 	
 	public AuthenticationDto validateLogin(String userId, String password) {
 		DocUser user = dao.validateLogin(userId, password);

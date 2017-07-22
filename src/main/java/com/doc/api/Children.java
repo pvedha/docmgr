@@ -19,7 +19,7 @@ import lombok.Data;
 @Data
 public class Children {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	protected int id;
 	protected String name;
 	protected Timestamp dob;

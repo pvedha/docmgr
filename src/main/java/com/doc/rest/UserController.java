@@ -19,8 +19,8 @@ import com.doc.dto.AuthenticationDto;
 import com.doc.dto.UserDto;
 import com.doc.exceptions.DuplicateUserException;
 import com.doc.exceptions.InvalidUserException;
-import com.doc.logger.Logger;
 import com.doc.mgr.UserManager;
+import com.doc.utilities.Logger;
 
 @Path("/user")
 public class UserController {

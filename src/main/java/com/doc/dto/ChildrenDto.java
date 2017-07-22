@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 import com.doc.api.Children;
 import com.doc.api.DocUser;
+import com.doc.utilities.Utilities;
 
 import lombok.Data;
 
@@ -36,5 +37,6 @@ public class ChildrenDto {
 		this.councillor = child.getCouncillorName();
 		this.therapist = child.getTherapistName();
 		this.tags = child.getTags();
-	}
+	}	
+	
 }

@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.doc.logger.Logger;
+import com.doc.utilities.Logger;
 
 import lombok.Data;
 

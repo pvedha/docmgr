@@ -38,7 +38,7 @@ function showAddStaffPage() {
 
 function showAddChildrenPage() {
     hideAllPages();
-    $("#AddChildren-Div").show();
+    $("#AddChild-Div").show();
 }
 
 function hideAllPages() {
@@ -47,6 +47,6 @@ function hideAllPages() {
     $("#DocController-Div").hide();
     $('#ChildController-Div').hide();
     $("#AddStaff-Div").hide();
-    $("#AddChildren-Div").hide();
+    $("#AddChild-Div").hide();
     $("#user-profile-div").hide();
 }

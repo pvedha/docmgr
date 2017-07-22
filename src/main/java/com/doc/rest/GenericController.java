@@ -13,30 +13,28 @@ import com.doc.mgr.UserManager;
 public class GenericController {
 
 	private GenericManager mgr = new GenericManager();
-	
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/init")
 	public Response initSystem() {
 		mgr.initTrial();
 		return Response.ok().entity("Generic").build();
-	}	
-	
+	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/initDB")
 	public Response initTrial() {
-		//mgr.initTrial();
+		// mgr.initTrial();
 		return Response.ok().entity("GenericTrial").build();
-	}	
-	
+	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/jobTitles")
-	public Response getJobTitles() {		
+	public Response getJobTitles() {
 		return Response.ok().entity(mgr.getJobTitles()).build();
-	}	
-	
-	
+	}
+
 }

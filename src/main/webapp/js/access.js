@@ -16,6 +16,7 @@ var loadSamePost = false;
 var docControllerAngular; // = angular.element($('#BlogPostController-Div')).scope();
 var childControllerAngular;
 var jobTitles = [];
+var staffs = [];
 
 //Dev settings
 var infiniteScroll = true;
@@ -82,6 +83,10 @@ $(document).ready(function () {
     $('#addStaff-submit-button').click(
         function () {
             addStaff();
+        });
+    $('#addChild-submit-button').click(
+        function () {
+            addChild();
         });
     //    $('#newChat-submit-button').click(
     //        function () {

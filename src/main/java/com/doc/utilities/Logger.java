@@ -1,4 +1,4 @@
-package com.doc.logger;
+package com.doc.utilities;
 
 public class Logger {
 	

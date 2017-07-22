@@ -12,7 +12,28 @@ function log(message) {
         console.log(message);
 }
 
+function setStatus(message) {
+    $("#status-message").html(message);
+}
 
+function doAjax(url, httpType, data, successMessage, successFunction, errorMessage, errorFunction) {
+    $.ajax({
+        url: baseURL + url,
+        type: httpType,
+        contentType: 'application/json',
+        global: false,
+        success: function (response) {
+            $("#status-message").html(successMessage);
+            sleep(2000);
+            successFunction();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus + errorMessage + errorThrown);
+            $("#status-message").html(errorMessage);
+        },
+        data: JSON.stringify(data)
+    })
+}
 
 //drag drop functions
 function allowDrop(ev) {
@@ -46,7 +67,7 @@ function drop(ev) {
 
 $(window).scroll(function () {
     // This is the function used to detect if the element is scrolled into view
-//    function elementScrolled(elem) {
+    //    function elementScrolled(elem) {
     //        var docViewTop = $(window).scrollTop();
     //        var docViewBottom = docViewTop + $(window).height();
     //        var elemTop = $(elem).offset().top;
