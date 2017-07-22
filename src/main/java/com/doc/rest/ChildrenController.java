@@ -31,12 +31,12 @@ public class ChildrenController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/addChild")
-	public Response addChild(ChildrenDto childDto) throws DuplicateUserException {
-		try{
+	public Response addChild(ChildrenDto childDto) {
+//		try{
 			int number = mgr.addChild(childDto);
 			return Response.ok().entity(Integer.toString(number)).build();
-		} catch (Exception e) {
-			throw new DuplicateUserException("Why this happening");
-		}
+//		} catch (Exception e) {
+//			throw new DuplicateUserException("Why this happening");
+//		}
 	}
 }

@@ -16,6 +16,14 @@ function setStatus(message) {
     $("#status-message").html(message);
 }
 
+function doNothing() {
+
+}
+
+function doAjax(url, httpType, data, successMessage, successFunction, errorMessage, errorFunction) {
+    doAjax(url, httpType, data, successMessage, successFunction, errorMessage, doNothing);
+}
+
 function doAjax(url, httpType, data, successMessage, successFunction, errorMessage, errorFunction) {
     $.ajax({
         url: baseURL + url,
@@ -28,8 +36,10 @@ function doAjax(url, httpType, data, successMessage, successFunction, errorMessa
             successFunction();
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log(textStatus + errorMessage + errorThrown);
+            console.log("Http responseText: " + XMLHttpRequest.responseText + ", Status : " + XMLHttpRequest.status + ", ErrorThrown: " + errorThrown);
             $("#status-message").html(errorMessage);
+            sleep(2000);
+            errorFunction();
         },
         data: JSON.stringify(data)
     })

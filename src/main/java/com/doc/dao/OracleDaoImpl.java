@@ -63,19 +63,19 @@ public class OracleDaoImpl implements DAO {
 	public int addChild(ChildrenDto child){
 		EntityManager em = factory.createEntityManager();
 		if(em.find(Children.class, child.getId())  != null ){
-			throw new DuplicateUserException(child.getId() + "");
+			throw new DuplicateUserException("Id " + child.getId() + " exists");
 		};
 		DocUser teacher = em.find(DocUser.class, child.getTeacher());
 		if(teacher == null){
-			throw new StaffNotFoundException(child.getTeacher());
+			throw new StaffNotFoundException("Teacher : " + child.getTeacher());
 		}
 		DocUser councillor = em.find(DocUser.class, child.getCouncillor());
 		if(councillor == null){
-			throw new StaffNotFoundException(child.getCouncillor());
+			throw new StaffNotFoundException("Councillor : " + child.getCouncillor());
 		}
 		DocUser therapist = em.find(DocUser.class, child.getTherapist());
 		if(therapist == null){
-			throw new StaffNotFoundException(child.getTherapist());
+			throw new StaffNotFoundException("Therapist : " + child.getTherapist());
 		}	
 		Children children = new Children();
 		children.setId(child.getId());

@@ -2,6 +2,7 @@ package com.doc.rest;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 import com.doc.exceptions.DocMgrException;
 import com.doc.exceptions.DuplicateUserException;
@@ -10,6 +11,7 @@ import com.doc.exceptions.JobTitleNotValidException;
 import com.doc.exceptions.StaffNotFoundException;
 import com.doc.utilities.Logger;
 
+@Provider
 public class DocExceptionHandler implements ExceptionMapper<DocMgrException> {
 
 	@Override

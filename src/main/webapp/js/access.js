@@ -18,6 +18,9 @@ var childControllerAngular;
 var jobTitles = [];
 var staffs = [];
 
+var httpPost = 'post';
+var httpGet = 'get';
+var httpPut = 'put';
 //Dev settings
 var infiniteScroll = true;
 var currentOffset = 1;
