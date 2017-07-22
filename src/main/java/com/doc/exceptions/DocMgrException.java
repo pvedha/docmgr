@@ -2,6 +2,11 @@ package com.doc.exceptions;
 
 public class DocMgrException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public DocMgrException() {
 		// TODO Auto-generated constructor stub
 	}

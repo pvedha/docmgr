@@ -1,11 +1,8 @@
 package com.doc.dto;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import com.doc.api.Children;
-import com.doc.api.DocUser;
-import com.doc.utilities.Utilities;
 
 import lombok.Data;
 

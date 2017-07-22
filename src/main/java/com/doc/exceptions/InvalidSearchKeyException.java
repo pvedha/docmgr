@@ -2,6 +2,11 @@ package com.doc.exceptions;
 
 public class InvalidSearchKeyException extends DocMgrException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public InvalidSearchKeyException() {
 		// TODO Auto-generated constructor stub
 	}

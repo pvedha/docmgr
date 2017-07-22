@@ -7,7 +7,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.doc.mgr.GenericManager;
-import com.doc.mgr.UserManager;
 
 @Path("/gen")
 public class GenericController {

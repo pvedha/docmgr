@@ -1,30 +1,14 @@
 package com.doc.mgr;
 
-import com.doc.dao.DAO;
-import com.doc.dao.OracleDaoImpl;
-
 import java.util.ArrayList;
 
-import com.doc.api.Children;
 import com.doc.api.DocUser;
-import com.doc.api.Jobtitle;
 import com.doc.dto.AuthenticationDto;
-import com.doc.dto.ChildrenDto;
 import com.doc.dto.UserDto;
-import com.doc.utilities.Logger;
 
 public class UserManager extends DocManager {
 
-	//private OracleDaoImpl dao = new OracleDaoImpl();//OracleDaoImpl.getInstance(); // = new OracleDAOImpl();
-	// TODO see if we can use the interface and init inside the constructor. or singleton
-
-	public UserManager() {
-		try {
-			Logger.log("Initializing for OracleDAOx");
-			// dao = new OracleDaoImpl();
-		} catch (Exception e) {
-			Logger.log("No class found most likely " + e.getMessage());
-		}
+	public UserManager() {		
 	}
 
 	public int addStaff(UserDto user) {
@@ -58,7 +42,6 @@ public class UserManager extends DocManager {
 		if(!validateToken(userId, token)){
 			return null;
 		}
-		Logger.log("proceeding to get the user details");
 		AuthenticationDto response = new AuthenticationDto();		
 		DocUser user = dao.getUser(userId);
 		response.setToken(token); //we can regenerate with time

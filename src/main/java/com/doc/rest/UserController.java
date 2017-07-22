@@ -1,7 +1,5 @@
 package com.doc.rest;
 
-import java.util.ArrayList;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -13,8 +11,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.doc.api.DocUser;
-import com.doc.api.Jobtitle;
 import com.doc.dto.AuthenticationDto;
 import com.doc.dto.UserDto;
 import com.doc.exceptions.DuplicateUserException;

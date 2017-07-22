@@ -7,15 +7,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import com.doc.dto.ChildrenDto;
-import com.doc.dto.UserDto;
-import com.doc.exceptions.DuplicateUserException;
-import com.doc.exceptions.InvalidUserException;
 import com.doc.mgr.ChildrenManager;
-import com.doc.mgr.UserManager;
-import com.doc.utilities.Logger;
 
 @Path("/child")
 public class ChildrenController {
