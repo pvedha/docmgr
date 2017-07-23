@@ -23,4 +23,8 @@ public class Utilities {
 		}
 		
 	}
+	
+	public static Timestamp getNow(){
+		return new Timestamp(System.currentTimeMillis());
+	}
 }

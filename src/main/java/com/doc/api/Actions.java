@@ -19,15 +19,21 @@ import lombok.Data;
 @Data
 public class Actions {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	protected int actionId;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "document", referencedColumnName = "docId")
 	protected Document document;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "action_creator", referencedColumnName = "userid")
+	protected DocUser action_creator;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "action_owner", referencedColumnName = "userid")
 	protected DocUser action_owner;
 	protected Timestamp created_on;
 	protected Timestamp updated_on;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "state", referencedColumnName = "state")
+	protected ActionStates state;
 	protected String remarks;
 }

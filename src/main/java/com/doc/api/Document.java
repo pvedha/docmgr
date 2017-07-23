@@ -20,7 +20,7 @@ import lombok.Data;
 @Data
 public class Document {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	protected int docId;
 	protected String docName;
 	protected int revision;

@@ -36,11 +36,11 @@ public class DocumentDaoImpl extends DaoImpl {
 		}		
 		DocUser owner = em.find(DocUser.class, docDto.getOwner());
 		if (owner == null) {
-			throw new StaffNotFoundException("Teacher : " + docDto.getOwner());
+			throw new StaffNotFoundException("Teacher : " + docDto.getOwner() + " not found");
 		}
 		DocUser creator = em.find(DocUser.class, docDto.getCreator());
 		if (creator == null) {
-			throw new StaffNotFoundException("Councillor : " + docDto.getCreator());
+			throw new StaffNotFoundException("Councillor : " + docDto.getCreator() + " not found");
 		}
 
 		DocState state = em.find(DocState.class, docDto.getStatus());
@@ -50,18 +50,15 @@ public class DocumentDaoImpl extends DaoImpl {
 		
 		Document doc = new Document();
 		doc.setChild(child);
-		doc.setCreated_on(new Timestamp(System.currentTimeMillis()));
-		doc.setLast_updated(new Timestamp(System.currentTimeMillis()));
+		doc.setCreated_on(Utilities.getNow());
+		doc.setLast_updated(Utilities.getNow());
 		doc.setCreator(creator);
 		doc.setOwner(owner);
 		doc.setDocName(docDto.getDocName());
 		doc.setRevision(1);
 		doc.setStatus(state);
 		
-		em.getTransaction().begin();
-		em.persist(doc);
-		em.getTransaction().commit();
-		em.close();
+		persistObject(doc);
 		return doc.getDocId();
 	}
 
