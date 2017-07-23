@@ -28,3 +28,10 @@ Passing a DTO:
 	    @JoinColumn(name = "childId", referencedColumnName="id"),
 	    @JoinColumn(name = "childId", referencedColumnName="title")
 	})
+	
+	
+Post: contentType: 'application/json', 
+Get: accept: 'application/json',
+
+persist using Detached entity 
+	Solution: try using the same entity manager. Particularly for update.

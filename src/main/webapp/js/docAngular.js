@@ -56,10 +56,20 @@ docModule.controller("DocController", function ($scope) {
                 created_on: action.created_on,
                 updated_on: action.updated_on,
                 state: action.state,
-                updates: action.remarks
+                remarks: action.remarks
             });
         }
     };
+
+
+    $scope.action;
+
+    $scope.setActionDetail = function (action) {
+        $scope.action = action;
+        $("#update-action-state").val(action.state);
+    };
+
+
 
 
     $scope.posts = [];

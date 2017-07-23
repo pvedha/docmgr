@@ -46,6 +46,20 @@ function showAddChildrenPage() {
     $("#AddChild-Div").show();
 }
 
+function showUpdateActionPage(actionId) {
+
+    for (i = 0; i < myActions.length; i++) {
+        if (myActions[i].actionId == actionId) {
+            updateActionControllerAngular.setActionDetail(myActions[i]);
+            updateActionControllerAngular.$apply();
+            break;
+        }
+    }
+
+    hideAllPages();
+    $("#UpdateAction-Div").show();
+}
+
 function hideAllPages() {
     $("#status-message").html("");
     $("#WelcomePage-Div").hide();
@@ -55,4 +69,5 @@ function hideAllPages() {
     $("#AddChild-Div").hide();
     $("#user-profile-div").hide();
     $("#ActionController-Div").hide();
+    $("#UpdateAction-Div").hide();
 }

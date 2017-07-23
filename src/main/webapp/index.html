@@ -273,9 +273,9 @@
                                         <td>{{a.created_on}}</td>
                                         <td>{{a.updated_on}}</td>
                                         <td>{{a.state}}</td>
-                                        <td>{{a.updates}}</td>
+                                        <td>{{a.remarks}}</td>
                                         <td>
-                                            <button id="action-update-button" class="btn btn-success" onclick='alert({{a.actionId}})'>update</button>
+                                            <button id="action-update-button" class="btn btn-success" onclick='showUpdateActionPage({{a.actionId}})'>update</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -288,9 +288,11 @@
                                     <input type="date" name="child-dob" class="" id="child-dob" placeholder="Date of Birth" />
                                     <input type="date" name="child-doj" class="" id="child-doj" placeholder="Date of Joining or Inclusion" />
                                     <input type="text" name="child-remarks" class="" id="child-remarks" placeholder="Specific remarks or identification about the child" />
-                                    <input type="text" name="child-message" class="" id="child-message" placeholder="Message about this child to other users, if any" />
+                                    <input type="text" name="child-message" class="" id="child-message" placeholder="Message about this child to other users, if any" /> Teacher:
                                     <select name="child-teacher" id="child-teacher" placeholder="Select the Teacher name"> </select>
+                                    Councillor:
                                     <select name="child-councillor" id="child-councillor" placeholder="Select the Councillor name"> </select>
+                                    Therapist:
                                     <select name="child-therapist" id="child-therapist" placeholder="Select the Therapist name"> </select>
                                     <input type="text" name="child-tags" class="" id="child-tags" placeholder="Tags for this child, can be used for searching" />
                                     <!--                                    TODO Multiple therapist selection needed?-->
@@ -298,9 +300,61 @@
                                     </button>
                                 </form>
                             </div>
-
-
-
+                            <div id="UpdateAction-Div" ng-controller="DocController">
+                                <table class="table">
+                                    <tr>
+                                        <td>Document Name :</td>
+                                        <td>{{action.docName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Action Title :</td>
+                                        <td>{{action.actionTitle}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Created By :</td>
+                                        <td>{{action.action_creator}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Assigned To :</td>
+                                        <td>{{action.action_owner}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Created On :</td>
+                                        <td>{{action.created_on}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last Updated :</td>
+                                        <td>{{action.updated_on}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Current State :</td>
+                                        <td>{{action.state}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Change State :</td>
+                                        <td>
+                                            <select name="update-action-state" id="update-action-state" placeholder="Select new state"></select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Updates :</td>
+                                        <td>{{action.remarks}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Add comment :</td>
+                                        <td>
+                                            <input type="text" id="update-action-remark" placeholder="Add comments or remakr" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button id="action-save-button" class="btn btn-success" onclick='saveCurrentAction({{action}})'>Save</button>
+                                            <button id="action-reset-button" class="btn btn-success" onclick='resetActionPage'>Reset</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
 
 
                             <div class="panel panel-info">
@@ -330,28 +384,7 @@
                                 </form>
                             </div>
                         </div>
-                        <!--
-                        <div id="new-post-div">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title center">Add a new post</h3>
-                                </div>
-                            </div>
-                            <h4 id="new-post-info"></h4>
-                            <div id="new-post-contents">
 
-                                <form class="signin-form">
-                                    <input type="text" name="new-post-title" class="" id="new-post-title" placeholder="Title of the post" />
-                                    <textarea name="new-post-message" id="new-post-message" rows="3" placeholder="Your message..."></textarea>
-                                    <input type="text" name="new-post-tags" class="" id="new-post-tags" placeholder="Add related tags" /> Select Category :
-                                    <select name="Category" id="new-post-category" placeholder="Select Category">
-                                    </select>
-                                    <button type="button" class="btn1" id="newPost-submit-button">Post it!
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
--->
 
 
                     </div>

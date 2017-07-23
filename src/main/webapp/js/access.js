@@ -17,8 +17,11 @@ var loadSamePost = false;
 var docControllerAngular; // = angular.element($('#BlogPostController-Div')).scope();
 var childControllerAngular;
 var actionControllerAngular;
+var updateActionControllerAngular;
 var jobTitles = [];
+var actionStates = [];
 var staffs = [];
+var myActions = [];
 
 var httpPost = 'post';
 var httpGet = 'get';
@@ -108,6 +111,8 @@ $(document).ready(function () {
     docControllerAngular = angular.element($('#DocController-Div')).scope();
     childControllerAngular = angular.element($('#ChildController-Div')).scope();
     actionControllerAngular = angular.element($('#ActionController-Div')).scope();
+    updateActionControllerAngular = angular.element($('#UpdateAction-Div')).scope();
+
 
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -346,6 +351,7 @@ function loadDashboardLinks(jobTitle) {
 function loadContents() {
     retrieveJobTitles();
     initAllUsers();
+    retrieveActionStates();
 }
 
 function showLoginPage() {

@@ -18,7 +18,15 @@ public class ActionManager extends DocManager {
 //	}
 	
 	public ArrayList<ActionDto> readActions(){
-		ArrayList<Actions> actions = dao.readActions();
+		
+		return getActionDto(dao.readActions());
+	}
+	
+	public ArrayList<ActionDto> readMyActions(String userId) {
+		return getActionDto(dao.readMyActions(userId));
+	}
+	
+	private ArrayList<ActionDto> getActionDto(ArrayList<Actions> actions){
 		ArrayList<ActionDto> dtos = new ArrayList<>();
 		for(Actions action : actions){
 			ActionDto dto = new ActionDto();
@@ -35,6 +43,9 @@ public class ActionManager extends DocManager {
 			dtos.add(dto);
 		}		
 		return dtos;
+	}
+	public int updateAction(ActionDto dto){
+		return dao.updateAction(dto);
 	}
 	
 	public ArrayList<ActionStates> readActionStates(){

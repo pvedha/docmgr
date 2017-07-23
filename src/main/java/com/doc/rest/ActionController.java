@@ -29,11 +29,17 @@ public class ActionController {
 		return Response.ok().entity(mgr.readActionStates()).build();
 	}
 	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/update")
+	public Response updateAction(ActionDto dto){
+		return Response.ok().entity(mgr.updateAction(dto)).build();
+	}
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add")
-	public Response addDocument(ActionDto dto){
+	public Response addAction(ActionDto dto){
 		return Response.ok().entity(mgr.addAction(dto)).build();
 	}
 	
