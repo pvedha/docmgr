@@ -36,10 +36,10 @@ public class DocumentController {
 		DocumentDto dto = new DocumentDto();
 		dto.setChildId(2);
 		dto.setDocName("somefile.doc");
-		dto.setCreator("p");
+		dto.setCreator("admin");
 		dto.setOwner("w");
 		dto.setStatus("Draft");
-		
+		dto.setRemarks("An excel sheet");
 		return Response.ok().entity(mgr.addDocument(dto)).build();
 	}
 }

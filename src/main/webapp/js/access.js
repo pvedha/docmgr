@@ -15,6 +15,7 @@ var currentUserFavouriteList = [];
 var userHasFavourites = false;
 var loadSamePost = false;
 var docControllerAngular; // = angular.element($('#BlogPostController-Div')).scope();
+var userControllerAngular;
 var childControllerAngular;
 var actionControllerAngular;
 var updateActionControllerAngular;
@@ -22,6 +23,7 @@ var jobTitles = [];
 var actionStates = [];
 var staffs = [];
 var myActions = [];
+var myDocuments = [];
 
 var httpPost = 'post';
 var httpGet = 'get';
@@ -108,6 +110,7 @@ $(document).ready(function () {
             addComment();
         });
 
+    userControllerAngular = angular.element($('#UserController-Div')).scope();
     docControllerAngular = angular.element($('#DocController-Div')).scope();
     childControllerAngular = angular.element($('#ChildController-Div')).scope();
     actionControllerAngular = angular.element($('#ActionController-Div')).scope();
@@ -345,6 +348,8 @@ function loadDashboardLinks(jobTitle) {
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyActions()>All My Actions</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllOpenActions()>All Open Actions</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllActions()>All Actions</a><p>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllDocuments()>All Documents</a><p>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyDocuments()>All My Documents</a><p>";
 
         $("#dashboard-links").html(dashBoardLinkHtml);
     }

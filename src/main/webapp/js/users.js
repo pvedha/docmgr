@@ -42,8 +42,8 @@ function readAllUsers() {
 };
 
 function displayUsers(response) {
-    docControllerAngular.addUsers(response);
-    docControllerAngular.$apply();
+    userControllerAngular.addUsers(response);
+    userControllerAngular.$apply();
     showUsersPage();
 }
 
@@ -62,13 +62,13 @@ function addStaff() {
 
     $("#status-message").html("Please wait, adding staff...");
     var data = {
-    userId: userId,
-    userName: userName,
-    about: about,
-    email: email,
-    phone: phone,
-    jobTitle: jobTitle
-};    
+        userId: userId,
+        userName: userName,
+        about: about,
+        email: email,
+        phone: phone,
+        jobTitle: jobTitle
+    };
     $.ajax({
         url: baseURL + '/user/addStaff',
         type: 'post',

@@ -35,6 +35,7 @@ public class Document {
 	@JoinColumn(name = "creator", referencedColumnName = "userid")
 	protected DocUser creator;	
 	protected Timestamp created_on;	
+	protected String remarks;
 	protected Timestamp last_updated;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "status", referencedColumnName = "docState")

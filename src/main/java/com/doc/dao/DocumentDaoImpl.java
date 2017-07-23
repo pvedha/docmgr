@@ -56,9 +56,11 @@ public class DocumentDaoImpl extends DaoImpl {
 		doc.setOwner(owner);
 		doc.setDocName(docDto.getDocName());
 		doc.setRevision(1);
+		doc.setRemarks(docDto.getRemarks());
 		doc.setStatus(state);
 		
 		persistObject(doc);
+		em.close();
 		return doc.getDocId();
 	}
 

@@ -46,6 +46,11 @@ function showAddChildrenPage() {
     $("#AddChild-Div").show();
 }
 
+function showDocumentsPage() {
+    hideAllPages();
+    $("#DocController-Div").show();
+}
+
 function showUpdateActionPage(actionId) {
 
     for (i = 0; i < myActions.length; i++) {
@@ -64,6 +69,7 @@ function hideAllPages() {
     $("#status-message").html("");
     $("#WelcomePage-Div").hide();
     $("#DocController-Div").hide();
+    $("#UserController-Div").hide();
     $('#ChildController-Div').hide();
     $("#AddStaff-Div").hide();
     $("#AddChild-Div").hide();

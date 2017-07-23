@@ -41,6 +41,29 @@ docModule.controller("DocController", function ($scope) {
         }
     };
 
+
+    $scope.docs = [];
+
+    $scope.addDocuments = function (response) {
+        $scope.docs = [];
+        for (i = 0; i < response.length; i++) {
+            var doc = response[i];
+            $scope.docs.push({
+                docId: doc.docId,
+                docName: doc.docName,
+                revision: doc.revision,
+                childName: doc.childName,
+                owner: doc.owner,
+                creator: doc.creator,
+                createdOn: doc.createdOn,
+                lastUpdated: doc.lastUpdated,
+                remarks: doc.remarks,
+                status: doc.status
+            });
+        }
+    };
+
+
     $scope.actions = [];
 
     $scope.addActions = function (response) {

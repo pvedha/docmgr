@@ -1,3 +1,30 @@
+function readAllDocuments() {
+    readDocuments('/doc/all');
+}
+
+function readMyDocuments() {
+    readDocuments('/doc/' + currentUserId);
+}
+
+function readDocuments(url) {
+    $.ajax({
+        url: baseURL + url,
+        type: 'get',
+        accept: 'application/json',
+        global: false,
+        success: function (response) {
+            displayDocuments(response);
+        }
+    })
+}
+
+function displayDocuments(response) {
+    myDocuments = response;
+    docControllerAngular.addDocuments(response);
+    docControllerAngular.$apply();
+    showDocumentsPage();
+}
+
 function readAllActions() {
     readActions('/action/all');
 };
@@ -77,8 +104,6 @@ function saveCurrentAction(action) {
         data: JSON.stringify(action)
     })
 }
-
-
 
 function retrieveActionStates() {
     $.ajax({
