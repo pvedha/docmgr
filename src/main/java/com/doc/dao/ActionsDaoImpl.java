@@ -18,7 +18,7 @@ import com.doc.utilities.Utilities;
 @SuppressWarnings("unchecked")
 public class ActionsDaoImpl extends DaoImpl {
 
-	public ArrayList<Actions> readActions() {
+	public ArrayList<Actions> readAllActions() {
 		EntityManager em = factory.createEntityManager();
 		ArrayList<Actions> actions = (ArrayList<Actions>) em.createNativeQuery("select * from actions", Actions.class)
 				.getResultList();
@@ -27,16 +27,37 @@ public class ActionsDaoImpl extends DaoImpl {
 		return actions;
 	}
 
-	public ArrayList<Actions> readMyActions(String userId) {
+	public ArrayList<Actions> readAllOpenActions() {
 		EntityManager em = factory.createEntityManager();
-		
-		String query = "select * from actions where action_owner = " + userId;
-		ArrayList<Actions> actions = (ArrayList<Actions>) em.createNativeQuery(query, Actions.class)
-				.getResultList();
+		String query = "select * from actions where state != 'Closed'";
+		ArrayList<Actions> actions = (ArrayList<Actions>) em.createNativeQuery(query, Actions.class).getResultList();
 
 		em.close();
 		return actions;
 	}
+
+	public ArrayList<Actions> readMyActions(String userId) {
+		EntityManager em = factory.createEntityManager();
+
+		String query = "select * from actions where action_owner = :owner or action_creator = :creator";
+		ArrayList<Actions> actions = (ArrayList<Actions>) em.createNativeQuery(query, Actions.class)
+				.setParameter("owner", userId).setParameter("creator", userId).getResultList();
+
+		em.close();
+		return actions;
+	}
+
+	public ArrayList<Actions> readMyOpenActions(String userId) {
+		EntityManager em = factory.createEntityManager();
+
+		String query = "select * from actions where (action_owner = :owner or action_creator = :creator) and state != 'Closed'";
+		ArrayList<Actions> actions = (ArrayList<Actions>) em.createNativeQuery(query, Actions.class)
+				.setParameter("owner", userId).setParameter("creator", userId).getResultList();
+
+		em.close();
+		return actions;
+	}
+
 	public ArrayList<ActionStates> readActionStates() {
 		EntityManager em = factory.createEntityManager();
 		ArrayList<ActionStates> actionStates = (ArrayList<ActionStates>) em
@@ -92,7 +113,7 @@ public class ActionsDaoImpl extends DaoImpl {
 		action.setRemarks(dto.getRemarks());
 		action.setState(state);
 		action.setUpdated_on(Utilities.getNow());
-		
+
 		em.getTransaction().begin();
 		em.persist(action);
 		em.getTransaction().commit();

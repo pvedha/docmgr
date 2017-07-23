@@ -3,6 +3,7 @@ package com.doc.rest;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -18,8 +19,29 @@ public class ActionController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
-	public Response readActions() {
-		return Response.ok().entity(mgr.readActions()).build();
+	public Response readAllActions() {
+		return Response.ok().entity(mgr.readAllActions()).build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/allOpen")
+	public Response readAllOpenActions() {
+		return Response.ok().entity(mgr.readAllOpenActions()).build();
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/myActions/{userId}")
+	public Response readMyActions(@PathParam("userId") String userId) {
+		return Response.ok().entity(mgr.readMyActions(userId)).build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/myOpenActions/{userId}")
+	public Response readMyOpenActions(@PathParam("userId") String userId) {
+		return Response.ok().entity(mgr.readMyOpenActions(userId)).build();
 	}
 	
 	@GET

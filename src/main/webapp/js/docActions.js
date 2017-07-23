@@ -1,6 +1,22 @@
 function readAllActions() {
+    readActions('/action/all');
+};
+
+function readAllOpenActions() {
+    readActions('/action/allOpen');
+};
+
+function readMyActions() {
+    readActions('/action/myActions' + '/' + currentUserId);
+};
+
+function readMyOpenActions() {
+    readActions('/action/myOpenActions' + '/' + currentUserId);
+};
+
+function readActions(url) {
     $.ajax({
-        url: baseURL + '/action/all',
+        url: baseURL + url,
         type: 'get',
         accept: 'application/json',
         global: false,

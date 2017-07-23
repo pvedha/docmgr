@@ -17,9 +17,16 @@ public class ActionManager extends DocManager {
 //		return dao.readActions();
 //	}
 	
-	public ArrayList<ActionDto> readActions(){
-		
-		return getActionDto(dao.readActions());
+	public ArrayList<ActionDto> readAllActions(){		
+		return getActionDto(dao.readAllActions());
+	}
+	
+	public ArrayList<ActionDto> readAllOpenActions() {
+		return getActionDto(dao.readAllOpenActions());
+	}
+	
+	public ArrayList<ActionDto> readMyOpenActions(String userId) {
+		return getActionDto(dao.readMyOpenActions(userId));
 	}
 	
 	public ArrayList<ActionDto> readMyActions(String userId) {

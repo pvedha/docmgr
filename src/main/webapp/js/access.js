@@ -335,13 +335,15 @@ function signOut() {
 
 function loadDashboardLinks(jobTitle) {
     if (jobTitle == "Administrator") {
-        dashBoardLinkHtml = "<a class='quicklink-links' href='#' onClick=readMyActions()>My Action Items</a><p>";
+        dashBoardLinkHtml = "<a class='quicklink-links' href='#' onClick=readMyOpenActions()>My Open Action Items</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllUsers()>Show All Users</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllChildren()>Show All Students</a><p>";
         dashBoardLinkHtml += "<br>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=showAddStaffPage()>Add Staff</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=showAddChildrenPage()>Add Children</a><p>";
 
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyActions()>All My Actions</a><p>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllOpenActions()>All Open Actions</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllActions()>All Actions</a><p>";
 
         $("#dashboard-links").html(dashBoardLinkHtml);
