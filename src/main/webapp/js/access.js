@@ -3,6 +3,7 @@ var userIdsResponseReceived = false;
 var validUserId = true;
 var currentUserId = "";
 var currentUserDetails;
+var currentRole;
 var token = "";
 var url = 'http://' + window.location.host;
 var baseURL = url + "/docmgr/doc"; //http://hostname:8080/blog/blog

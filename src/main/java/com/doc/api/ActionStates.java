@@ -9,8 +9,8 @@ import lombok.Data;
 @Entity
 @XmlRootElement
 @Data
-public class DocState {
+public class ActionStates {
 	@Id
-	protected String docState;
+	protected String state;
 	protected String remarks;
 }

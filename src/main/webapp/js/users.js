@@ -24,7 +24,7 @@ function setStaffRoles() {
 
 function addStaffRoleToSelect(selectOption, staff) {
     var option = document.createElement("option");
-    option.text = staff.userName + "(" + staff.userId + ")";
+    option.text = staff.userName + " ( " + staff.userId + " )";
     option.value = staff.userId;
     selectOption.add(option);
 }

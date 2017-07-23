@@ -15,4 +15,16 @@ Test case for odbc possible?
 Mockito & PowerMock
 
 
-Bidirectional relationship - ownership is update. 
+Bidirectional relationship - ownership is update.
+
+View all open rest APIs: hostname:8080/appName/context/application.wadl
+http://localhost:8080/docmgr/doc/application.wadl 
+
+Passing a DTO:
+ the DTO object should have a public constructor explicitly defined. 
+ 
+ 
+ @JoinColumns({
+	    @JoinColumn(name = "childId", referencedColumnName="id"),
+	    @JoinColumn(name = "childId", referencedColumnName="title")
+	})

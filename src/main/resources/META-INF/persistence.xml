@@ -9,9 +9,11 @@
 		<class>com.doc.api.Children</class>
 		<class>com.doc.api.Jobtitle</class>
 		<class>com.doc.api.DocState</class>
-		<properties>
-
- 
+		<class>com.doc.api.Actions</class>
+		<class>com.doc.api.ActionStates</class>
+		<class>com.doc.api.Document</class>
+		
+		<properties> 
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" /> 
 			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:dividb" />
 			<property name="javax.persistence.jdbc.user" value="doc"/>
