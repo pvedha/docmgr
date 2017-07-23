@@ -17,11 +17,11 @@ import com.doc.exceptions.StaffNotFoundException;
 import com.doc.utilities.Logger;
 import com.doc.utilities.Utilities;
 
-public class OracleDaoImpl implements DAO {
+public class OracleDaoImpl extends DaoImpl  implements DAO {
 	
 //	private static final OracleDaoImpl instance = new OracleDaoImpl();
 	
-	static EntityManagerFactory factory = Persistence.createEntityManagerFactory("doc");
+	
 	
 //	public static OracleDaoImpl getInstance(){
 //		return instance;
