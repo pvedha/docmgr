@@ -26,6 +26,11 @@ function showUsersPage() {
     $("#DocController-Div").show();
 }
 
+function showActionsPage() {
+    hideAllPages();
+    $("#ActionController-Div").show();
+}
+
 function showChildrenPage() {
     hideAllPages();
     $('#ChildController-Div').show();
@@ -49,4 +54,5 @@ function hideAllPages() {
     $("#AddStaff-Div").hide();
     $("#AddChild-Div").hide();
     $("#user-profile-div").hide();
+    $("#ActionController-Div").hide();
 }

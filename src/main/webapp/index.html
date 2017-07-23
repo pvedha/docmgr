@@ -24,6 +24,7 @@
     <script src='js/docAngular.js'></script>
     <script src="js/access.js"></script>
     <script src="js/post.js"></script>
+    <script src="js/docActions.js"></script>
     <script src="js/views.js"></script>
     <script src="js/utilities.js"></script>
     <script src="js/users.js"></script>
@@ -191,7 +192,7 @@
                                         <td>{{u.phone}}</td>
                                         <td>{{u.actions}}</td>
                                         <td>
-                                            <button id="reset-pwd-button" class="btn1">Reset Pwd</button>
+                                            <button id="reset-pwd-button" class="btn btn-success">Reset Pwd</button>
                                         </td>
 
                                         <!--
@@ -251,7 +252,34 @@
                                     </button>
                                 </form>
                             </div>
-
+                            <div id="ActionController-Div" ng-controller="DocController">
+                                <table class="table">
+                                    <tr>
+                                        <th>Document Name</th>
+                                        <th>Action</th>
+                                        <th>Created By</th>
+                                        <th>Assigned To</th>
+                                        <th>Created On</th>
+                                        <th>Last updated</th>
+                                        <th>Current State</th>
+                                        <th>Updates</th>
+                                        <th>Save</th>
+                                    </tr>
+                                    <tr ng-repeat='a in actions'>
+                                        <td>{{a.docName}}</td>
+                                        <td>{{a.actionTitle}}</td>
+                                        <td>{{a.action_creator}}</td>
+                                        <td>{{a.action_owner}}</td>
+                                        <td>{{a.created_on}}</td>
+                                        <td>{{a.updated_on}}</td>
+                                        <td>{{a.state}}</td>
+                                        <td>{{a.updates}}</td>
+                                        <td>
+                                            <button id="action-update-button" class="btn btn-success" onclick='alert({{a.actionId}})'>update</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                             <div id="AddChild-Div">
                                 <form class="signin-form">
                                     <!--TODO email and phone validations -->

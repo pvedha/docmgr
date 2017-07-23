@@ -17,6 +17,15 @@ import com.doc.utilities.Utilities;
 @SuppressWarnings("unchecked")
 public class ActionsDaoImpl extends DaoImpl {
 	
+	public ArrayList<Actions> readActions() {
+		EntityManager em = factory.createEntityManager();
+		ArrayList<Actions> actions = (ArrayList<Actions>) em
+				.createNativeQuery("select * from actions", Actions.class).getResultList();
+		
+		em.close();
+		return actions;
+	}
+	
 	public ArrayList<ActionStates> readActionStates() {
 		EntityManager em = factory.createEntityManager();
 		ArrayList<ActionStates> actionStates = (ArrayList<ActionStates>) em
@@ -45,11 +54,14 @@ public class ActionsDaoImpl extends DaoImpl {
 		}
 		
 		Actions action = new Actions();
+		action.setDocument(doc);
 		action.setAction_creator(creator);
 		action.setAction_owner(owner);
+		action.setAction_title(dto.getActionTitle());
 		action.setCreated_on(Utilities.getNow());
-		action.setUpdated_on(Utilities.getNow());
+		action.setUpdated_on(Utilities.getNow());		
 		action.setState(state);
+		action.setRemarks(dto.getRemarks());
 		
 		persistObject(action);
 		

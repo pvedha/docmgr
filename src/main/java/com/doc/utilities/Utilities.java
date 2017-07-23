@@ -24,6 +24,14 @@ public class Utilities {
 		
 	}
 	
+	public static String getDD_MMM_YYYY(Timestamp timestamp){
+		return new SimpleDateFormat("dd-MMM-yyyy").format(timestamp);
+	}
+	
+	public static String getDDMMYY_HHMM(Timestamp timestamp){
+		return new SimpleDateFormat("dd/MMM/yy hh:mm").format(timestamp);
+	}
+	
 	public static Timestamp getNow(){
 		return new Timestamp(System.currentTimeMillis());
 	}

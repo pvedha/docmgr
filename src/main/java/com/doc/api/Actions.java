@@ -24,8 +24,9 @@ public class Actions {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "document", referencedColumnName = "docId")
 	protected Document document;
+	protected String action_title;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "action_creator", referencedColumnName = "userid")
+	@JoinColumn(name = "action_creator", referencedColumnName = "userid")	
 	protected DocUser action_creator;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "action_owner", referencedColumnName = "userid")

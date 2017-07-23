@@ -18,9 +18,17 @@ public class ActionController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
+	public Response readActions() {
+		return Response.ok().entity(mgr.readActions()).build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/states/all")
 	public Response readActionStates() {
 		return Response.ok().entity(mgr.readActionStates()).build();
 	}
+	
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -36,6 +44,7 @@ public class ActionController {
 		ActionDto dto = new ActionDto();
 		
 		dto.setDocId(1);
+		dto.setActionTitle("Fill the latest assessment results");
 		dto.setAction_creator("p");
 		dto.setAction_owner("p");
 		dto.setRemarks("trial addition");
