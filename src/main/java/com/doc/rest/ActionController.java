@@ -9,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.doc.dto.ActionDto;
-import com.doc.dto.DocumentDto;
 import com.doc.mgr.ActionManager;
 
 @Path("/action")

@@ -97,10 +97,6 @@ $(document).ready(function () {
         function () {
             addChild();
         });
-    //    $('#newChat-submit-button').click(
-    //        function () {
-    //            newChat();
-    //        });
     $('#search-button').click(
         function () {
             searchAllPosts();
@@ -329,7 +325,6 @@ function toggleSignform() {
 }
 
 function signOut() {
-    Chat.loginMessage("Signing out");
     localStorage.setItem("userId", "");
     localStorage.setItem("token", "");
     window.location.href = appURL;
@@ -379,8 +374,6 @@ function hideAllForms() {
     $("#LoginForm").hide();
     $("#LoggedInForm").hide();
     $("#NotLogged").hide();
-    //$("#newChat-submit-button").prop("disabled", true);
-    $("#new-chat-message").prop("disabled", true);
     $("#post-comment-button").prop("disabled", true);
     $("#comment-textarea").prop("disabled", true);
 

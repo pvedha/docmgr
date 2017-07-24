@@ -12,6 +12,7 @@ import lombok.Data;
 public class Jobtitle {
 	@Id
 	protected String title;
+	protected String remarks;
 	protected int docrights;
 	protected int childrights;
 	protected int jobrights;	

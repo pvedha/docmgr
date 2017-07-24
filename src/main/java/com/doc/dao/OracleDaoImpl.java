@@ -3,9 +3,6 @@ package com.doc.dao;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import com.doc.api.Children;
 import com.doc.api.DocUser;
 import com.doc.api.Jobtitle;

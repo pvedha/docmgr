@@ -2,9 +2,7 @@ package com.doc.mgr;
 
 import java.util.ArrayList;
 
-import com.doc.api.ActionStates;
 import com.doc.api.Document;
-import com.doc.dao.ActionsDaoImpl;
 import com.doc.dao.DocumentDaoImpl;
 import com.doc.dto.DocumentDto;
 import com.doc.utilities.Utilities;

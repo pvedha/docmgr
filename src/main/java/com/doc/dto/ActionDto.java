@@ -1,15 +1,5 @@
 package com.doc.dto;
 
-import java.sql.Timestamp;
-
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.doc.api.DocUser;
-import com.doc.api.Document;
-
 import lombok.Data;
 
 @Data

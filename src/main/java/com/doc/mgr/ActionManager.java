@@ -6,7 +6,6 @@ import com.doc.api.ActionStates;
 import com.doc.api.Actions;
 import com.doc.dao.ActionsDaoImpl;
 import com.doc.dto.ActionDto;
-import com.doc.dto.DocumentDto;
 import com.doc.utilities.Utilities;
 
 public class ActionManager extends DocManager {

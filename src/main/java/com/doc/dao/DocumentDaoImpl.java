@@ -1,18 +1,15 @@
 package com.doc.dao;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 
-import com.doc.api.ActionStates;
 import com.doc.api.Children;
 import com.doc.api.DocState;
 import com.doc.api.DocUser;
 import com.doc.api.Document;
 import com.doc.dto.DocumentDto;
 import com.doc.exceptions.ChildNotFoundException;
-import com.doc.exceptions.DuplicateUserException;
 import com.doc.exceptions.InvalidStatusException;
 import com.doc.exceptions.StaffNotFoundException;
 import com.doc.utilities.Utilities;

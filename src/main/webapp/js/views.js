@@ -23,7 +23,7 @@ function showWelcomePage() {
 
 function showUsersPage() {
     hideAllPages();
-    $("#DocController-Div").show();
+    $("#UserController-Div").show();
 }
 
 function showActionsPage() {

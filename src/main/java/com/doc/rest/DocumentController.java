@@ -8,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.doc.dto.DocumentDto;
-import com.doc.mgr.ActionManager;
 import com.doc.mgr.DocumentManager;
 
 @Path("/doc")
