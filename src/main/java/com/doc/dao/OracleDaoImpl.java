@@ -132,7 +132,6 @@ public class OracleDaoImpl extends DaoImpl  implements DAO {
 		ArrayList<DocUser> docUsers = (ArrayList<DocUser>) em.createNativeQuery(validateQuery, DocUser.class)
 				.setParameter("userId", userId).setParameter("password", password).getResultList();
 		em.close();
-		Logger.log(docUsers.toString());
 		if (docUsers.size() == 1) {
 			return docUsers.get(0);
 		} else {

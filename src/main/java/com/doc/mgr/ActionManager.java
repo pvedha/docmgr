@@ -32,6 +32,10 @@ public class ActionManager extends DocManager {
 		return getActionDtos(dao.readMyActions(userId));
 	}
 	
+	public int getMyOpenActionCount(String userId){	
+		return dao.getMyOpenActionCount(userId);
+	}
+	
 	private ArrayList<ActionDto> getActionDtos(ArrayList<Actions> actions){
 		ArrayList<ActionDto> dtos = new ArrayList<>();
 		for(Actions action : actions){

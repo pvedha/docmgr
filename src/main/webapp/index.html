@@ -29,6 +29,7 @@
     <script src="js/utilities.js"></script>
     <script src="js/users.js"></script>
     <script src="js/blogModal.js"></script>
+    <script src="js/dropzone.js"></script>
 
     <script type="application/javascript">
         jQuery(document).ready(function($) {
@@ -62,12 +63,12 @@
                         <input id="loginPassword" type="password" placeholder="Password" class="form-control">
                     </div>
                     <button id="login-button" type="button" class="btn btn-success">Sign in</button>
-                    <button id="showSignUp" type="button" class="btn btn-success">Sign Up</button>
+                    <!--                    <button id="showSignUp" type="button" class="btn btn-success">Sign Up</button>-->
                 </form>
                 <form id="LoggedInForm" class="navbar-form navbar-right">
                     <input id="search-text" type="text" placeholder="Search ..." class="form-control search-box">
 
-                    <button type="button" class="btn btn-success" onclick="showNewPost()">New Post</button>
+                    <button type="button" class="btn btn-success" onclick="readMyOpenActions()">My Actions <span class="badge" id="my-action-count">0</span></button>
                     <button id="user-button" data-toggle="tooltip" data-placement="bottom" title="Edit Your Profile!" type="button" class="btn btn-info" onclick="viewProfile()"><span class="glyphicon glyphicon-user"></span>User ID</button>
                     <button type="button" class="btn btn-success" onclick="signOut()">Sign Out</button>
                 </form>
@@ -169,7 +170,70 @@
                             <div id="WelcomePage-Div">
                                 <h3>Welcome to kriyAdveSin Doc Manager</h3>
                                 <h4>Something goes here. TODO</h4>
-                                <p>Some intro about this app. TODO</p>
+
+                                <div id="dropzone">
+                                    <form action="/" class="dropzone needsclick" id="demo-upload">
+
+                                        <div class="dz-message needsclick">
+                                            Drop files here or click to upload.
+                                            <br />
+                                            <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                        </div>
+
+                                    </form>
+
+                                    <form action="/upload" class="dropzone needsclick" id="2demo-upload">
+
+                                        <div class="dz-message needsclick">
+                                            Drop files here or click to upload.
+                                            <br />
+                                            <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <p>Some intro about this app e. TODO</p>
+
+
+                                <form action="/" class="dropzone" id="my-awesome-dropzone"></form>
+
+                                sss
+
+                                <form action="/file-upload" class="dropzone needslick" id="my-awesome-dropzone"></form>
+
+                                xx
+
+
+                                <form action="/" class="dropzone">
+                                    <div class="fallback">
+                                        <input name="file" type="file" multiple />
+                                        <input type="submit" value="Submit">
+                                    </div>
+                                </form>
+
+                                <form action="/" class="dropzone" id="mmy-awesome-dropzone">
+                                    <input type="file" name="file" />
+                                    <input type="submit" value="Submit">
+                                </form>
+
+                                <form action="/tmp" class="dropzone">
+                                    <div class="fallback">
+                                        <input name="file" type="file" multiple />
+                                        <input type="submit" value="Submit">
+                                    </div>
+                                </form>
+
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="file" />
+                                    <input type="submit" value="Submit">
+                                </form>
+
+                                <form action="/" class="dropzone">
+                                    <div class="fallback">
+                                        <input name="file" type="file" multiple />
+                                    </div>
+                                </form>
                             </div>
 
 
@@ -294,6 +358,7 @@
                                         <th>Remarks</th>
                                         <th>Status</th>
                                         <th>Update</th>
+                                        <th>Action</th>
                                     </tr>
                                     <tr ng-repeat='d in docs'>
                                         <td>{{d.docId}}</td>
@@ -308,6 +373,9 @@
                                         <td>{{d.status}}</td>
                                         <td>
                                             <button id="document-update-button" class="btn btn-success" onclick='showUpdateActionPage({{d.docId}})'>update</button>
+                                        </td>
+                                        <td>
+                                            <button id="document-add-action-button" class="btn btn-success" onclick='showAddActionPage({{d.docId}})'>Add</button>
                                         </td>
                                     </tr>
                                 </table>

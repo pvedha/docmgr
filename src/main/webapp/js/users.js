@@ -144,21 +144,6 @@ function addChild() {
         tags: tags
     };
 
+    //Calling common ajax function
     doAjax('/child/addChild', httpPost, data, "Child successfully added", showWelcomePage, "Error adding, please check the details", doNothing);
-    //    $.ajax({
-    //        url: baseURL + '/child/addChild',
-    //        type: 'post',
-    //        contentType: 'application/json',
-    //        global: false,
-    //        success: function (response) {
-    //            $("#status-message").html("Child successfully added");
-    //            sleep(2000);
-    //            showWelcomePage();
-    //        },
-    //        error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //            console.log("Http responseText " + XMLHttpRequest.responseText + ", Status : " + XMLHttpRequest.status + ", ErrorThrown: " + errorThrown);
-    //            $("#status-message").html("Error adding, please check the details");
-    //        },
-    //        data: JSON.stringify(data)
-    //    })
 }

@@ -3,6 +3,7 @@ package com.doc.mgr;
 import java.util.ArrayList;
 
 import com.doc.api.DocUser;
+import com.doc.dao.ActionsDaoImpl;
 import com.doc.dto.AuthenticationDto;
 import com.doc.dto.UserDto;
 
@@ -49,6 +50,7 @@ public class UserManager extends DocManager {
 		response.setName(user.getName());
 		response.setUserId(user.getUserid());	
 		response.setJobTitle(user.getJobTitleString());
+		response.setMyOpenActionCount(getMyOpenActionCount(userId));
 		return response;
 	}
 	
@@ -60,7 +62,12 @@ public class UserManager extends DocManager {
 	}
 	
 	private AuthenticationDto makeAuthDto(DocUser user) {
-		return (new AuthenticationDto(user.getUserid(), user.getName(), user.getAbout(), user.getJobtitle().getTitle()));
+		return (new AuthenticationDto(user.getUserid(), user.getName(), user.getAbout(), user.getJobtitle().getTitle(), 
+				getMyOpenActionCount(user.getUserid())));
 	}		
 	
+	private int getMyOpenActionCount(String userId){
+		ActionsDaoImpl actionDao = new ActionsDaoImpl();
+		return actionDao.getMyOpenActionCount(userId);
+	}
 }

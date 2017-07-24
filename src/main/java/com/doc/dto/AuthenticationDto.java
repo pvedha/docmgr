@@ -16,6 +16,7 @@ public class AuthenticationDto {
 	private String about;
 	private String token;
 	private String jobTitle;
+	private int myOpenActionCount;
 	
 	public String genToken(String userId) {
 		
@@ -39,13 +40,14 @@ public class AuthenticationDto {
 		
 	}
 	
-	public AuthenticationDto(String userId, String name, String about, String jobTitle) {
+	public AuthenticationDto(String userId, String name, String about, String jobTitle, int myOpenActionCount) {
 		super();
 		this.userId = userId;
 		this.name = name;
 		this.about = about;
 		this.setToken(this.genToken(userId));
 		this.jobTitle = jobTitle;
+		this.myOpenActionCount = myOpenActionCount;
 	}	
 
 	public AuthenticationDto() {

@@ -7,7 +7,7 @@ var currentRole;
 var token = "";
 var url = 'http://' + window.location.host;
 var baseURL = url + "/docmgr/doc"; //http://hostname:8080/blog/blog
-var appURL = url + "/doc" //http://hostname:8080/blog
+var appURL = url + "/docmgr" //http://hostname:8080/blog
 var readPostResponse = [];
 var currentPostId = 0;
 var currentPost;
@@ -216,7 +216,7 @@ function authenticate(userId, password) {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             log("Invalid user credentials");
-            $("#loginMessage").html("Invalid crendentials, please try again");
+            $("#status-message").html("Invalid crendentials, please try again");
             //$("#login-message").css({ 'color': 'green', 'font-size': '100%' });
         }
     })
@@ -241,9 +241,9 @@ function validateSession() {
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             log("Invalid user credentials");
             showLoginPage();
-            $("#Logged").hide();
-            $("#LoggedInForm").hide();
-            $("#NotLogged").show();
+            //$("#Logged").hide();
+            // $("#LoggedInForm").hide();
+            //$("#NotLogged").show();
         }
     })
 };

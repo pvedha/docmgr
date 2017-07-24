@@ -1,8 +1,14 @@
 package com.doc.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 import com.doc.api.ActionStates;
 import com.doc.api.Actions;
@@ -64,6 +70,15 @@ public class ActionsDaoImpl extends DaoImpl {
 				.createNativeQuery("select * from actionstates", ActionStates.class).getResultList();
 		em.close();
 		return actionStates;
+	}
+
+	public int getMyOpenActionCount(String userId) {
+		EntityManager em = factory.createEntityManager();
+		String query = "select count(*) from actions  where (action_owner = :owner or action_creator = :creator) and state != 'Closed'";		
+		BigDecimal count = (BigDecimal) em.createNativeQuery(query)
+				.setParameter("owner", userId).setParameter("creator", userId)
+				.getSingleResult();
+		return  count.intValue();
 	}
 
 	public int addAction(ActionDto dto) {

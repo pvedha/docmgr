@@ -45,10 +45,17 @@ public class ActionController {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/myOpenActionsCount/{userId}")
+	public Response readMyOpenActionsCount(@PathParam("userId") String userId) {
+		return Response.ok().entity(mgr.getMyOpenActionCount(userId)).build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/states/all")
 	public Response readActionStates() {
 		return Response.ok().entity(mgr.readActionStates()).build();
-	}
+	}	
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)

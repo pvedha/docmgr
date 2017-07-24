@@ -11,16 +11,16 @@
   </description>
   
 	<servlet>
-		<servlet-name>jersey</servlet-name>
+		<servlet-name>DocMgr</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>com.blog.rest</param-value>
+			<param-value>com.doc.rest</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>jersey</servlet-name>
+		<servlet-name>DocMgr</servlet-name>
 		<url-pattern>/doc/*</url-pattern>
 	</servlet-mapping>
 </web-app>

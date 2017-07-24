@@ -2,6 +2,7 @@ function loadMainPage(response) {
     token = response.token; //new token?
     $("#current-user-icon").html("<img src='img/48px-User_icon_2.svg.png' class='img-normal'/>");
     $("#user-detail-div").html("<b>" + response.name + "</b><p><i>" + response.about);
+    $("#my-action-count").html(response.myOpenActionCount);
     currentUserId = response.userId;
     currentUserDetails = response;
     $("#user-button").html("<span class='glyphicon glyphicon-user' > </span>" + response.name);
