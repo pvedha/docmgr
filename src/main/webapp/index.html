@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">kriyAdveSin Doc Mgr</a>
+                <a class="navbar-brand" href="#" onclick="showWelcomePage()">kriyAdveSin Doc Mgr</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form id="LoginForm" class="navbar-form navbar-right">
@@ -66,7 +66,7 @@
                     <!--                    <button id="showSignUp" type="button" class="btn btn-success">Sign Up</button>-->
                 </form>
                 <form id="LoggedInForm" class="navbar-form navbar-right">
-                    <input id="search-text" type="text" placeholder="Search ..." class="form-control search-box">
+                    <input id="search-text" type="text" title="Search children, by ID, name, tags...!" placeholder="Search ..." class="form-control search-box">
 
                     <button type="button" class="btn btn-success" onclick="readMyOpenActions()">My Actions <span class="badge" id="my-action-count">0</span></button>
                     <button id="user-button" data-toggle="tooltip" data-placement="bottom" title="Edit Your Profile!" type="button" class="btn btn-info" onclick="viewProfile()"><span class="glyphicon glyphicon-user"></span>User ID</button>
@@ -170,7 +170,8 @@
                             <div id="WelcomePage-Div">
                                 <h3>Welcome to kriyAdveSin Doc Manager</h3>
                                 <h4>Something goes here. TODO</h4>
-
+                                <a href="file:///C:\temp\somefile.txt" download>somefile.txt</a>
+                                <a href="file:///C:\temp\8.jpg" download>9.jpg</a>
                                 <div id="dropzone">
                                     <form action="/" class="dropzone needsclick" id="demo-upload">
 
@@ -261,17 +262,6 @@
                                         <td>
                                             <button id="reset-pwd-button" class="btn btn-success">Reset Pwd</button>
                                         </td>
-
-                                        <!--
-                                            <a href="#" onclick=viewPost({{p.postId}})>
-                                                <p class='post-title'>{{p.title}}</p>
-                                            </a>
-                                            <p class='post-message'> {{p.message}} </p>
-                                            <p class='post-detail'> <span class='glyphicon glyphicon-user'></span> <b>{{p.userName}}</b> ,
-                                                <span>   </span> <span class='glyphicon glyphicon-time'></span> : {{p.postedOn}} ,
-                                                <span class='glyphicon glyphicon-comment'></span> <span class='badge'>{{p.commentsCount}}</span></p>
--->
-                                        <!--                                        </td>-->
                                     </tr>
                                 </table>
                             </div>
@@ -305,6 +295,8 @@
                                         <th>Councillor</th>
                                         <th>Therapist</th>
                                         <th>Tags</th>
+                                        <th>Update</th>
+                                        <th>Add Doc</th>
                                     </tr>
                                     <tr ng-repeat='c in children'>
                                         <td>{{c.id}}</td>
@@ -317,6 +309,12 @@
                                         <td>{{c.councillor}}</td>
                                         <td>{{c.therapist}}</td>
                                         <td>{{c.tags}}</td>
+                                        <td>
+                                            <button id="document-update-button" class="btn btn-success" onclick='showUpdateChildPage({{c.id}})'>update</button>
+                                        </td>
+                                        <td>
+                                            <button id="document-update-button" class="btn btn-success" onclick='showAddDocumentPage({{c.id}}, {{c.name}})'>Add</button>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -324,8 +322,8 @@
                                 <form class="signin-form">
                                     <!--TODO email and phone validations -->
                                     <input type="text" name="child-roll-no" class="" id="child-roll-no" placeholder="Child Roll No / Id" />
-                                    <input type="text" name="child-name" class="" id="child-name" placeholder="Child Name" />
-                                    <input type="date" name="child-dob" class="" id="child-dob" placeholder="Date of Birth" />
+                                    <input type="text" name="child-name" class="" id="child-name" placeholder="Child Name" /> Date of Birth :
+                                    <input type="date" name="child-dob" class="" id="child-dob" placeholder="Date of Birth" /> Date of Entry :
                                     <input type="date" name="child-doj" class="" id="child-doj" placeholder="Date of Joining or Inclusion" />
                                     <input type="text" name="child-remarks" class="" id="child-remarks" placeholder="Specific remarks or identification about the child" />
                                     <input type="text" name="child-message" class="" id="child-message" placeholder="Message about this child to other users, if any" /> Teacher:
@@ -341,6 +339,71 @@
                                 </form>
                             </div>
 
+
+                            <div id="UpdateChild-Div" ng-controller="DocController">
+                                <table class="table">
+                                    <tr>
+                                        <td>Child Id :</td>
+                                        <td>{{child.id}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Child Name :</td>
+                                        <td>{{child.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date of Birth :</td>
+                                        <td>{{child.dob}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date of Entry :</td>
+                                        <td>{{child.doj}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Remarks :</td>
+                                        <td>
+                                            <input type="text" id="UpdateChild-remarks" placeholder="Add comments or remarks" value="{{child.remarks}}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Message :</td>
+                                        <td>
+                                            <input type="text" id="UpdateChild-message" placeholder="Any message" value="{{child.message}}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Teacher :</td>
+                                        <td>
+                                            <select name="UpdateChild-Teacher" id="UpdateChild-Teacher" placeholder="Select the Teacher name"> </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Councillor :</td>
+                                        <td>
+                                            <select name="UpdateChild-Councillor" id="UpdateChild-Councillor" placeholder="Select the Councillor name"> </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Therapist :</td>
+                                        <td>
+                                            <select name="UpdateChild-Therapist" id="UpdateChild-Therapist" placeholder="Select the Therapist name"> </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tags :</td>
+                                        <td>
+                                            <input type="text" id="UpdateChild-remarks" value="{{child.tags}}" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button id="action-save-button" class="btn btn-success" onclick='saveCurrentChild({{child}})'>Save</button>
+                                            <button id="action-reset-button" class="btn btn-success" onclick='resetActionPage'>Reset</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
 
 
                             <!--            Document Pages          -->
@@ -362,7 +425,9 @@
                                     </tr>
                                     <tr ng-repeat='d in docs'>
                                         <td>{{d.docId}}</td>
-                                        <td>{{d.docName}}</td>
+                                        <td>{{d.docName}} ..
+                                            <a href="c:\temp\somefile.txt">somefile.txt</a>
+                                        </td>
                                         <td>{{d.revision}}</td>
                                         <td>{{d.childName}}</td>
                                         <td>{{d.owner}}</td>
@@ -372,13 +437,110 @@
                                         <td>{{d.remarks}}</td>
                                         <td>{{d.status}}</td>
                                         <td>
-                                            <button id="document-update-button" class="btn btn-success" onclick='showUpdateActionPage({{d.docId}})'>update</button>
+                                            <button id="document-update-button" class="btn btn-success" onclick='showUpdateDocumentPage({{d.docId}})'>update</button>
                                         </td>
                                         <td>
                                             <button id="document-add-action-button" class="btn btn-success" onclick='showAddActionPage({{d.docId}})'>Add</button>
                                         </td>
                                     </tr>
                                 </table>
+                            </div>
+                            <div id="AddDocument-Div">
+                                <Table class="table">
+                                    <tr>
+                                        <td>Child Id : </td>
+                                        <td id="AddDocument-child-id"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Child Name : </td>
+                                        <td id="AddDocument-child-name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Doc Owner : </td>
+                                        <td>
+                                            <select name="AddDocument-owner" id="AddDocument-owner" placeholder="Select the Document Owner name"> </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Doc Creator : </td>
+                                        <td>
+                                            <select name="AddDocument-creator" id="AddDocument-creator" placeholder="Select the Document creator name"> </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Remarks : </td>
+                                        <td>
+                                            <input type="text" name="AddDocument-remarks" class="" id="AddDocument-remarks" placeholder="Specific remarks about the Document" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Doc Status : </td>
+                                        <td>
+                                            <select name="AddDocument-status" id="AddDocument-status" placeholder="Select current state of the document"> </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button type="button" class="btn btn-success" id="AddDocument-submit-button" onclick="addDocument()">Add Document
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </Table>
+                            </div>
+
+                            <div id="UpdateDocument-Div" ng-controller="DocController">
+                                <Table class="table">
+                                    <tr>
+                                        <td>Child Id : </td>
+                                        <td>{{document.childId}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Child Name : </td>
+                                        <td>{{document.childName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Doc Owner : </td>
+                                        <td>
+                                            <select name="UpdateDocument-owner" id="UpdateDocument-owner" placeholder="Select the Document Owner name"> </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Doc Creator : </td>
+                                        <td>{{document.creator}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Created On : </td>
+                                        <td id="UpdateDocument-created-on">{{document.createdOn}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last updated On : </td>
+                                        <td id="UpdateDocument-updated-on">{{document.lastUpdated}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Doc remarks : </td>
+                                        <td>
+                                            <input type="text" name="UpdateDocument-remarks" class="" id="UpdateDocument-remarks" value="{{document.remarks}}" placeholder="{{document.remarks}}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Doc Status : </td>
+                                        <td>
+                                            <select name="UpdateDocument-status" id="UpdateDocument-status" placeholder="Select current state of the document"> </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button id="UpdateDocument-submit-button" class="btn btn-success" onclick='saveCurrentDocument({{document}})'>Save</button>
+                                            <button id="UpdateDocument-reset-button" class="btn btn-success" onclick='resetActionPage'>Reset</button>
+                                        </td>
+                                    </tr>
+                                </Table>
                             </div>
 
                             <!--                            Action pages    -->

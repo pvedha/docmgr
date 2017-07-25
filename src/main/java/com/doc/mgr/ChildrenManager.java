@@ -15,6 +15,11 @@ public class ChildrenManager extends DocManager {
 		ArrayList<Children> childrens = dao.readAllChildren();
 		return getChildrenDtos(childrens);
 	}
+	
+	public int updateChild(ChildrenDto dto){
+		return dao.updateChild(dto);
+	}
+		
 	private ArrayList<ChildrenDto> getChildrenDtos(ArrayList<Children> childrens){
 		ArrayList<ChildrenDto> childrenDtos = new ArrayList<>();
 		for(Children children: childrens){
@@ -22,4 +27,6 @@ public class ChildrenManager extends DocManager {
 		}
 		return childrenDtos;
 	}
+	
+	
 }

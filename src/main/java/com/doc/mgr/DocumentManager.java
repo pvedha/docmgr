@@ -2,6 +2,7 @@ package com.doc.mgr;
 
 import java.util.ArrayList;
 
+import com.doc.api.DocState;
 import com.doc.api.Document;
 import com.doc.dao.DocumentDaoImpl;
 import com.doc.dto.DocumentDto;
@@ -19,6 +20,13 @@ public class DocumentManager extends DocManager {
 		return getDocumentDtos(dao.readAllDocuments());
 	}
 	
+	public int updateDocument(DocumentDto dto){
+		return dao.updateDocument(dto);
+	}
+	
+	public ArrayList<DocState> readDocStates(){
+		return dao.readDocStates();
+	}
 	public ArrayList<DocumentDto> getDocumentDtos(ArrayList<Document> docs){
 		ArrayList<DocumentDto> dtos = new ArrayList<>();
 		for(Document doc : docs){

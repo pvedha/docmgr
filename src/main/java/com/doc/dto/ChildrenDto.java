@@ -15,8 +15,11 @@ public class ChildrenDto {
 	private String remarks;
 	private String message;
 	private String teacher;
+	private String teacherId;
 	private String councillor;
+	private String councillorId;
 	private String therapist;
+	private String therapistId;
 	private String tags;
 	
 	public ChildrenDto(){
@@ -31,8 +34,11 @@ public class ChildrenDto {
 		this.remarks = child.getRemarks();
 		this.message = child.getMessage();
 		this.teacher = child.getTeacherName();
+		this.teacherId = child.getTeacherUserId();
 		this.councillor = child.getCouncillorName();
+		this.councillorId = child.getCouncillorUserId();
 		this.therapist = child.getTherapistName();
+		this.therapistId = child.getTherapistUserId();
 		this.tags = child.getTags();
 	}	
 	

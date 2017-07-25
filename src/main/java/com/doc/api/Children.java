@@ -36,14 +36,26 @@ public class Children {
 	protected String tags;
 
 	public String getTeacherName() {
-		return teacher.getName() + "(" + teacher.getUserid() + ")";
+		return teacher.getName();
 	}
 	
 	public String getCouncillorName() {
-		return councillor.getName() + "(" + councillor.getUserid() + ")";
+		return councillor.getName();
 	}
 	
 	public String getTherapistName() {
-		return therapist.getName() + "(" + therapist.getUserid() + ")";
+		return therapist.getName();
+	}
+	
+	public String getTeacherUserId() {
+		return teacher.getUserid();
+	}
+	
+	public String getCouncillorUserId() {
+		return councillor.getUserid();
+	}
+	
+	public String getTherapistUserId() {
+		return therapist.getUserid();
 	}
 }

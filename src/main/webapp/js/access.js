@@ -8,22 +8,26 @@ var token = "";
 var url = 'http://' + window.location.host;
 var baseURL = url + "/docmgr/doc"; //http://hostname:8080/blog/blog
 var appURL = url + "/docmgr" //http://hostname:8080/blog
-var readPostResponse = [];
-var currentPostId = 0;
-var currentPost;
-var currentUserFavouriteList = [];
-var userHasFavourites = false;
-var loadSamePost = false;
+
+
+
+
 var docControllerAngular; // = angular.element($('#BlogPostController-Div')).scope();
 var userControllerAngular;
 var childControllerAngular;
 var actionControllerAngular;
 var updateActionControllerAngular;
+var updateChildControllerAngular;
+var updateDocControllerAngular;
+
+
 var jobTitles = [];
 var actionStates = [];
+var docStates = [];
 var staffs = [];
 var myActions = [];
 var myDocuments = [];
+var myChildren = [];
 
 var httpPost = 'post';
 var httpGet = 'get';
@@ -111,6 +115,8 @@ $(document).ready(function () {
     childControllerAngular = angular.element($('#ChildController-Div')).scope();
     actionControllerAngular = angular.element($('#ActionController-Div')).scope();
     updateActionControllerAngular = angular.element($('#UpdateAction-Div')).scope();
+    updateChildControllerAngular = angular.element($('#UpdateChild-Div')).scope();
+    updateDocumentControllerAngular = angular.element($('#UpdateDocument-Div')).scope();
 
 
     $('[data-toggle="tooltip"]').tooltip();
@@ -342,6 +348,7 @@ function loadDashboardLinks(jobTitle) {
 
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyActions()>All My Actions</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllOpenActions()>All Open Actions</a><p>";
+        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyOpenActions()>My Open Actions</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllActions()>All Actions</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllDocuments()>All Documents</a><p>";
         dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyDocuments()>All My Documents</a><p>";
@@ -353,6 +360,7 @@ function loadDashboardLinks(jobTitle) {
 function loadContents() {
     retrieveJobTitles();
     initAllUsers();
+    retrieveDocStates();
     retrieveActionStates();
 }
 

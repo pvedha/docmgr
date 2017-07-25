@@ -52,6 +52,39 @@ function showDocumentsPage() {
     $("#DocController-Div").show();
 }
 
+function showAddDocumentPage(childId, childName) {
+    $("#AddDocument-child-id").html(childId);
+    $("#AddDocument-child-name").html(childName);
+    $('#ChildController-Div').hide();
+    hideAllForms();
+    $("#AddDocument-Div").show();
+}
+
+function showUpdateChildPage(chidId) {
+    for (i = 0; i < myChildren.length; i++) {
+        if (myChildren[i].id == chidId) {
+            updateChildControllerAngular.setChildDetail(myChildren[i]);
+            updateChildControllerAngular.$apply();
+            break;
+        }
+    }
+
+    hideAllPages();
+    $("#UpdateChild-Div").show();
+}
+
+function showUpdateDocumentPage(docId) {
+    for (i = 0; i < myDocuments.length; i++) {
+        if (myDocuments[i].docId == docId) {
+            updateDocumentControllerAngular.setDocumentDetail(myDocuments[i]);
+            updateDocumentControllerAngular.$apply();
+            break;
+        }
+    }
+    hideAllPages();
+    $("#UpdateDocument-Div").show();
+}
+
 function showUpdateActionPage(actionId) {
 
     for (i = 0; i < myActions.length; i++) {
@@ -74,7 +107,10 @@ function hideAllPages() {
     $('#ChildController-Div').hide();
     $("#AddStaff-Div").hide();
     $("#AddChild-Div").hide();
+    $("#UpdateChild-Div").hide();
     $("#user-profile-div").hide();
     $("#ActionController-Div").hide();
     $("#UpdateAction-Div").hide();
+    $("#AddDocument-Div").hide();
+    $("#UpdateDocument-Div").hide();
 }

@@ -30,6 +30,20 @@ public class DocumentController {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/update")
+	public Response updateDocument(DocumentDto dto){
+		return Response.ok().entity(mgr.updateDocument(dto)).build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/states")
+	public Response readDocStates() {
+		return Response.ok().entity(mgr.readDocStates()).build();
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/test/add")
 	public Response addDocument(){
 		DocumentDto dto = new DocumentDto();

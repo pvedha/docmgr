@@ -24,7 +24,7 @@ public class ChildrenController {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/addChild")
+	@Path("/add")
 	public Response addChild(ChildrenDto childDto) {
 //		try{
 			int number = mgr.addChild(childDto);
@@ -33,4 +33,14 @@ public class ChildrenController {
 //			throw new DuplicateUserException("Why this happening");
 //		}
 	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/update")
+	public Response updateChild(ChildrenDto childDto) {
+			return Response.ok().entity(mgr.updateChild(childDto) + "").build();
+//		}
+	}
+	
+	
 }

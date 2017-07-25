@@ -23,6 +23,13 @@ public class GenericController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/properties")
+	public Response getProperties() {
+		return Response.ok().entity(mgr.getProperties()).build();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/initDB")
 	public Response initTrial() {
 		// mgr.initTrial();

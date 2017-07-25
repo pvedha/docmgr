@@ -92,6 +92,28 @@ docModule.controller("DocController", function ($scope) {
         $("#update-action-state").val(action.state);
     };
 
+    $scope.child;
+
+    $scope.setChildDetail = function (child) {
+        $scope.child = child;
+        $("#UpdateChild-Teacher").val(child.teacher);
+        $("#UpdateChild-Councillor").val(child.councillor);
+        $("#UpdateChild-Therapist").val(child.therapist);
+    };
+
+    $scope.document;
+
+    $scope.setDocumentDetail = function (document) {
+        $scope.document = document;
+        $("#UpdateDocument-owner").val(document.owner);
+        $("#UpdateDocument-status").val(document.status);
+    };
+
+
+
+
+
+
 
 
 
@@ -137,18 +159,6 @@ docModule.controller("DocController", function ($scope) {
                 commentsCount: post.comments.length
             });
         }
-    };
-
-
-
-    $scope.chats = [];
-
-    $scope.addChat = function (messageIn, userNameIn, timeIn) {
-        $scope.chats.push({
-            userName: userNameIn,
-            message: messageIn,
-            time: timeIn
-        });
     };
 
 
