@@ -171,39 +171,9 @@
                                 <h3>Welcome to kriyAdveSin Doc Manager</h3>
                                 <h4>Something goes here. TODO</h4>
 
-                                <a href="file:///c:\temp\" target="somefile.txt">Link Text</a>
-                                <a href="file:///c:/temp" target="somefile.txt">Link Text</a>
-
-                                <a href="file:///c:\temp\somefile.txt" download>somefile.txt</a>
-                                <a href="file://C:\temp\somefile.txt" download>somefile.txt</a>
-                                <a href="file:///c:\temp\somefile.txt">somefile.txt</a>
-                                <a href="file:///C:\temp\8.jpg" download>9.jpg</a>
-
-                                <a href="#" download onclick=alert( "hello")>TryDownloading</a>
-                                <a download onclick=alert( "hello")>TryDownloading no href</a>
-
-                                <a href="#" download onclick=downloadx()>TryDownloadingx</a>
-                                <button onclick=downloadx()>download</button>
 
                                 <p>Some intro about this app e. TODO</p>
 
-
-                                <button onclick=downloadY()>downloadY</button>
-
-                                <a href="https://docs.google.com/uc?id=0B0jH18Lft7ypSmRjdWg1c082Y2M" download id="downloady" hidden></a>
-
-                                <button onclick=downloadZ()>downloadY</button>
-                                <a href="file:///c:\temp\somefile.txt" download id="downloadz" hidden></a>
-
-
-
-                                Calling ajax rest download service
-                                <button onclick=downloadDocument()>downloadDocument</button>
-
-
-
-                                <a href="http://localhost:8080/Js/rest/file/get?filePath=c:\temp\somefile.txt&fileName=somefile.txt">Calling JS rest get function</a>
-                                <a href="http://localhost:8080/Js/rest/file/get?filePath=c:\temp\somefile.txt&fileName=somefile.txt" download>Calling JS rest get function without download</a>
                             </div>
 
 
@@ -395,7 +365,13 @@
                                     <tr ng-repeat='d in docs'>
                                         <td>{{d.docId}}</td>
                                         <td>{{d.docName}} ..
-                                            <a href="{{baseFilePathUrl}}/{{d.childName}}/{{d.docName}}" download>{{d.docName}}</a>
+
+                                            <!--    //http://localhost:8080/Js/rest/file/get?filePath=c:\temp\fileZilla.exe&fileName=filezilla.exe-->
+
+                                            <a href="{{fileDownloadUrl}}/{{d.childName}}/{{d.docName}}&fileName={{d.docName}}" download>{{d.docName}}</a>
+
+                                            <a href="http://localhost:8080{{fileDownloadUrl}}/{{d.childName}}/{{d.docName}}&fileName={{d.docName}}" download>With host {{d.docName}}</a>
+
                                         </td>
                                         <td>{{d.revision}}</td>
                                         <td>{{d.childName}}</td>

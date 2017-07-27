@@ -1,7 +1,8 @@
 var docModule = angular.module("DocApp", []);
 docModule.controller("DocController", function ($scope) {
 
-    $scope.baseFilePathUrl = "file:///c:/temp"
+    //http://localhost:8080/Js/rest/file/get?filePath=c:\temp\fileZilla.exe&fileName=filezilla.exe    
+    $scope.fileDownloadUrl = "/Js/rest/file/get?filePath=c:/temp";
 
     $scope.users = [];
 

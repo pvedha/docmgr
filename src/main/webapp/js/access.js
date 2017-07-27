@@ -5,12 +5,15 @@ var currentUserId = "";
 var currentUserDetails;
 var myJobtitle;
 var token = "";
+
 var url = 'http://' + window.location.host;
 var baseURL = url + "/docmgr/doc"; //http://hostname:8080/blog/blog
 var appURL = url + "/docmgr" //http://hostname:8080/blog
 
 var fileBasePath = "c:/temp";
-var fileServiceUrl = url + "/Js/rest/file/upload?filePath=";
+var fileServiceUrl = url + "/Js/rest";
+var fileUploadUrl = fileServiceUrl + "/file/upload?filePath=";
+var fileDownloadUrl = "/Js/rest/file/get";
 
 var dashBoardLinkHtml;
 

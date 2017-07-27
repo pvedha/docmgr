@@ -31,13 +31,13 @@ function uploadDocument() {
 
     // Create an FormData object
     var data = new FormData(form);
-    var file = $('input[name="file"').get(2).files[0];
+    var file = $("#AddDocument-file-input").get(0).files[0]; //$('input[name="file"]').get(0).files[0];
     console.log(file);
     data.append('file', file);
 
     var fileName = file.name;
 
-    var childDir = fileServiceUrl + fileBasePath + "/" + $("#AddDocument-child-name").html();
+    var childDir = fileUploadUrl + fileBasePath + "/" + $("#AddDocument-child-name").html();
 
     $("#status-message").html("Uploading the document. " + getLoadingMoreGif());
 
