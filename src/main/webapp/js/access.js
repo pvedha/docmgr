@@ -10,7 +10,7 @@ var baseURL = url + "/docmgr/doc"; //http://hostname:8080/blog/blog
 var appURL = url + "/docmgr" //http://hostname:8080/blog
 
 var fileBasePath = "c:/temp";
-var fileServiceUrl = url + "/Js/rest/upload/path?filePath=";
+var fileServiceUrl = url + "/Js/rest/file/upload?filePath=";
 
 var dashBoardLinkHtml;
 

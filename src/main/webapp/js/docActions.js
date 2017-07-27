@@ -125,6 +125,28 @@ function addDocument(fileName) {
     })
 }
 
+
+function downloadDocument() {
+    $.ajax({
+        url: '/Js/rest/file/get',
+        type: 'get',
+        contentType: 'application/json',
+        global: false,
+        success: function (response) {
+            //TODO try to update the current page if possible. with updated time, state and remarks. 
+            console.log(response);
+            $("#status-message").html("Document details updated");
+            sleep(2000);
+            //readAllActions();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log("Http responseText: " + XMLHttpRequest.responseText + ", Status : " + XMLHttpRequest.status + ", ErrorThrown: " + errorThrown);
+            $("#status-message").html("Error Updating Document");
+        }
+    })
+}
+
+
 function saveCurrentDocument(document) {
 
     document.owner = $("#UpdateDocument-owner").val();

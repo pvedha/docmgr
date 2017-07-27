@@ -45,6 +45,17 @@ function downloadx() {
     link.click();
 }
 
+
+function downloadY() {
+    document.getElementById('downloady').click();
+
+}
+
+function downloadZ() {
+    document.getElementById('downloadz').click();
+
+}
+
 function doNothing() {
 
 }
