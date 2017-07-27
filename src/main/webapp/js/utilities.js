@@ -16,6 +16,10 @@ function setStatus(message) {
     $("#status-message").html(message);
 }
 
+function getLoadingMoreGif() {
+    return '<img style="width:24px;height:24px;" src="img/loading_128.gif">';
+}
+
 function doNothing() {
 
 }

@@ -29,7 +29,7 @@
     <script src="js/utilities.js"></script>
     <script src="js/users.js"></script>
     <script src="js/blogModal.js"></script>
-    <script src="js/dropzone.js"></script>
+    <!--    <script src="js/dropzone.js"></script>-->
 
     <script type="application/javascript">
         jQuery(document).ready(function($) {
@@ -172,69 +172,12 @@
                                 <h4>Something goes here. TODO</h4>
                                 <a href="file:///C:\temp\somefile.txt" download>somefile.txt</a>
                                 <a href="file:///C:\temp\8.jpg" download>9.jpg</a>
-                                <div id="dropzone">
-                                    <form action="/" class="dropzone needsclick" id="demo-upload">
-
-                                        <div class="dz-message needsclick">
-                                            Drop files here or click to upload.
-                                            <br />
-                                            <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                        </div>
-
-                                    </form>
-
-                                    <form action="/upload" class="dropzone needsclick" id="2demo-upload">
-
-                                        <div class="dz-message needsclick">
-                                            Drop files here or click to upload.
-                                            <br />
-                                            <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                        </div>
-
-                                    </form>
-                                </div>
 
                                 <p>Some intro about this app e. TODO</p>
 
 
-                                <form action="/" class="dropzone" id="my-awesome-dropzone"></form>
-
-                                sss
-
-                                <form action="/file-upload" class="dropzone needslick" id="my-awesome-dropzone"></form>
-
-                                xx
 
 
-                                <form action="/" class="dropzone">
-                                    <div class="fallback">
-                                        <input name="file" type="file" multiple />
-                                        <input type="submit" value="Submit">
-                                    </div>
-                                </form>
-
-                                <form action="/" class="dropzone" id="mmy-awesome-dropzone">
-                                    <input type="file" name="file" />
-                                    <input type="submit" value="Submit">
-                                </form>
-
-                                <form action="/tmp" class="dropzone">
-                                    <div class="fallback">
-                                        <input name="file" type="file" multiple />
-                                        <input type="submit" value="Submit">
-                                    </div>
-                                </form>
-
-                                <form action="" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="file" />
-                                    <input type="submit" value="Submit">
-                                </form>
-
-                                <form action="/" class="dropzone">
-                                    <div class="fallback">
-                                        <input name="file" type="file" multiple />
-                                    </div>
-                                </form>
                             </div>
 
 
@@ -313,7 +256,7 @@
                                             <button id="document-update-button" class="btn btn-success" onclick='showUpdateChildPage({{c.id}})'>update</button>
                                         </td>
                                         <td>
-                                            <button id="document-update-button" class="btn btn-success" onclick='showAddDocumentPage({{c.id}}, {{c.name}})'>Add</button>
+                                            <button id="document-update-button" class="btn btn-success" onclick='showAddDocumentPage({{c.id}}, "{{c.name}}")'>Add</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -440,7 +383,7 @@
                                             <button id="document-update-button" class="btn btn-success" onclick='showUpdateDocumentPage({{d.docId}})'>update</button>
                                         </td>
                                         <td>
-                                            <button id="document-add-action-button" class="btn btn-success" onclick='showAddActionPage({{d.docId}})'>Add</button>
+                                            <button id="document-add-action-button" class="btn btn-success" onclick='showAddActionPage({{d.docId}},"{{d.docName}}")'>Add</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -454,6 +397,14 @@
                                     <tr>
                                         <td>Child Name : </td>
                                         <td id="AddDocument-child-name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Select the file to upload : </td>
+                                        <td>
+                                            <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+                                                <input type="file" name="file" />
+                                            </form>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Doc Owner : </td>
@@ -482,7 +433,7 @@
                                     <tr>
                                         <td></td>
                                         <td>
-                                            <button type="button" class="btn btn-success" id="AddDocument-submit-button" onclick="addDocument()">Add Document
+                                            <button type="button" class="btn btn-success" id="AddDocument-submit-button" onclick="uploadDocument()">Add Document
                                             </button>
                                         </td>
                                     </tr>
@@ -573,6 +524,51 @@
                                 </table>
                             </div>
 
+                            <div id="AddAction-Div" ng-controller="DocController">
+                                <table class="table">
+                                    <tr>
+                                        <td>Document Name :</td>
+                                        <td id="AddAction-docId"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Document Name :</td>
+                                        <td id="AddAction-docName"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Action Title :</td>
+                                        <td>
+                                            <input type="text" name="AddAction-title" class="" id="AddAction-title" placeholder="Add a title" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Assigned To :</td>
+                                        <td>
+                                            <select name="AddAction-owner" id="AddAction-owner" placeholder="Select the action Owner name"> </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Current State :</td>
+                                        <td>
+                                            Created
+                                            <!--                                            <select name="AddAction-action-state" id="AddAction-state" placeholder="Select new state"></select>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Remarks :</td>
+                                        <td>
+                                            <input type="text" name="AddAction-remarks" class="" id="AddAction-remarks" placeholder="Add action remarks or comments" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button id="AddAction-submit-button" class="btn btn-success" onclick='addAction()'>Add Action</button>
+                                            <button id="AddAction-reset-button" class="btn btn-success" onclick='resetActionPage'>Reset</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
                             <div id="UpdateAction-Div" ng-controller="DocController">
                                 <table class="table">
                                     <tr>
@@ -606,7 +602,7 @@
                                     <tr>
                                         <td>Change State :</td>
                                         <td>
-                                            <select name="update-action-state" id="update-action-state" placeholder="Select new state"></select>
+                                            <select name="UpdateAction-state" id="UpdateAction-state" placeholder="Select new state"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -616,7 +612,7 @@
                                     <tr>
                                         <td>Add comment :</td>
                                         <td>
-                                            <input type="text" id="update-action-remark" placeholder="Add comments or remakr" />
+                                            <input type="text" id="update-action-remarks" placeholder="Add comments or remarr" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -628,6 +624,14 @@
                                     </tr>
                                 </table>
                             </div>
+
+
+
+
+
+
+
+
 
 
                             <div class="panel panel-info">
@@ -695,7 +699,7 @@
         </div>
 
         <footer>
-            <!--            <p align="center">A <a id="showAbout">project</a> by Praveen Vedha and Aswin Kuppusami, &copy; 2017 Bogus Inc.</p>-->
+            <!--            <p align="center">A <a id="showAbout">project</a> by Praveen Vedha, &copy; 2017 Bogus Inc.</p>-->
             <p align="center">A project for kriyAdveSin, &copy; 2017 Bogus Inc.</p>
         </footer>
     </div>

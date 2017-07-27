@@ -86,7 +86,7 @@ public class DocumentDaoImpl extends DaoImpl {
 		doc.setLast_updated(Utilities.getNow());
 		doc.setOwner(owner);
 		doc.setRemarks(dto.getRemarks());
-		doc.setRevision(doc.getRevision());
+		doc.setRevision(doc.getRevision()+1);
 		doc.setStatus(state);
 		
 		em.getTransaction().begin();

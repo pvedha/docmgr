@@ -25,27 +25,78 @@ function displayDocuments(response) {
     showDocumentsPage();
 }
 
-function addDocument() {
 
-    var docName = "YetToBeAdded.doc";
+function uploadDocument() {
+    var form = $('#fileUploadForm')[0];
+
+    // Create an FormData object
+    var data = new FormData(form);
+    var file = $('input[name="file"').get(2).files[0];
+    console.log(file);
+    data.append('file', file);
+
+    var fileName = file.name;
+
+    var childDir = fileServiceUrl + fileBasePath + $("#AddDocument-child-name").html();
+
+    $("#status-message").html("Uploading the document. " + getLoadingMoreGif());
+
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: childDir,
+        data: data,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+
+            $("#status-message").html("Successfully uploaded the file, now adding the document details..." + getLoadingMoreGif());
+            addDocument(fileName);
+
+        },
+        error: function (e) {
+            $("#status-message").html("File upload failed, cannot add the document now. Please check the details");
+            console.log("ERROR : ", e);
+        }
+    });
+
+}
+
+
+function addDocument(fileName) {
+
+    var docName = fileName;
     var revision = 1;
-    var childId = $("#AddDocument-child-id").val();
-    var childName = $("#AddDocument-child-name").val();
-    var owner = $("#staff-about").val();
-    var creator = $("#staff-email").val();
-    var remarks = $("#staff-phone").val();
-    var status = $("#staff-job-title").val();
+    var childId = $("#AddDocument-child-id").html();
+    var childName = $("#AddDocument-child-name").html();
+    var owner = $("#AddDocument-owner").val();
+    var creator = $("#AddDocument-creator").val();
+    var remarks = $("#AddDocument-remarks").val();
+    var status = $("#AddDocument-status").val();
 
+    //    protected int docId;
+    //	protected String docName;
+    //	protected int revision;
+    //	protected int childId;
+    //	protected String childName;
+    //	protected String owner;
+    //	protected String creator;	
+    //	protected String createdOn;	
+    //	protected String lastUpdated;
+    //	protected String remarks;
+    //	protected String status;
 
-    if (docName.trim().length === 0 || childName.trim().length === 0) {
+    if (docName.trim().length === 0) {
         $("#status-message").html("Invalid details");
         return;
     }
 
-    $("#status-message").html("Please wait, adding document...");
+    $("#status-message").html("Please wait, adding document..." + getLoadingMoreGif());
     var data = {
-        docId: userId,
-        docId: userName,
+        docId: 1,
+        docName: docName,
         revision: revision,
         childId: childId,
         childName: childName,
@@ -57,18 +108,18 @@ function addDocument() {
         status: status
     };
     $.ajax({
-        url: baseURL + '/user/addStaff',
+        url: baseURL + '/doc/add',
         type: 'post',
         contentType: 'application/json',
         global: false,
         success: function (response) {
-            $("#status-message").html("Staff successfully added");
+            $("#status-message").html("Document successfully added");
             sleep(2000);
             showWelcomePage();
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log(textStatus + "Error adding user" + errorThrown);
-            $("#status-message").html("Error adding, please check the details");
+            console.log(textStatus + "Error adding document" + errorThrown);
+            $("#status-message").html("Error adding document, please check the details");
         },
         data: JSON.stringify(data)
     })
@@ -142,10 +193,29 @@ function displayActions(response) {
     showActionsPage();
 }
 
-//TODO where is this called?
 function addAction() {
-    action.remarks += action.remarks + "; " + $("#update-action-remark").val();
-    action.state = $("#update-action-state").val();
+
+    var docId = $("#AddAction-docId").html(); //TODO check why .val is not returning contents?
+    var docName = $("#AddAction-docName").html();
+    var actionTitle = $("#AddAction-title").val();
+    var action_creator = currentUserId; //$("#AddAction-title").val();
+    var action_owner = $("#AddAction-owner").val();
+    var state = 'Created'; //$("#AddAction-state").val(); //by default
+    var remarks = $("#AddAction-remarks").val();
+
+    var data = {
+        actionId: 1,
+        docId: 1,
+        docName: docName,
+        actionTitle: actionTitle,
+        action_creator: action_creator,
+        action_owner: action_owner,
+        created_on: '',
+        updated_on: '',
+        state: state,
+        remarks: remarks
+    };
+
     $.ajax({
         url: baseURL + '/action/add',
         type: 'post',
@@ -156,17 +226,17 @@ function addAction() {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log("Http responseText: " + XMLHttpRequest.responseText + ", Status : " + XMLHttpRequest.status + ", ErrorThrown: " + errorThrown);
-            $("#status-message").html("Error Updating Action");
+            $("#status-message").html("Error Adding Action");
         },
-        data: JSON.stringify(action)
+        data: JSON.stringify(data)
     })
 }
 
 
 function saveCurrentAction(action) {
 
-    action.state = $("#update-action-state").val();
-    action.remarks += "; " + $("#update-action-remark").val();
+    action.state = $("#UpdateAction-state").val();
+    action.remarks += "; " + $("#update-action-remarks").val();
 
     $("#status-message").html("Updating Action...");
     $.ajax({
@@ -222,9 +292,11 @@ function retrieveActionStates() {
 };
 
 function setActionStates(actionStates) {
-    var teachers = document.getElementById("update-action-state");
+    var updateActionState = document.getElementById("UpdateAction-state");
+    //var AddActionState = document.getElementById("AddAction-state");
     for (i = 0; i < actionStates.length; i++) {
-        addValuesToSelect(teachers, actionStates[i].state);
+        addValuesToSelect(updateActionState, actionStates[i].state);
+        //addValuesToSelect(AddActionState, actionStates[i].state);
     }
 }
 

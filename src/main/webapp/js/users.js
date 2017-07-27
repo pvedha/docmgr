@@ -22,6 +22,7 @@ function setStaffRoles() {
     var updateChildTeacher = document.getElementById("UpdateChild-Teacher");
     var updateChildCouncillor = document.getElementById("UpdateChild-Councillor");
     var updateChildTherapist = document.getElementById("UpdateChild-Therapist");
+    var addActionOwner = document.getElementById("AddAction-owner");
     for (i = 0; i < staffs.length; i++) {
         addStaffRoleToSelect(teachers, staffs[i]);
         addStaffRoleToSelect(councillors, staffs[i]);
@@ -32,6 +33,7 @@ function setStaffRoles() {
         addStaffRoleToSelect(updateChildTeacher, staffs[i]);
         addStaffRoleToSelect(updateChildCouncillor, staffs[i]);
         addStaffRoleToSelect(updateChildTherapist, staffs[i]);
+        addStaffRoleToSelect(addActionOwner, staffs[i]);
     }
 }
 
@@ -118,7 +120,6 @@ function readAllChildren() {
 
 
 function displayChildren(response) {
-    console.log(response);
     myChildren = response;
     childControllerAngular.addChildren(response);
     childControllerAngular.$apply();

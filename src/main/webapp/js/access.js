@@ -3,13 +3,16 @@ var userIdsResponseReceived = false;
 var validUserId = true;
 var currentUserId = "";
 var currentUserDetails;
-var currentRole;
+var myJobtitle;
 var token = "";
 var url = 'http://' + window.location.host;
 var baseURL = url + "/docmgr/doc"; //http://hostname:8080/blog/blog
 var appURL = url + "/docmgr" //http://hostname:8080/blog
 
+var fileBasePath = "c:/temp/";
+var fileServiceUrl = url + "/Js/rest/upload/path?filePath=";
 
+var dashBoardLinkHtml;
 
 
 var docControllerAngular; // = angular.element($('#BlogPostController-Div')).scope();
@@ -124,12 +127,12 @@ $(document).ready(function () {
 
     //    console.log("Data from localStorage", localStorage.getItem("userId"));
     hideAllForms();
+    loadContents();
     if (localStorage.getItem("userId") !== null && localStorage.getItem("token")) {
         validateSession();
     } else {
         showLoginPage();
     }
-    loadContents();
     $('.affixed').affix({
         offset: {
             top: 50
@@ -337,28 +340,10 @@ function signOut() {
 }
 
 
-function loadDashboardLinks(jobTitle) {
-    if (jobTitle == "Administrator") {
-        dashBoardLinkHtml = "<a class='quicklink-links' href='#' onClick=readMyOpenActions()>My Open Action Items</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllUsers()>Show All Users</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllChildren()>Show All Students</a><p>";
-        dashBoardLinkHtml += "<br>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=showAddStaffPage()>Add Staff</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=showAddChildrenPage()>Add Children</a><p>";
 
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyActions()>All My Actions</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllOpenActions()>All Open Actions</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyOpenActions()>My Open Actions</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllActions()>All Actions</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllDocuments()>All Documents</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyDocuments()>All My Documents</a><p>";
-
-        $("#dashboard-links").html(dashBoardLinkHtml);
-    }
-}
 
 function loadContents() {
-    retrieveJobTitles();
+    //retrieveJobTitles(); not here. 
     initAllUsers();
     retrieveDocStates();
     retrieveActionStates();
@@ -382,11 +367,11 @@ function hideAllForms() {
     $("#LoginForm").hide();
     $("#LoggedInForm").hide();
     $("#NotLogged").hide();
-    $("#post-comment-button").prop("disabled", true);
-    $("#comment-textarea").prop("disabled", true);
+    // $("#post-comment-button").prop("disabled", true);
+    //$("#comment-textarea").prop("disabled", true);
 
-    $("#loading-more").hide();
-    $("#thats-all").hide();
+    //$("#loading-more").hide();
+    //$("#thats-all").hide();
 
 }
 
@@ -400,32 +385,4 @@ function skipLogin() {
     $("#mainPage").fadeIn(5000);
     readAllPosts();
     retrieveCategory();
-}
-
-
-
-function retrieveJobTitles() {
-    $.ajax({
-        url: baseURL + '/gen/jobTitles',
-        type: 'get',
-        accept: 'application/json',
-        global: false,
-        success: function (response) {
-            jobTitles = response;
-            setJobTitles();
-            //            console.log("added items");
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            log("Error Loading categories");
-        }
-    })
-}
-
-function setJobTitles() {
-    var jobTitle = document.getElementById("staff-job-title");
-    for (i = 0; i < jobTitles.length; i++) {
-        var option = document.createElement("option");
-        option.text = jobTitles[i].title;
-        jobTitle.add(option);
-    }
 }
