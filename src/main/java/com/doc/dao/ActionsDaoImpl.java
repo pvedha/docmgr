@@ -78,6 +78,7 @@ public class ActionsDaoImpl extends DaoImpl {
 		BigDecimal count = (BigDecimal) em.createNativeQuery(query)
 				.setParameter("owner", userId).setParameter("creator", userId)
 				.getSingleResult();
+		em.close();
 		return  count.intValue();
 	}
 
@@ -112,6 +113,7 @@ public class ActionsDaoImpl extends DaoImpl {
 
 		persistObject(action);
 
+		em.close();
 		return action.getActionId();
 	}
 

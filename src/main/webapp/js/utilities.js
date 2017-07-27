@@ -20,6 +20,31 @@ function getLoadingMoreGif() {
     return '<img style="width:24px;height:24px;" src="img/loading_128.gif">';
 }
 
+
+function getFileDownloadUrl(childName, docName) {
+    return "file:///" + fileBasePath + childName + "/" + docName;
+}
+
+
+function downloadURI(uri, name) {
+    var link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+
+    link.click();
+
+    link.href = "file:///c:/temp/somefile.txt";
+    link.click();
+}
+
+function downloadx() {
+    var link = document.createElement("a");
+    link.download = "name";
+
+    link.href = "file:///c:/temp/somefile.txt";
+    link.click();
+}
+
 function doNothing() {
 
 }

@@ -37,7 +37,7 @@ function uploadDocument() {
 
     var fileName = file.name;
 
-    var childDir = fileServiceUrl + fileBasePath + $("#AddDocument-child-name").html();
+    var childDir = fileServiceUrl + fileBasePath + "/" + $("#AddDocument-child-name").html();
 
     $("#status-message").html("Uploading the document. " + getLoadingMoreGif());
 

@@ -1,6 +1,8 @@
 var docModule = angular.module("DocApp", []);
 docModule.controller("DocController", function ($scope) {
 
+    $scope.baseFilePathUrl = "file:///c:/temp"
+
     $scope.users = [];
 
     $scope.addUsers = function (response) {

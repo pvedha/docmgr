@@ -66,7 +66,7 @@ function loadDashboardLinks() {
     dashBoardLinkHtml = "";
 
     if (myControls.viewAllActions) {
-        createDashBoardLinkEntry("meow", "This is a meow");
+
     }
 
 
@@ -135,6 +135,8 @@ function showAddDocumentPage(childId, childName) {
     $('#ChildController-Div').hide();
     $("#AddDocument-remarks").val("");
     $("#AddDocument-file-input").val("");
+    $("#AddDocument-owner").val(currentUserId);
+    $("#AddDocument-creator").val(currentUserId);
     hideAllPages();
     $("#AddDocument-Div").show();
 }

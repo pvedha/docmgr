@@ -170,8 +170,19 @@
                             <div id="WelcomePage-Div">
                                 <h3>Welcome to kriyAdveSin Doc Manager</h3>
                                 <h4>Something goes here. TODO</h4>
-                                <a href="file:///C:\temp\somefile.txt" download>somefile.txt</a>
+
+                                <a href="file:///c:\temp\" target="somefile.txt">Link Text</a>
+                                <a href="file:///c:/temp" target="somefile.txt">Link Text</a>
+
+                                <a href="file:///c:\temp\somefile.txt" download>somefile.txt</a>
+                                <a href="file://C:\temp\somefile.txt" download>somefile.txt</a>
+                                <a href="file:///c:\temp\somefile.txt">somefile.txt</a>
                                 <a href="file:///C:\temp\8.jpg" download>9.jpg</a>
+
+                                <a href="#" download onclick=alert( "hello")>TryDownloading</a>
+
+                                <a href="#" download onclick=downloadx()>TryDownloadingx</a>
+                                <button onclick=downloadx()>download</button>
 
                                 <p>Some intro about this app e. TODO</p>
 
@@ -369,7 +380,7 @@
                                     <tr ng-repeat='d in docs'>
                                         <td>{{d.docId}}</td>
                                         <td>{{d.docName}} ..
-                                            <a href="c:\temp\somefile.txt">somefile.txt</a>
+                                            <a href="{{baseFilePathUrl}}/{{d.childName}}/{{d.docName}}" download>{{d.docName}}</a>
                                         </td>
                                         <td>{{d.revision}}</td>
                                         <td>{{d.childName}}</td>
@@ -402,7 +413,7 @@
                                         <td>Select the file to upload : </td>
                                         <td>
                                             <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
-                                                <input type="file" name="file" />
+                                                <input id="AddDocument-file-input" type="file" name="file" />
                                             </form>
                                         </td>
                                     </tr>
