@@ -17,6 +17,7 @@ import com.doc.exceptions.ChildNotFoundException;
 import com.doc.exceptions.DocumentNotFoundException;
 import com.doc.exceptions.InvalidStatusException;
 import com.doc.exceptions.StaffNotFoundException;
+import com.doc.utilities.QueryStatements;
 import com.doc.utilities.Utilities;
 
 @SuppressWarnings("unchecked")
@@ -25,7 +26,33 @@ public class DocumentDaoImpl extends DaoImpl {
 	public ArrayList<Document> readAllDocuments() {
 		EntityManager em = factory.createEntityManager();
 		ArrayList<Document> documents = (ArrayList<Document>) em
-				.createNativeQuery("select * from Document", Document.class).getResultList();
+				.createNativeQuery(QueryStatements.allDocsQuery, Document.class).getResultList();
+		em.close();
+		return documents;
+	}
+	
+	public ArrayList<Document> readAllOpenDocuments() {
+		EntityManager em = factory.createEntityManager();
+		ArrayList<Document> documents = (ArrayList<Document>) em
+				.createNativeQuery(QueryStatements.allOpenDocsQuery, Document.class).getResultList();
+		em.close();
+		return documents;
+	}
+	
+	public ArrayList<Document> readAllMyDocuments(String userId) {
+		EntityManager em = factory.createEntityManager();
+		ArrayList<Document> documents = (ArrayList<Document>) em
+				.createNativeQuery(QueryStatements.allMyDocsQuery, Document.class)
+				.setParameter("owner", userId).setParameter("creator",  userId).getResultList();
+		em.close();
+		return documents;
+	}
+	
+	public ArrayList<Document> readMyOpenDocuments(String userId) {
+		EntityManager em = factory.createEntityManager();
+		ArrayList<Document> documents = (ArrayList<Document>) em
+				.createNativeQuery(QueryStatements.myOpenDocsQuery, Document.class)
+				.setParameter("owner", userId).setParameter("creator",  userId).getResultList();
 		em.close();
 		return documents;
 	}

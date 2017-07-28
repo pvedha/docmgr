@@ -2,8 +2,16 @@ function readAllDocuments() {
     readDocuments('/doc/all');
 }
 
+function readAllOpenDocuments() {
+    readDocuments('/doc/allOpen');
+}
+
 function readMyDocuments() {
-    readDocuments('/doc/' + currentUserId);
+    readDocuments('/doc/myDocs/' + currentUserId);
+}
+
+function readMyOpenDocuments() {
+    readDocuments('/doc/myOpenDocs/' + currentUserId);
 }
 
 function readDocuments(url) {
@@ -227,7 +235,7 @@ function addAction() {
 
     var data = {
         actionId: 1,
-        docId: 1,
+        docId: docId,
         docName: docName,
         actionTitle: actionTitle,
         action_creator: action_creator,
@@ -237,18 +245,21 @@ function addAction() {
         state: state,
         remarks: remarks
     };
-
+    $("#AddAction-submit-button").prop("disabled", true);
     $.ajax({
         url: baseURL + '/action/add',
         type: 'post',
         contentType: 'application/json',
         global: false,
         success: function (response) {
-            setActionStates(response);
+            setStatus("Action successfully added");
+            sleep(2000);
+            showWelcomePage();
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log("Http responseText: " + XMLHttpRequest.responseText + ", Status : " + XMLHttpRequest.status + ", ErrorThrown: " + errorThrown);
             $("#status-message").html("Error Adding Action");
+            $("#AddAction-submit-button").prop("disabled", false);
         },
         data: JSON.stringify(data)
     })

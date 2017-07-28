@@ -119,6 +119,23 @@ function readAllChildren() {
 };
 
 
+function searchChildren(searchKey) {
+    $.ajax({
+        url: baseURL + '/child/find/' + searchKey,
+        type: 'get',
+        accept: 'application/json',
+        global: false,
+        success: function (response) {
+            displayChildren(response);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus + "Error Searching children" + errorThrown);
+            setStatus("Error Searching children with text '" + searchKey + "'");
+        }
+    })
+};
+
+
 function displayChildren(response) {
     myChildren = response;
     childControllerAngular.addChildren(response);

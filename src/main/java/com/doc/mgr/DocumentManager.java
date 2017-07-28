@@ -20,6 +20,17 @@ public class DocumentManager extends DocManager {
 		return getDocumentDtos(dao.readAllDocuments());
 	}
 	
+	public ArrayList<DocumentDto> readAllOpenDocuments(){
+		return getDocumentDtos(dao.readAllOpenDocuments());
+	}
+	public ArrayList<DocumentDto> readAllMyDocuments(String userId){
+		return getDocumentDtos(dao.readAllMyDocuments(userId));
+	}
+	
+	public ArrayList<DocumentDto> readMyOpenDocuments(String userId){
+		return getDocumentDtos(dao.readMyOpenDocuments(userId));
+	}
+	
 	public int updateDocument(DocumentDto dto){
 		return dao.updateDocument(dto);
 	}

@@ -20,8 +20,11 @@ public class Utilities {
 		    return new java.sql.Timestamp(parsedDate.getTime());
 		}catch(Exception e){//this generic but you can control another types of exception
 			throw new DocMgrException();
-		}
-		
+		}		
+	}
+	
+	public static String getTextSearchQuery(String fieldName, String searchText){
+		return " upper(" + fieldName + ") like upper(\'%" + searchText + "%\')";
 	}
 	
 	public static String getDD_MMM_YYYY(Timestamp timestamp){

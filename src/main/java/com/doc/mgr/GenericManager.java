@@ -28,4 +28,8 @@ public class GenericManager extends DocManager{
 		return dao.getJobTitles();
 	};
 	
+	public int updateJobTitle(Jobtitle dto){
+		return dao.updateJobTitle(dto);
+	}
+	
 }

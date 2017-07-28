@@ -12,8 +12,10 @@ import com.doc.dto.UserDto;
 import com.doc.exceptions.ChildNotFoundException;
 import com.doc.exceptions.DuplicateUserException;
 import com.doc.exceptions.JobTitleNotValidException;
+import com.doc.exceptions.NotAuthorizedException;
 import com.doc.exceptions.StaffNotFoundException;
 import com.doc.utilities.Logger;
+import com.doc.utilities.QueryStatements;
 import com.doc.utilities.Utilities;
 
 public class OracleDaoImpl extends DaoImpl implements DAO {
@@ -36,10 +38,10 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		if (em.find(DocUser.class, user.getUserId()) != null) {
 			throw new DuplicateUserException();
 		}
-		;
+
 		Jobtitle jobtitle = em.find(Jobtitle.class, user.getJobTitle());
 		if (jobtitle == null) {
-			throw new JobTitleNotValidException();
+			throw new JobTitleNotValidException(user.getJobTitle());
 		}
 		// TODO try to standardize the annoying userid UserId userId thingy
 		DocUser docUser = new DocUser();
@@ -112,7 +114,7 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		if (therapist == null) {
 			throw new StaffNotFoundException("Therapist : " + dto.getTherapist());
 		}
-		
+
 		child.setRemarks(dto.getRemarks());
 		child.setMessage(dto.getMessage());
 		child.setTeacher(teacher);
@@ -123,7 +125,7 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		em.persist(child);
 		em.getTransaction().commit();
 		em.close();
-		
+
 		return 0;
 	}
 
@@ -148,6 +150,39 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		EntityManager em = factory.createEntityManager();
 		ArrayList<Children> childrens = (ArrayList<Children>) em
 				.createNativeQuery("select * from children", Children.class).getResultList();
+		em.close();
+		return childrens;
+	}
+
+	public Children findChildById(Integer id) {
+		EntityManager em = factory.createEntityManager();
+		Children child = em.find(Children.class, id);
+		if (child == null) {
+			throw new ChildNotFoundException(id.toString());
+		}
+		return child;
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<Children> searchChildren(ArrayList<String> keys) {
+
+		EntityManager em = factory.createEntityManager();
+		String searchQuery = "select * from children where ";
+
+		for (String key : keys) {
+			searchQuery += Utilities.getTextSearchQuery("name", key) + " or "
+					+ Utilities.getTextSearchQuery("remarks", key) + " or "
+					+ Utilities.getTextSearchQuery("message", key) + " or " 
+					+ Utilities.getTextSearchQuery("tags", key);
+			if (keys.indexOf(key) < keys.size() - 1) {
+				searchQuery += " or ";
+			}
+		}
+		
+		Logger.log("The query is " + searchQuery);
+
+		ArrayList<Children> childrens = (ArrayList<Children>) em.createNativeQuery(searchQuery, Children.class)
+				.getResultList();
 		em.close();
 		return childrens;
 	}
@@ -180,13 +215,42 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		em.close();
 		return user;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public ArrayList<Properties> getProperties(){
+	public ArrayList<Properties> getProperties() {
 		EntityManager em = factory.createEntityManager();
-		ArrayList<Properties> properties = (ArrayList<Properties>) em.createNativeQuery("select * from properties", Properties.class).getResultList();
+		ArrayList<Properties> properties = (ArrayList<Properties>) em
+				.createNativeQuery("select * from properties", Properties.class).getResultList();
 		em.close();
-		return properties;		
+		return properties;
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<Jobtitle> getJobTitles() {
+		EntityManager em = factory.createEntityManager();
+		ArrayList<Jobtitle> jobTitles = (ArrayList<Jobtitle>) em
+				.createNativeQuery("select * from jobtitle", Jobtitle.class).getResultList();
+		em.close();
+		return jobTitles;
+	}
+
+	public int updateJobTitle(Jobtitle dto) {
+		EntityManager em = factory.createEntityManager();
+
+		if (dto.getTitle().contentEquals(QueryStatements.administrator)) {
+			throw new NotAuthorizedException();
+		}
+
+		Jobtitle jt = em.find(Jobtitle.class, dto.getTitle());
+		if (jt == null) {
+			throw new JobTitleNotValidException(dto.getTitle());
+		}
+
+		em.getTransaction().begin();
+		em.persist(dto);
+		em.getTransaction().commit();
+		em.close();
+		return 0;
 	}
 
 	@Override
@@ -226,13 +290,4 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		return 0;
 	}
 
-	@SuppressWarnings("unchecked")
-	public ArrayList<Jobtitle> getJobTitles() {
-		EntityManager em = factory.createEntityManager();
-		ArrayList<Jobtitle> jobTitles = (ArrayList<Jobtitle>) em
-				.createNativeQuery("select * from jobtitle", Jobtitle.class).getResultList();
-		em.close();
-		return jobTitles;
-		// return new ArrayList<Jobtitle>();
-	}
 }

@@ -60,14 +60,15 @@ $(document).ready(function () {
     $("#search-text").keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
-            searchAllPosts($("#search-text").val());
+            searchChildren($("#search-text").val());
         }
     });
 
     $("#search-text1").keypress(function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
-            searchAllPosts($("#search-text1").val());
+            //searchAllPosts($("#search-text1").val());
+            setStatus('please login');
         }
     });
 
@@ -75,15 +76,11 @@ $(document).ready(function () {
         $("#user-profile-update").removeClass("disabled-button");
         $("#user-profile-update").addClass("btn1"); //will this keep adding the same class?                  
     });
-    $('#trythis-button')
-        .click(function () {
-            retrieveCategory();
-        });
 
-    $('#trythis2-button')
-        .click(function () {
-            readAllPosts();
-        });
+    $("#ManageControls-user-type").onchange(function (event) {
+        updateManageControlsPageValues();
+    });
+
 
     $('#login-button').click(
         function () {

@@ -1,11 +1,14 @@
 package com.doc.rest;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.doc.api.Jobtitle;
+import com.doc.dto.DocumentDto;
 import com.doc.mgr.GenericManager;
 
 @Path("/gen")
@@ -41,6 +44,13 @@ public class GenericController {
 	@Path("/jobTitles")
 	public Response getJobTitles() {
 		return Response.ok().entity(mgr.getJobTitles()).build();
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/jobTitles/update")
+	public Response updateDocument(Jobtitle dto){
+		return Response.ok().entity(mgr.updateJobTitle(dto) + "").build();
 	}
 
 }

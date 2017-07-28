@@ -39,17 +39,25 @@ function retrieveJobTitles() {
 
 function setJobTitles() {
     var jobTitle = document.getElementById("staff-job-title");
+    var manageControlsJobTitle = document.getElementById("ManageControls-user-type");
     for (i = 0; i < jobTitles.length; i++) {
-        var option = document.createElement("option");
-        option.text = jobTitles[i].title;
-        jobTitle.add(option);
+        addJobTitleToSelect(jobTitle, jobTitles[i].title);
+        addJobTitleToSelect(manageControlsJobTitle, jobTitles[i].title);
     }
 }
 
+function addJobTitleToSelect(selectElement, title) {
+    var option = document.createElement("option");
+    option.text = title;
+    selectElement.add(option);
+}
 
 function loadDashboardLinks() {
+
     //if (jobTitles.length == 0)
-    //   return;
+    // return;
+
+
     var myControls;
     for (i = 0; i < jobTitles.length; i++) {
         if (jobTitles[i].title == myJobTitle) {
@@ -57,42 +65,69 @@ function loadDashboardLinks() {
         }
     }
 
-    /* protected boolean viewAllActions;
-	protected boolean addStaff;
-	protected boolean addChildren;
-	protected boolean viewAllChildren;
-	protected boolean manageUserControls;
-	protected boolean manageSettings;	*/
+    //  protected boolean viewAllActions;
+    //	protected boolean addStaff;
+    //	protected boolean addChildren;
+    //	protected boolean viewAllChildren;
+    //	protected boolean manageUserControls;
+    //	protected boolean manageSettings;	
+
+
     dashBoardLinkHtml = "";
 
+    addDashBoardLinkHeading("Actions");
+
     if (myControls.viewAllActions) {
-
+        addDashBoardLinkEntry("readAllActions", "All Actions");
+        addDashBoardLinkEntry("readAllOpenActions", "All Open Actions");
     }
 
+    addDashBoardLinkEntry("readMyOpenActions", "My Open Actions");
+    addDashBoardLinkEntry("readMyActions", "All My Actions");
 
+    addDashBoardLinkHeading("Views");
 
-    if (myJobTitle == "Administrator") {
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyOpenActions()>My Open Action Items</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllUsers()>Show All Users</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllChildren()>Show All Students</a><p>";
-        dashBoardLinkHtml += "<br>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=showAddStaffPage()>Add Staff</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=showAddChildrenPage()>Add Children</a><p>";
-
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyActions()>All My Actions</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllOpenActions()>All Open Actions</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyOpenActions()>My Open Actions</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllActions()>All Actions</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readAllDocuments()>All Documents</a><p>";
-        dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=readMyDocuments()>All My Documents</a><p>";
-
-        $("#dashboard-links").html(dashBoardLinkHtml);
+    if (myControls.viewAllChildren) {
+        //do we need this?
     }
+
+    addDashBoardLinkEntry("readAllChildren", "Show All Students");
+
+    //TODO view all documents??
+    addDashBoardLinkEntry("readMyOpenDocuments", "My Open Documents");
+    addDashBoardLinkEntry("readMyDocuments", "All My Documents");
+
+    if (myControls.viewAllDocuments) {
+        addDashBoardLinkEntry("readAllOpenDocuments", "All Open Documents");
+        addDashBoardLinkEntry("readAllDocuments", "All Documents");
+    }
+
+    addDashBoardLinkHeading("Manage");
+    addDashBoardLinkEntry("readAllUsers", "Show All Users");
+
+    if (myControls.addStaff) {
+        addDashBoardLinkEntry("showAddStaffPage", "Add Staff");
+    }
+
+    if (myControls.addChildren) {
+        addDashBoardLinkEntry("showAddChildrenPage", "Add Children");
+    }
+
+    if (myControls.manageUserControls) {
+        addDashBoardLinkEntry("manageUserControls", "Manage User Controls");
+    }
+
+    $("#dashboard-links").html(dashBoardLinkHtml);
 }
 
-function createDashBoardLinkEntry(functionName, linkText) {
-    dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=" + functionName + "()>" + linkText + "</a><p>";
+function addDashBoardLinkEntry(functionName, linkText) {
+    dashBoardLinkHtml += "<a class='quicklink-links' href='#' onClick=" + functionName + "()>" + linkText + "</a><br/>";
 }
+
+function addDashBoardLinkHeading(heading) {
+    dashBoardLinkHtml += "<h2>" + heading + "</h2>";
+}
+
 
 function showWelcomePage() {
     hideAllPages();
@@ -129,6 +164,36 @@ function showDocumentsPage() {
     $("#DocController-Div").show();
 }
 
+function manageUserControls() {
+    hideAllPages();
+    $("#ManageControls-Div").show();
+    updateManageControlsPageValues();
+}
+
+function updateManageControlsPageValues() {
+    var userType = $("#ManageControls-user-type").val();
+
+    //protected boolean addStaff;
+    //	protected boolean addChildren;
+    //	protected boolean viewAllChildren;
+    //	protected boolean viewAllDocuments;
+    //	protected boolean viewAllActions;
+    //	protected boolean manageUserControls;
+    //	protected boolean manageSettings;	
+    for (i = 0; i < jobTitles.length; i++) {
+        var entry = jobTitles[i];
+        $("#ManageControls-remarks").val(entry.remarks);
+        $("ManageControls-addStaff").prop('checked', entry.addChildren);
+        $("ManageControls-addChildren").prop('checked', entry.addStaff);
+        $("ManageControls-viewAllChildren").prop('checked', entry.viewAllChildren);
+        $("ManageControls-viewAllDocuments").prop('checked', entry.viewAllDocuments);
+        $("ManageControls-viewAllActions").prop('checked', entry.viewAllActions);
+        $("ManageControls-manageUserControls").prop('checked', entry.manageUserControls);
+        $("ManageControls-manageSettings").prop('checked', entry.manageSettings);
+    }
+
+}
+
 function showAddDocumentPage(childId, childName) {
     $("#AddDocument-child-id").html(childId);
     $("#AddDocument-child-name").html(childName);
@@ -145,6 +210,9 @@ function showAddActionPage(docId, docName) {
     $("#AddAction-docId").html(docId);
     $("#AddAction-docName").html(docName);
     $("#DocController-Div").hide();
+    $("#AddAction-title").val("");
+    $("#AddAction-remarks").val("");
+    $("#AddAction-submit-button").prop("disabled", false);
     hideAllPages();
     $("#AddAction-Div").show();
 }
@@ -208,4 +276,5 @@ function hideAllPages() {
     $("#UpdateAction-Div").hide();
 
     $("#user-profile-div").hide();
+    $("#ManageControls-Div").hide();
 }

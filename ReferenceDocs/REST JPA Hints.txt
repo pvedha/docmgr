@@ -35,3 +35,5 @@ Get: accept: 'application/json',
 
 persist using Detached entity 
 	Solution: try using the same entity manager. Particularly for update.
+	
+	localhost:8080/Js/rest/file/get?filePath=c:\temp\ak.mkv&fileName=ak.mkv

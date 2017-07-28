@@ -174,6 +174,9 @@
 
                                 <p>Some intro about this app e. TODO</p>
 
+                                <button type="button" class="btn1" id="trial-button" onclick="loadDashboardLinks()">Load</button>
+                                <button type="button" class="btn" id="trial-button2" onclick="enableButton()">Enable</button>
+
                             </div>
 
 
@@ -364,14 +367,7 @@
                                     </tr>
                                     <tr ng-repeat='d in docs'>
                                         <td>{{d.docId}}</td>
-                                        <td>{{d.docName}} ..
-
-                                            <!--    //http://localhost:8080/Js/rest/file/get?filePath=c:\temp\fileZilla.exe&fileName=filezilla.exe-->
-
-                                            <a href="{{fileDownloadUrl}}/{{d.childName}}/{{d.docName}}&fileName={{d.docName}}" download>{{d.docName}}</a>
-
-                                            <a href="http://localhost:8080{{fileDownloadUrl}}/{{d.childName}}/{{d.docName}}&fileName={{d.docName}}" download>With host {{d.docName}}</a>
-
+                                        <td> <a href="{{fileDownloadUrl}}/{{d.childName}}/{{d.docName}}&fileName={{d.docName}}" download>{{d.docName}}</a>
                                         </td>
                                         <td>{{d.revision}}</td>
                                         <td>{{d.childName}}</td>
@@ -614,7 +610,7 @@
                                     <tr>
                                         <td>Add comment :</td>
                                         <td>
-                                            <input type="text" id="update-action-remarks" placeholder="Add comments or remarr" />
+                                            <input type="text" id="update-action-remarks" placeholder="Add comments or remarks" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -630,6 +626,101 @@
 
 
 
+                            <!--
+protected boolean addStaff;
+	protected boolean addChildren;
+	protected boolean viewAllChildren;
+	protected boolean viewAllDocuments;
+	protected boolean viewAllActions;
+	protected boolean manageUserControls;
+	protected boolean manageSettings;	
+-->
+
+
+                            <div id="ManageControls-Div" ng-controller="DocController">
+                                <table class="table">
+                                    <tr>
+                                        <td>Select the user type : </td>
+                                        <td>
+                                            <select name="ManageControls-user-type" id="ManageControls-user-type" placeholder="Select User Type"></select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Remarks : </td>
+                                        <td>
+                                            <input type="text" id="ManageControls-remarks" placeholder="Add comments or remarks" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Add Child : </td>
+                                        <td>
+                                            <input type="checkbox" id="ManageControls-addChildren" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Add Staff : </td>
+                                        <td>
+                                            <input type="checkbox" id="ManageControls-addStaff" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>View All Children : </td>
+                                        <td>
+                                            <input type="checkbox" id="ManageControls-viewAllChildren" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>View All Docs : </td>
+                                        <td>
+                                            <input type="checkbox" id="ManageControls-viewAllDocuments" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>View All Actions : </td>
+                                        <td>
+                                            <input type="checkbox" id="ManageControls-viewAllActions" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Manage User controls : </td>
+                                        <td>
+                                            <input type="checkbox" id="ManageControls-manageUserControls" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Manage System Settings : </td>
+                                        <td>
+                                            <input type="checkbox" id="ManageControls-manageSettings" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button id="ManageControls-submit-button" class="btn btn-success">Save</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+
+
+                            <div id="user-profile-div">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title center">Your Profile</h3>
+                                    </div>
+                                </div>
+                                <h4 id="user-profile-info"></h4>
+                                <div id="user-profile-contents">
+                                    <form class="signin-form" id="user-profile-form">
+                                        <div id="user-profile-fixed" title="Non editable fields">User ID : <b>PVedha</b>
+                                            <br>Name : <b>Praveen Vedha</b></div>
+                                        <input type="text" name="view-profile-newPassword" class="" id="view-profile-newPassword" placeholder="Your new password, leave it blank not to update" /> About Yourself :
+                                        <textarea name="view-profile-about" id="view-profile-about" rows="3" placeholder="Few lines about yourself"></textarea>
+                                        <button type="button" class="disabled-button" id="user-profile-update" onClick="updateProfile()">Update</button>
+                                    </form>
+                                </div>
+                            </div>
 
 
 
@@ -646,23 +737,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="user-profile-div">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title center">Your Profile</h3>
-                                </div>
-                            </div>
-                            <h4 id="user-profile-info"></h4>
-                            <div id="user-profile-contents">
-                                <form class="signin-form" id="user-profile-form">
-                                    <div id="user-profile-fixed" title="Non editable fields">User ID : <b>PVedha</b>
-                                        <br>Name : <b>Praveen Vedha</b></div>
-                                    <input type="text" name="view-profile-newPassword" class="" id="view-profile-newPassword" placeholder="Your new password, leave it blank not to update" /> About Yourself :
-                                    <textarea name="view-profile-about" id="view-profile-about" rows="3" placeholder="Few lines about yourself"></textarea>
-                                    <button type="button" class="disabled-button" id="user-profile-update" onClick="updateProfile()">Update</button>
-                                </form>
-                            </div>
-                        </div>
+
 
 
 
