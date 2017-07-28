@@ -245,9 +245,18 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		if (jt == null) {
 			throw new JobTitleNotValidException(dto.getTitle());
 		}
+		
+		jt.setAddChildren(dto.isAddChildren());
+		jt.setAddStaff(dto.isAddStaff());
+		jt.setManageSettings(dto.isManageSettings());
+		jt.setManageUserControls(dto.isManageUserControls());
+		jt.setRemarks(dto.getRemarks());
+		jt.setViewAllActions(dto.isViewAllActions());
+		jt.setViewAllChildren(dto.isViewAllChildren());
+		jt.setViewAllDocuments(dto.isViewAllDocuments());
 
 		em.getTransaction().begin();
-		em.persist(dto);
+		em.persist(jt);
 		em.getTransaction().commit();
 		em.close();
 		return 0;

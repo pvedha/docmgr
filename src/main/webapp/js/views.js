@@ -29,6 +29,7 @@ function retrieveJobTitles() {
             jobTitles = response;
             setJobTitles();
             loadDashboardLinks();
+            updateManageControlsPageValues();
             //            console.log("added items");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -38,8 +39,12 @@ function retrieveJobTitles() {
 }
 
 function setJobTitles() {
+
+    $("#staff-job-title").find('option').remove().end();
+    $("#ManageControls-user-type").find('option').remove().end();
     var jobTitle = document.getElementById("staff-job-title");
     var manageControlsJobTitle = document.getElementById("ManageControls-user-type");
+
     for (i = 0; i < jobTitles.length; i++) {
         addJobTitleToSelect(jobTitle, jobTitles[i].title);
         addJobTitleToSelect(manageControlsJobTitle, jobTitles[i].title);
@@ -171,25 +176,33 @@ function manageUserControls() {
 }
 
 function updateManageControlsPageValues() {
-    var userType = $("#ManageControls-user-type").val();
 
-    //protected boolean addStaff;
-    //	protected boolean addChildren;
-    //	protected boolean viewAllChildren;
-    //	protected boolean viewAllDocuments;
-    //	protected boolean viewAllActions;
-    //	protected boolean manageUserControls;
-    //	protected boolean manageSettings;	
+    if (selectedUserType != "") {
+        $("#ManageControls-user-type").val(selectedUserType);
+        selectedUserType = "";
+    }
+
+    var userType = $("#ManageControls-user-type").val();
+    if (userType == "Administrator") {
+        //setStatus("No modification allowed for Administrator"); //This is shown while loading for the first time itself.
+        $("#ManageControls-submit-button").prop("disabled", true);
+    } else {
+        setStatus("");
+        $("#ManageControls-submit-button").prop("disabled", false);
+    }
+
     for (i = 0; i < jobTitles.length; i++) {
-        var entry = jobTitles[i];
-        $("#ManageControls-remarks").val(entry.remarks);
-        $("ManageControls-addStaff").prop('checked', entry.addChildren);
-        $("ManageControls-addChildren").prop('checked', entry.addStaff);
-        $("ManageControls-viewAllChildren").prop('checked', entry.viewAllChildren);
-        $("ManageControls-viewAllDocuments").prop('checked', entry.viewAllDocuments);
-        $("ManageControls-viewAllActions").prop('checked', entry.viewAllActions);
-        $("ManageControls-manageUserControls").prop('checked', entry.manageUserControls);
-        $("ManageControls-manageSettings").prop('checked', entry.manageSettings);
+        if (userType == jobTitles[i].title) {
+            var entry = jobTitles[i];
+            $("#ManageControls-remarks").val(entry.remarks);
+            $("#ManageControls-addStaff").prop('checked', entry.addStaff);
+            $("#ManageControls-addChildren").prop('checked', entry.addChildren);
+            $("#ManageControls-viewAllChildren").prop('checked', entry.viewAllChildren);
+            $("#ManageControls-viewAllDocuments").prop('checked', entry.viewAllDocuments);
+            $("#ManageControls-viewAllActions").prop('checked', entry.viewAllActions);
+            $("#ManageControls-manageUserControls").prop('checked', entry.manageUserControls);
+            $("#ManageControls-manageSettings").prop('checked', entry.manageSettings);
+        }
     }
 
 }

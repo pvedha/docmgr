@@ -12,6 +12,8 @@ function initAllUsers() {
 };
 
 function setStaffRoles() {
+
+    //TODO clear existing options first
     var teachers = document.getElementById("child-teacher");
     var councillors = document.getElementById("child-councillor");
     var therapists = document.getElementById("child-therapist");
@@ -207,5 +209,52 @@ function saveCurrentChild(child) {
             $("#status-message").html("Error Updating Child");
         },
         data: JSON.stringify(child)
+    })
+}
+
+
+function updateUserControl() {
+
+    var title = $("#ManageControls-user-type").val();
+    var remarks = $("#ManageControls-remarks").val();
+    var addStaff = $("#ManageControls-addStaff").is(":checked");
+    var addChildren = $("#ManageControls-addChildren").is(":checked");
+    var viewAllChildren = $("#ManageControls-viewAllChildren").is(":checked");
+    var viewAllDocuments = $("#ManageControls-viewAllDocuments").is(":checked");
+    var viewAllActions = $("#ManageControls-viewAllActions").is(":checked");
+    var manageUserControls = $("#ManageControls-manageUserControls").is(":checked");
+    var manageSettings = $("#ManageControls-manageSettings").is(":checked");
+
+    setStatus("Please wait, updating user controls...");
+    var data = {
+        title: title,
+        remarks: remarks,
+        addStaff: addStaff,
+        addChildren: addChildren,
+        viewAllChildren: viewAllChildren,
+        viewAllDocuments: viewAllDocuments,
+        viewAllActions: viewAllActions,
+        manageUserControls: manageUserControls,
+        manageSettings: manageSettings
+    };
+
+    selectedUserType = title;
+
+    $.ajax({
+        url: baseURL + '/gen/jobTitles/update',
+        type: 'post',
+        contentType: 'application/json',
+        global: false,
+        success: function (response) {
+            setStatus("User controls updated");
+            sleep(2000);
+            retrieveJobTitles(); //better to refresh the controls stored
+            //showWelcomePage();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus + "Error updating controls " + errorThrown);
+            setStatus("Error updating, please check the details");
+        },
+        data: JSON.stringify(data)
     })
 }

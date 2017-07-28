@@ -14,13 +14,7 @@ public class Jobtitle {
 	protected String title;
 	protected String remarks;
 	
-	
-	
-	protected int docrights;
-	protected int childrights;
-	protected int jobrights;	
-	
-	//TODO Find alternative, this is a stupid way of having the properties
+		//TODO Find alternative, this is a stupid way of having the properties
 	
 	protected boolean addStaff;
 	protected boolean addChildren;

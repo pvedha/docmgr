@@ -38,6 +38,8 @@ var myChildren = [];
 var httpPost = 'post';
 var httpGet = 'get';
 var httpPut = 'put';
+
+var selectedUserType = "";
 //Dev settings
 var infiniteScroll = true;
 var currentOffset = 1;
@@ -77,7 +79,7 @@ $(document).ready(function () {
         $("#user-profile-update").addClass("btn1"); //will this keep adding the same class?                  
     });
 
-    $("#ManageControls-user-type").onchange(function (event) {
+    $("#ManageControls-user-type").on('change', function () {
         updateManageControlsPageValues();
     });
 
