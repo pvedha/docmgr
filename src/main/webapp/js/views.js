@@ -160,7 +160,7 @@ function showChildrenPage() {
 
 function showAddStaffPage() {
     hideAllPages();
-    setPageHeading("Add staff");
+    setPageHeading("Add Staff");
     $("#AddStaff-Div").show();
 }
 
@@ -282,6 +282,20 @@ function showUpdateActionPage(actionId) {
     $("#UpdateAction-Div").show();
 }
 
+
+function showMyProfile() {
+    $("#MyProfile-id").html(currentUserId);
+    $("#MyProfile-name").html(currentUserDetails.name);
+    $("#MyProfile-newPassword").val("");
+    $("#MyProfile-title").html(currentUserDetails.jobTitle);
+    $("#MyProfile-about").val(currentUserDetails.about);
+    $("#MyProfile-email").val(currentUserDetails.email);
+    $("#MyProfile-phone").val(currentUserDetails.phone);
+    hideAllPages();
+    setPageHeading("My Profile");
+    $("#MyProfile-div").fadeIn(1000);
+}
+
 function hideAllPages() {
     $("#status-message").html("");
     $("#WelcomePage-Div").hide();
@@ -301,6 +315,6 @@ function hideAllPages() {
     $("#ActionController-Div").hide();
     $("#UpdateAction-Div").hide();
 
-    $("#user-profile-div").hide();
+    $("#MyProfile-div").hide();
     $("#ManageControls-Div").hide();
 }

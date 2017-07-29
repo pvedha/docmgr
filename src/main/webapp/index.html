@@ -69,7 +69,7 @@
                     <input id="search-text" type="text" title="Search children, by ID, name, tags...!" placeholder="Search ..." class="form-control search-box">
 
                     <button type="button" class="btn btn-success" onclick="readMyOpenActions()">My Actions <span class="badge" id="my-action-count">0</span></button>
-                    <button id="user-button" data-toggle="tooltip" data-placement="bottom" title="Edit Your Profile!" type="button" class="btn btn-info" onclick="viewProfile()"><span class="glyphicon glyphicon-user"></span>User ID</button>
+                    <button id="user-button" data-toggle="tooltip" data-placement="bottom" title="Edit Your Profile!" type="button" class="btn btn-info" onclick="showMyProfile()"><span class="glyphicon glyphicon-user"></span>User ID</button>
                     <button type="button" class="btn btn-success" onclick="signOut()">Sign Out</button>
                 </form>
 
@@ -202,7 +202,7 @@
                                         <td>{{u.phone}}</td>
                                         <td>{{u.actions}}</td>
                                         <td>
-                                            <button id="reset-pwd-button" class="btn btn-success">Reset Pwd</button>
+                                            <button id="UserController-reset-password-button" class="btn btn-success" onclick="resetPassword('{{u.userId}}')">Reset Pwd</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -705,22 +705,51 @@ protected boolean addStaff;
 
 
 
-                            <div id="user-profile-div">
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title center">Your Profile</h3>
-                                    </div>
-                                </div>
-                                <h4 id="user-profile-info"></h4>
-                                <div id="user-profile-contents">
-                                    <form class="signin-form" id="user-profile-form">
-                                        <div id="user-profile-fixed" title="Non editable fields">User ID : <b>PVedha</b>
-                                            <br>Name : <b>Praveen Vedha</b></div>
-                                        <input type="text" name="view-profile-newPassword" class="" id="view-profile-newPassword" placeholder="Your new password, leave it blank not to update" /> About Yourself :
-                                        <textarea name="view-profile-about" id="view-profile-about" rows="3" placeholder="Few lines about yourself"></textarea>
-                                        <button type="button" class="disabled-button" id="user-profile-update" onClick="updateProfile()">Update</button>
-                                    </form>
-                                </div>
+                            <div id="MyProfile-div">
+                                <table class="table">
+                                    <tr>
+                                        <td>User ID : </td>
+                                        <td id="MyProfile-id"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name : </td>
+                                        <td id="MyProfile-name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Job Title : </td>
+                                        <td id="MyProfile-title"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Password : </td>
+                                        <td>
+                                            <input type="password" name="MyProfile-newPassword" id="MyProfile-newPassword" placeholder="Your new password, leave it blank not to update" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>About MySelf : </td>
+                                        <td>
+                                            <textarea name="MyProfile-about" id="MyProfile-about" rows="3" placeholder="Few lines about yourself"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Email Id : </td>
+                                        <td>
+                                            <input type="email" name="MyProfile-email" class="" id="MyProfile-email" placeholder="Your email" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Phone No : </td>
+                                        <td>
+                                            <input type="text" name="MyProfile-phone" class="" id="MyProfile-phone" placeholder="Your phone number" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button type="button" class="btn btn-success" id="MyProfile-submit-button" onClick="updateMyProfile()">Update</button>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
 
 

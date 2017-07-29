@@ -104,6 +104,60 @@ function addStaff() {
     })
 }
 
+
+function updateMyProfile() {
+
+
+    currentUserDetails.about = $("#MyProfile-about").val();
+    currentUserDetails.email = $("#MyProfile-email").val();
+    currentUserDetails.phone = $("#MyProfile-phone").val();
+
+    var newPassword = $("#MyProfile-newPassword").val();
+
+    if (newPassword.trim().length === 0) {
+        currentUserDetails.password = "";
+    } else {
+        currentUserDetails.password = newPassword;
+    }
+
+    $("#status-message").html("Please wait, updating profile...");
+
+    $.ajax({
+        url: baseURL + '/user/update',
+        type: 'post',
+        contentType: 'application/json',
+        global: false,
+        success: function (response) {
+            $("#status-message").html("Profile successfully updated");
+            sleep(2000);
+            showWelcomePage();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus + "Error updating profile" + errorThrown);
+            $("#status-message").html("Error updating, please check the details");
+        },
+        data: JSON.stringify(currentUserDetails)
+    })
+}
+
+
+function resetPassword(userId) {
+    $.ajax({
+        url: baseURL + '/user/reset/' + userId,
+        type: 'post',
+        accept: 'application/json',
+        global: false,
+        success: function (response) {
+            //displayChildren(response);
+            $("#status-message").html("Password reset done for " + userId);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus + "Error resetting password" + errorThrown);
+            $("#status-message").html("Error resetting password for " + userId);
+        }
+    })
+}
+
 function readAllChildren() {
     $.ajax({
         url: baseURL + '/child/all',

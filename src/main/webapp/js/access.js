@@ -123,11 +123,8 @@ $(document).ready(function () {
     updateChildControllerAngular = angular.element($('#UpdateChild-Div')).scope();
     updateDocumentControllerAngular = angular.element($('#UpdateDocument-Div')).scope();
 
-
     $('[data-toggle="tooltip"]').tooltip();
 
-
-    //    console.log("Data from localStorage", localStorage.getItem("userId"));
     hideAllForms();
     loadContents();
     if (localStorage.getItem("userId") !== null && localStorage.getItem("token")) {
@@ -293,19 +290,6 @@ function updateProfile() {
 
 }
 
-
-
-function viewProfile() {
-    $("#post-div").hide();
-    $("#view-post-div").hide();
-    $("#new-post-div").hide();
-    $("#user-profile-fixed").html("User ID : <b>" + currentUserId + "</b><br>Name : <b>" + currentUserDetails.name);
-    $("#view-profile-about").val(currentUserDetails.about);
-    $("#user-profile-div").fadeIn(1000);
-
-}
-
-
 function validateUser(value) {
     //console.log(value);
     if (userIdsResponseReceived) {
@@ -355,11 +339,6 @@ function showLoginPage() {
     $("#signup-form").hide();
     $("#result-div").hide();
     $("#mainPage").hide();
-    //$("#loginPage").hide(); //to hide first
-    //$("#post-div").hide(); //This is shown at all times
-    $("#new-post-div").hide();
-    $("#view-post-div").hide();
-    $("#user-profile-div").hide();
     $("#LoginForm").show();
     $("#LoggedInForm").hide();
 

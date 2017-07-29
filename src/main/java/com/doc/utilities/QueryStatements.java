@@ -13,7 +13,7 @@ public class QueryStatements {
 	
 	public static final String getPropertiesQuery = "select * from properties";
 	public static final String getJobTitlesQuery = "select * from jobtitles where title != 'Administrator'";
-	
+		
 	
 	
 	

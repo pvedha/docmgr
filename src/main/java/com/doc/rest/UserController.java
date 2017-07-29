@@ -56,13 +56,23 @@ public class UserController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/addStaff")
 	public Response addStaff(UserDto userDto) throws InvalidUserException, DuplicateUserException {	
-		try {
 			int number = mgr.addStaff(userDto);			
 			return Response.ok().entity(Integer.toString(number)).build();
-		} catch (Exception e) {
-			Logger.log("In add staff" + e.getMessage());
-			return Response.status(Status.CONFLICT).entity("Invalid User Details").build();
-		}
+	}
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/update")
+	public Response updateMyProfile(AuthenticationDto dto) throws InvalidUserException {	
+			int number = mgr.updateMyProfile(dto);			
+			return Response.ok().entity(Integer.toString(number)).build();
 	}
 
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/reset/{userId}")
+	public Response resetPassword(@PathParam("userId") String userId) throws InvalidUserException {	
+			int number = mgr.resetPassword(userId);	
+			return Response.ok().entity(Integer.toString(number)).build();
+	}
 }

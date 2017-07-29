@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.doc.api.DocUser;
 import com.doc.utilities.Logger;
 
 import lombok.Data;
@@ -13,9 +14,12 @@ public class AuthenticationDto {
 
 	private String userId;
 	private String name;
+	private String password;
 	private String about;
 	private String token;
-	private String jobTitle;
+	private String email;
+	private String phone;
+	private String jobTitle;	
 	private int myOpenActionCount;
 	
 	public String genToken(String userId) {
@@ -40,18 +44,28 @@ public class AuthenticationDto {
 		
 	}
 	
-	public AuthenticationDto(String userId, String name, String about, String jobTitle, int myOpenActionCount) {
-		super();
-		this.userId = userId;
-		this.name = name;
-		this.about = about;
-		this.setToken(this.genToken(userId));
-		this.jobTitle = jobTitle;
-		this.myOpenActionCount = myOpenActionCount;
-	}	
-
+	public AuthenticationDto(DocUser user){
+		setUserDetails(user);
+	}
+	
+	public AuthenticationDto(DocUser user, Integer actionCount){		
+		this.myOpenActionCount = actionCount;
+		setUserDetails(user);
+	}
+	
+	
 	public AuthenticationDto() {
 		// do nothing, needed for bean		
+	}
+	
+	private void setUserDetails(DocUser user){
+		this.userId = user.getUserid();
+		this.name = user.getName();
+		this.about = user.getAbout();
+		this.setToken(this.genToken(userId));
+		this.jobTitle = user.getJobTitleString();
+		this.email = user.getEmail();
+		this.phone = user.getPhone();
 	}
 
 }

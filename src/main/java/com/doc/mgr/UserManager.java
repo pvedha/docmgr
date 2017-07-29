@@ -4,11 +4,15 @@ import java.util.ArrayList;
 
 import com.doc.api.DocUser;
 import com.doc.dao.ActionsDaoImpl;
+import com.doc.dao.OracleDaoImpl;
+import com.doc.dao.UserDaoImpl;
 import com.doc.dto.AuthenticationDto;
 import com.doc.dto.UserDto;
 
-public class UserManager extends DocManager {
+public class UserManager {
 
+	public static final UserDaoImpl dao = new UserDaoImpl();
+	
 	public UserManager() {		
 	}
 
@@ -43,15 +47,20 @@ public class UserManager extends DocManager {
 		if(!validateToken(userId, token)){
 			return null;
 		}
-		AuthenticationDto response = new AuthenticationDto();		
+				
 		DocUser user = dao.getUser(userId);
-		response.setToken(token); //we can regenerate with time
-		response.setAbout(user.getAbout());
-		response.setName(user.getName());
-		response.setUserId(user.getUserid());	
-		response.setJobTitle(user.getJobTitleString());
-		response.setMyOpenActionCount(getMyOpenActionCount(userId));
+		AuthenticationDto response = new AuthenticationDto(user, getMyOpenActionCount(userId));
+		response.setToken(token); //we can regenerate with time	// TODO we need this? doing it again?	
 		return response;
+	}
+	
+	
+	public int updateMyProfile(AuthenticationDto dto){
+		return dao.updateMyProfile(dto);
+	}
+	
+	public int resetPassword(String userId){
+		return dao.resetPassword(userId);
 	}
 	
 	public Boolean validateToken(String userId, String token){
@@ -62,8 +71,7 @@ public class UserManager extends DocManager {
 	}
 	
 	private AuthenticationDto makeAuthDto(DocUser user) {
-		return (new AuthenticationDto(user.getUserid(), user.getName(), user.getAbout(), user.getJobtitle().getTitle(), 
-				getMyOpenActionCount(user.getUserid())));
+		return (new AuthenticationDto(user, getMyOpenActionCount(user.getUserid())));
 	}		
 	
 	private int getMyOpenActionCount(String userId){
