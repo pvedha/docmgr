@@ -12,6 +12,10 @@ function log(message) {
         console.log(message);
 }
 
+function setPageHeading(message) {
+    $("#page-heading").html(message);
+}
+
 function setStatus(message) {
     $("#status-message").html(message);
 }

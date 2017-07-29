@@ -136,41 +136,49 @@ function addDashBoardLinkHeading(heading) {
 
 function showWelcomePage() {
     hideAllPages();
+    setPageHeading("Welcome to kriyAdveSin Document Management");
     $("#WelcomePage-Div").show();
 }
 
 function showUsersPage() {
     hideAllPages();
+    setPageHeading("View All Users");
     $("#UserController-Div").show();
 }
 
 function showActionsPage() {
     hideAllPages();
+    setPageHeading("View Actions");
     $("#ActionController-Div").show();
 }
 
 function showChildrenPage() {
     hideAllPages();
+    setPageHeading("view All Children");
     $('#ChildController-Div').show();
 }
 
 function showAddStaffPage() {
     hideAllPages();
+    setPageHeading("Add staff");
     $("#AddStaff-Div").show();
 }
 
 function showAddChildrenPage() {
     hideAllPages();
+    setPageHeading("Add Child");
     $("#AddChild-Div").show();
 }
 
 function showDocumentsPage() {
     hideAllPages();
+    setPageHeading("View Actions");
     $("#DocController-Div").show();
 }
 
 function manageUserControls() {
     hideAllPages();
+    setPageHeading("Manage user controls");
     $("#ManageControls-Div").show();
     updateManageControlsPageValues();
 }
@@ -210,12 +218,13 @@ function updateManageControlsPageValues() {
 function showAddDocumentPage(childId, childName) {
     $("#AddDocument-child-id").html(childId);
     $("#AddDocument-child-name").html(childName);
-    $('#ChildController-Div').hide();
+    $('#ChildController-Div').hide(); //TODO why do we need this?, its not hiding under hideAllPages().
     $("#AddDocument-remarks").val("");
     $("#AddDocument-file-input").val("");
     $("#AddDocument-owner").val(currentUserId);
     $("#AddDocument-creator").val(currentUserId);
     hideAllPages();
+    setPageHeading("Add a document");
     $("#AddDocument-Div").show();
 }
 
@@ -227,6 +236,7 @@ function showAddActionPage(docId, docName) {
     $("#AddAction-remarks").val("");
     $("#AddAction-submit-button").prop("disabled", false);
     hideAllPages();
+    setPageHeading("Add an Action");
     $("#AddAction-Div").show();
 }
 
@@ -240,6 +250,7 @@ function showUpdateChildPage(chidId) {
     }
 
     hideAllPages();
+    setPageHeading("Update Child details");
     $("#UpdateChild-Div").show();
 }
 
@@ -252,6 +263,7 @@ function showUpdateDocumentPage(docId) {
         }
     }
     hideAllPages();
+    setPageHeading("Update document details");
     $("#UpdateDocument-Div").show();
 }
 
@@ -266,6 +278,7 @@ function showUpdateActionPage(actionId) {
     }
 
     hideAllPages();
+    setPageHeading("Update Action");
     $("#UpdateAction-Div").show();
 }
 
