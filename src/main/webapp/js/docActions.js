@@ -29,6 +29,7 @@ function readDocuments(url) {
 function displayDocuments(response) {
     myDocuments = response;
     docControllerAngular.addDocuments(response);
+    docControllerAngular.fileDownloadUrl = fileDownloadUrl + fileBasePath;
     docControllerAngular.$apply();
     showDocumentsPage();
 }

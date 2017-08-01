@@ -87,6 +87,19 @@ docModule.controller("DocController", function ($scope) {
         }
     };
 
+    $scope.properties = [];
+
+    $scope.addProperties = function (response) {
+        $scope.properties = [];
+        for (i = 0; i < response.length; i++) {
+            var property = response[i];
+            $scope.properties.push({
+                name: property.name,
+                property: property.property
+            });
+        }
+    }
+
 
     $scope.action;
 

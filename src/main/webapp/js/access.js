@@ -13,7 +13,7 @@ var appURL = url + "/docmgr" //http://hostname:8080/blog
 var fileBasePath = "c:/temp";
 var fileServiceUrl = url + "/Js/rest";
 var fileUploadUrl = fileServiceUrl + "/file/upload?filePath=";
-var fileDownloadUrl = "/Js/rest/file/get";
+var fileDownloadUrl = "/Js/rest/file/get?filePath=";
 
 var dashBoardLinkHtml;
 
@@ -24,7 +24,8 @@ var childControllerAngular;
 var actionControllerAngular;
 var updateActionControllerAngular;
 var updateChildControllerAngular;
-var updateDocControllerAngular;
+var updateDocumentControllerAngular;
+var propertiesControllerAngular;
 
 
 var jobTitles = [];
@@ -122,6 +123,7 @@ $(document).ready(function () {
     updateActionControllerAngular = angular.element($('#UpdateAction-Div')).scope();
     updateChildControllerAngular = angular.element($('#UpdateChild-Div')).scope();
     updateDocumentControllerAngular = angular.element($('#UpdateDocument-Div')).scope();
+    propertiesControllerAngular = angular.element($('#PropertiesController-Div')).scope();
 
     $('[data-toggle="tooltip"]').tooltip();
 

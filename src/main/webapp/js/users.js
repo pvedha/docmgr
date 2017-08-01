@@ -142,6 +142,11 @@ function updateMyProfile() {
 
 
 function resetPassword(userId) {
+    if (currentUserDetails.jobTitle != "Administrator") {
+        setStatus("You are not Authorized");
+        return; //Rather do it at the rest layer
+    }
+
     $.ajax({
         url: baseURL + '/user/reset/' + userId,
         type: 'post',
@@ -266,6 +271,48 @@ function saveCurrentChild(child) {
     })
 }
 
+function addStaffRole() {
+    var title = $("#AddStaffRole-title").val();
+    var remarks = $("#AddStaffRole-remarks").val();
+    var addStaff = $("#AddStaffRole-addStaff").is(":checked");
+    var addChildren = $("#AddStaffRole-addChildren").is(":checked");
+    var viewAllChildren = $("#AddStaffRole-viewAllChildren").is(":checked");
+    var viewAllDocuments = $("#AddStaffRole-viewAllDocuments").is(":checked");
+    var viewAllActions = $("#AddStaffRole-viewAllActions").is(":checked");
+    var manageUserControls = $("#AddStaffRole-manageUserControls").is(":checked");
+    var manageSettings = $("#AddStaffRole-manageSettings").is(":checked");
+
+    setStatus("Please wait, adding staff role...");
+    var data = {
+        title: title,
+        remarks: remarks,
+        addStaff: addStaff,
+        addChildren: addChildren,
+        viewAllChildren: viewAllChildren,
+        viewAllDocuments: viewAllDocuments,
+        viewAllActions: viewAllActions,
+        manageUserControls: manageUserControls,
+        manageSettings: manageSettings
+    };
+
+    $.ajax({
+        url: baseURL + '/gen/jobTitles/add',
+        type: 'post',
+        contentType: 'application/json',
+        global: false,
+        success: function (response) {
+            setStatus("Staff role added");
+            sleep(2000);
+            retrieveJobTitles(); //better to refresh the controls stored
+            showWelcomePage();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus + "Error adding staff role " + errorThrown);
+            setStatus("Error adding staff role, please check the details");
+        },
+        data: JSON.stringify(data)
+    })
+}
 
 function updateUserControl() {
 

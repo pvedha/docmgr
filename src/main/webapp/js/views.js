@@ -13,10 +13,80 @@ function loadMainPage(response) {
     $("#LoginForm").hide();
     $("#NotLogged").hide();
     $("#LoggedInForm").show();
+    retrieveSystemProperties();
     showWelcomePage();
     //loadDashboardLinks(response.jobTitle);
     retrieveJobTitles();
+}
 
+
+function retrieveSystemProperties() {
+    $.ajax({
+        url: baseURL + '/gen/properties',
+        type: 'get',
+        accept: 'application/json',
+        global: false,
+        success: function (response) {
+            setSystemProperties(response);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            log("Error Loading system properties, " + textStatus);
+        }
+    })
+}
+
+function setSystemProperties(response) {
+    propertiesControllerAngular.addProperties(response);
+    propertiesControllerAngular.$apply();
+
+    for (i = 0; i < response.length; i++) {
+        if (response[i].name == "BasePath") {
+            fileBasePath = response[i].property;
+        }
+    }
+}
+
+function updateSystemProperty(name, value) {
+    var data = {
+        name: name,
+        property: $(document.getElementById(value)).val()
+    }
+
+    $.ajax({
+        url: baseURL + '/gen/properties',
+        type: 'post',
+        contentType: 'application/json',
+        global: false,
+        success: function (response) {
+            setStatus("System properties updated, kindly relogin");
+            sleep(2000);
+            //showWelcomePage();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus + "Error updating system properties" + errorThrown);
+            setStatus("Error updating system properties, please check the details");
+        },
+        data: JSON.stringify(data)
+    })
+}
+
+function updateSystemProperties(propertyList) {
+    $.ajax({
+        url: baseURL + '/gen/properties',
+        type: 'post',
+        contentType: 'application/json',
+        global: false,
+        success: function (response) {
+            setStatus("System properties updated, kindly relogin");
+            sleep(2000);
+            showWelcomePage();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus + "Error updating system properties " + errorThrown);
+            setStatus("Error updating system properties, please check the details");
+        },
+        data: JSON.stringify(propertyList)
+    })
 }
 
 function retrieveJobTitles() {
@@ -82,13 +152,15 @@ function loadDashboardLinks() {
 
     addDashBoardLinkHeading("Actions");
 
+    addDashBoardLinkEntry("readMyOpenActions", "My Open Actions");
+    addDashBoardLinkEntry("readMyActions", "All My Actions");
+
     if (myControls.viewAllActions) {
         addDashBoardLinkEntry("readAllActions", "All Actions");
         addDashBoardLinkEntry("readAllOpenActions", "All Open Actions");
     }
 
-    addDashBoardLinkEntry("readMyOpenActions", "My Open Actions");
-    addDashBoardLinkEntry("readMyActions", "All My Actions");
+
 
     addDashBoardLinkHeading("Views");
 
@@ -118,8 +190,11 @@ function loadDashboardLinks() {
         addDashBoardLinkEntry("showAddChildrenPage", "Add Children");
     }
 
-    if (myControls.manageUserControls) {
+    if (myControls.manageUserControls) { //Admin role only
         addDashBoardLinkEntry("manageUserControls", "Manage User Controls");
+        addDashBoardLinkEntry("showAddStaffRole", "Add Staff Role");
+        //TODO needs investigation for obtaining updated Angular object
+        addDashBoardLinkEntry("showSystemSettings", "System Settings");
     }
 
     $("#dashboard-links").html(dashBoardLinkHtml);
@@ -172,7 +247,7 @@ function showAddChildrenPage() {
 
 function showDocumentsPage() {
     hideAllPages();
-    setPageHeading("View Actions");
+    setPageHeading("View Documents");
     $("#DocController-Div").show();
 }
 
@@ -181,6 +256,18 @@ function manageUserControls() {
     setPageHeading("Manage user controls");
     $("#ManageControls-Div").show();
     updateManageControlsPageValues();
+}
+
+function showAddStaffRole() {
+    hideAllPages();
+    setPageHeading("Add Staff Role");
+    $("#AddStaffRole-Div").show();
+}
+
+function showSystemSettings() {
+    hideAllPages();
+    setPageHeading("View/Update System Properties");
+    $("#PropertiesController-Div").show();
 }
 
 function updateManageControlsPageValues() {
@@ -317,4 +404,7 @@ function hideAllPages() {
 
     $("#MyProfile-div").hide();
     $("#ManageControls-Div").hide();
+    $("#AddStaffRole-Div").hide();
+
+    $("#PropertiesController-Div").hide();
 }

@@ -174,9 +174,6 @@
 
                                 <p>Some intro about this app e. TODO</p>
 
-                                <button type="button" class="btn1" id="trial-button" onclick="loadDashboardLinks()">Load</button>
-                                <button type="button" class="btn" id="trial-button2" onclick="enableButton()">Enable</button>
-
                             </div>
 
 
@@ -190,7 +187,7 @@
                                         <th>About</th>
                                         <th>Email ID</th>
                                         <th>Phone</th>
-                                        <th>Actions</th>
+                                        <!--                                        <th>Actions</th> TODO open actions can be added if needed. -->
                                         <th>Reset Pwd</th>
                                     </tr>
                                     <tr ng-repeat='u in users'>
@@ -200,7 +197,7 @@
                                         <td>{{u.about}}</td>
                                         <td>{{u.email}}</td>
                                         <td>{{u.phone}}</td>
-                                        <td>{{u.actions}}</td>
+                                        <!--                                        <td>{{u.actions}}</td>-->
                                         <td>
                                             <button id="UserController-reset-password-button" class="btn btn-success" onclick="resetPassword('{{u.userId}}')">Reset Pwd</button>
                                         </td>
@@ -701,9 +698,90 @@ protected boolean addStaff;
                                     </tr>
                                 </table>
                             </div>
+                            <div id="AddStaffRole-Div" ng-controller="DocController">
+                                <table class="table">
+                                    <tr>
+                                        <td>Select the user type : </td>
+                                        <td>
+                                            <input type="text" id="AddStaffRole-title" placeholder="Add Role or Job Title, eg: Teacher" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Remarks : </td>
+                                        <td>
+                                            <input type="text" id="AddStaffRole-remarks" placeholder="Add comments or remarks" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Add Child : </td>
+                                        <td>
+                                            <input type="checkbox" id="AddStaffRole-addChildren" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Add Staff : </td>
+                                        <td>
+                                            <input type="checkbox" id="AddStaffRole-addStaff" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>View All Children : </td>
+                                        <td>
+                                            <input type="checkbox" id="AddStaffRole-viewAllChildren" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>View All Docs : </td>
+                                        <td>
+                                            <input type="checkbox" id="AddStaffRole-viewAllDocuments" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>View All Actions : </td>
+                                        <td>
+                                            <input type="checkbox" id="AddStaffRole-viewAllActions" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Manage User controls : </td>
+                                        <td>
+                                            <input type="checkbox" id="AddStaffRole-manageUserControls" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Manage System Settings : </td>
+                                        <td>
+                                            <input type="checkbox" id="AddStaffRole-manageSettings" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <button id="AddStaffRole-submit-button" class="btn btn-success" onclick="addStaffRole()">Add Role</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
 
 
+                            <div id="PropertiesController-Div" ng-controller="DocController">
+                                <table class="table">
+                                    <tr>
+                                        <th>Property Name</th>
+                                        <th>Value</th>
+                                        <th>Update</th>
+                                    </tr>
+                                    <tr ng-repeat='p in properties'>
+                                        <td>{{p.name}}</td>
+                                        <td>
+                                            <input type="text" id="{{p.name}}-text" value="{{p.property}}" /> </td>
+                                        <td>
+                                            <button class="btn btn-success" onclick='updateSystemProperty("{{p.name}}", "{{p.name}}-text")'>Save Settings</button>
+                                        </td>
+                                    </tr>
 
+                                </table>
+                            </div>
 
                             <div id="MyProfile-div">
                                 <table class="table">

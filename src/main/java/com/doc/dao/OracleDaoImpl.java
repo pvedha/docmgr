@@ -11,6 +11,7 @@ import com.doc.dto.ChildrenDto;
 import com.doc.dto.UserDto;
 import com.doc.exceptions.ChildNotFoundException;
 import com.doc.exceptions.DuplicateUserException;
+import com.doc.exceptions.InvalidPropertyException;
 import com.doc.exceptions.JobTitleNotValidException;
 import com.doc.exceptions.NotAuthorizedException;
 import com.doc.exceptions.StaffNotFoundException;
@@ -32,8 +33,6 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 
 	public OracleDaoImpl() {
 	}
-
-	
 
 	public int addChild(ChildrenDto dto) {
 		EntityManager em = factory.createEntityManager();
@@ -111,7 +110,6 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		return 0;
 	}
 
-	
 	@SuppressWarnings("unchecked")
 	public ArrayList<Children> readAllChildren() {
 		EntityManager em = factory.createEntityManager();
@@ -139,13 +137,12 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		for (String key : keys) {
 			searchQuery += Utilities.getTextSearchQuery("name", key) + " or "
 					+ Utilities.getTextSearchQuery("remarks", key) + " or "
-					+ Utilities.getTextSearchQuery("message", key) + " or " 
-					+ Utilities.getTextSearchQuery("tags", key);
+					+ Utilities.getTextSearchQuery("message", key) + " or " + Utilities.getTextSearchQuery("tags", key);
 			if (keys.indexOf(key) < keys.size() - 1) {
 				searchQuery += " or ";
 			}
 		}
-		
+
 		Logger.log("The query is " + searchQuery);
 
 		ArrayList<Children> childrens = (ArrayList<Children>) em.createNativeQuery(searchQuery, Children.class)
@@ -160,8 +157,6 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		return null;
 	}
 
-	
-
 	@SuppressWarnings("unchecked")
 	public ArrayList<Properties> getProperties() {
 		EntityManager em = factory.createEntityManager();
@@ -169,6 +164,36 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 				.createNativeQuery("select * from properties", Properties.class).getResultList();
 		em.close();
 		return properties;
+	}
+
+	public int setProperties(ArrayList<Properties> properties) {
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		for (Properties item : properties) {
+			Properties property = em.find(Properties.class, item.getName());
+			if (property == null) {
+				throw new InvalidPropertyException(item.getName());
+			}
+			property.setProperty(item.getProperty());
+			em.persist(property);
+		}
+		em.getTransaction().commit();
+		em.close();
+		return 0;
+	}
+
+	public int setProperties(Properties item) {
+		EntityManager em = factory.createEntityManager();
+		Properties property = em.find(Properties.class, item.getName());
+		if (property == null) {
+			throw new InvalidPropertyException(item.getName());
+		}
+		property.setProperty(item.getProperty());
+		em.getTransaction().begin();
+		em.persist(property);
+		em.getTransaction().commit();
+		em.close();
+		return 0;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -191,7 +216,7 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		if (jt == null) {
 			throw new JobTitleNotValidException(dto.getTitle());
 		}
-		
+
 		jt.setAddChildren(dto.isAddChildren());
 		jt.setAddStaff(dto.isAddStaff());
 		jt.setManageSettings(dto.isManageSettings());
@@ -208,8 +233,32 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		return 0;
 	}
 
-	
-	
+	public int addJobTitle(Jobtitle dto) {
+		EntityManager em = factory.createEntityManager();
+
+		if (em.find(Jobtitle.class, dto.getTitle()) != null) {
+			throw new JobTitleNotValidException(dto.getTitle() + " Exists ");
+		}
+
+		Jobtitle jt = new Jobtitle();
+
+		jt.setTitle(dto.getTitle());
+		jt.setAddChildren(dto.isAddChildren());
+		jt.setAddStaff(dto.isAddStaff());
+		jt.setManageSettings(dto.isManageSettings());
+		jt.setManageUserControls(dto.isManageUserControls());
+		jt.setRemarks(dto.getRemarks());
+		jt.setViewAllActions(dto.isViewAllActions());
+		jt.setViewAllChildren(dto.isViewAllChildren());
+		jt.setViewAllDocuments(dto.isViewAllDocuments());
+
+		em.getTransaction().begin();
+		em.persist(jt);
+		em.getTransaction().commit();
+		em.close();
+		return 0;
+	}
+
 	@Override
 	public int initDB() {
 		EntityManager em = factory.createEntityManager();
@@ -247,23 +296,17 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 		return 0;
 	}
 
-
-
 	@Override
 	public ArrayList<DocUser> readAllUsers() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
-
 	@Override
 	public DocUser validateLogin(String userId, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 
 	@Override
 	public DocUser getUser(String userId) {
