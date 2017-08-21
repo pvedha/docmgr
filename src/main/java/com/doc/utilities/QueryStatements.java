@@ -2,9 +2,7 @@ package com.doc.utilities;
 
 public class QueryStatements {
 	
-	//TODO ideally static finals should be ALL_CAPS
-
-	public static final String administrator = "Administrator";
+	//TODO ideally static finals should be ALL_CAPS	
 	
 	public static final String allMyDocsQuery = "select * from document where owner = :owner or creator = :creator";
 	public static final String allDocsQuery = "select * from document";

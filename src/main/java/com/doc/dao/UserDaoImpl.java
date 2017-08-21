@@ -12,6 +12,7 @@ import com.doc.dto.UserDto;
 import com.doc.exceptions.DuplicateUserException;
 import com.doc.exceptions.JobTitleNotValidException;
 import com.doc.exceptions.StaffNotFoundException;
+import com.doc.utilities.Environment;
 
 public class UserDaoImpl extends DaoImpl {
 
@@ -56,18 +57,72 @@ public class UserDaoImpl extends DaoImpl {
 
 	public DocUser validateLogin(String userId, String password) {
 		EntityManager em = factory.createEntityManager();
-		String validateQuery = "select * from docuser where  userid = :userId and password = :password";
-		@SuppressWarnings("unchecked")
-		ArrayList<DocUser> docUsers = (ArrayList<DocUser>) em.createNativeQuery(validateQuery, DocUser.class)
-				.setParameter("userId", userId).setParameter("password", password).getResultList();
+		
+		DocUser user = em.find(DocUser.class, userId);
 		em.close();
-		if (docUsers.size() == 1) {
-			return docUsers.get(0);
-		} else {
+		
+		if(user == null){
+			if(userId == Environment.ADMIN_NAME){
+				//create new Admin user				
+				return createAdmin(userId, password);
+			}
 			return null;
 		}
+		
+		if(user.getPassword().equals(password)){
+			return user;
+		}
+		
+		return null;
+		
+		
+//		String validateQuery = "select * from docuser where  userid = :userId and password = :password";
+//		@SuppressWarnings("unchecked")
+//		ArrayList<DocUser> docUsers = (ArrayList<DocUser>) em.createNativeQuery(validateQuery, DocUser.class)
+//				.setParameter("userId", userId).setParameter("password", password).getResultList();
+//		em.close();
+//		if (docUsers.size() == 1) {
+//			return docUsers.get(0);
+//		} else {
+//			return null;
+//		}
 	}
 
+	private DocUser createAdmin(String userId, String password){
+		EntityManager em = factory.createEntityManager();
+		
+		Jobtitle admin = em.find(Jobtitle.class, Environment.ADMINISTRATOR);
+		
+		if(admin == null){
+			admin = new Jobtitle();
+			admin.setTitle(Environment.ADMINISTRATOR);
+			admin.setAddChildren(true);
+			admin.setAddStaff(true);
+			admin.setManageSettings(true);
+			admin.setRemarks(Environment.ADMINISTRATOR);
+			admin.setViewAllActions(true);
+			admin.setViewAllChildren(true);
+			admin.setViewAllDocuments(true);
+			em.getTransaction().begin();
+			em.persist(admin);
+			em.getTransaction().commit();
+		}
+		
+		DocUser adminUser = new DocUser();
+		
+		adminUser.setUserid(Environment.ADMIN_NAME);
+		adminUser.setJobtitle(admin);
+		adminUser.setAbout(Environment.ADMINISTRATOR);
+		adminUser.setName(Environment.ADMINISTRATOR);
+		adminUser.setPassword(password);
+		em.getTransaction().begin();
+		em.persist(adminUser);
+		em.getTransaction().commit();
+		em.close();
+		return adminUser;	
+		
+	}
+	
 	public DocUser getUser(String userId) {
 		EntityManager em = factory.createEntityManager();
 		DocUser user = em.find(DocUser.class, userId);

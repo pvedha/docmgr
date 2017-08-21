@@ -15,6 +15,7 @@ import com.doc.exceptions.InvalidPropertyException;
 import com.doc.exceptions.JobTitleNotValidException;
 import com.doc.exceptions.NotAuthorizedException;
 import com.doc.exceptions.StaffNotFoundException;
+import com.doc.utilities.Environment;
 import com.doc.utilities.Logger;
 import com.doc.utilities.QueryStatements;
 import com.doc.utilities.Utilities;
@@ -208,7 +209,7 @@ public class OracleDaoImpl extends DaoImpl implements DAO {
 	public int updateJobTitle(Jobtitle dto) {
 		EntityManager em = factory.createEntityManager();
 
-		if (dto.getTitle().contentEquals(QueryStatements.administrator)) {
+		if (dto.getTitle().contentEquals(Environment.ADMINISTRATOR)) {
 			throw new NotAuthorizedException();
 		}
 
