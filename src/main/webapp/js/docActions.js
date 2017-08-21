@@ -35,18 +35,7 @@ function displayDocuments(response) {
 }
 
 
-function uploadDocument() {
-    var form = $('#fileUploadForm')[0];
-
-    // Create an FormData object
-    var data = new FormData(form);
-    var file = $("#AddDocument-file-input").get(0).files[0]; //$('input[name="file"]').get(0).files[0];
-    console.log(file);
-    data.append('file', file);
-
-    var fileName = file.name;
-
-    var childDir = fileUploadUrl + fileBasePath + "/" + $("#AddDocument-child-name").html();
+function uploadDocument(data, childDir, callbackFunction, callbackParameter) {
 
     $("#status-message").html("Uploading the document. " + getLoadingMoreGif());
 
@@ -60,21 +49,30 @@ function uploadDocument() {
         cache: false,
         timeout: 600000,
         success: function (data) {
-
             $("#status-message").html("Successfully uploaded the file, now adding the document details..." + getLoadingMoreGif());
-            addDocument(fileName);
-
+            callbackFunction(callbackParameter);
         },
         error: function (e) {
             $("#status-message").html("File upload failed, cannot add the document now. Please check the details");
             console.log("ERROR : ", e);
+            return false;
         }
     });
-
 }
 
+function addDocument() {
+    var form = $('#fileUploadForm')[0];
+    // Create an FormData object
+    var data = new FormData(form);
+    var file = $("#AddDocument-file-input").get(0).files[0]; //$('input[name="file"]').get(0).files[0];
+    console.log(file);
+    data.append('file', file);
+    var fileName = file.name;
+    var childDir = fileUploadUrl + fileBasePath + "/" + $("#AddDocument-child-name").html();
+    uploadDocument(data, childDir, addDocumentDetails, fileName);
+}
 
-function addDocument(fileName) {
+function addDocumentDetails(fileName) {
 
     var docName = fileName;
     var revision = 1;
@@ -85,7 +83,7 @@ function addDocument(fileName) {
     var remarks = $("#AddDocument-remarks").val();
     var status = $("#AddDocument-status").val();
 
-    //    protected int docId;
+    //  protected int docId;
     //	protected String docName;
     //	protected int revision;
     //	protected int childId;
@@ -158,10 +156,25 @@ function downloadDocument() {
 
 function saveCurrentDocument(document) {
 
+    var form = $('#UpdateDocument-FileUploadForm')[0];
+    // Create an FormData object
+    var data = new FormData(form);
+    var file = $("#UpdateDocument-file-input").get(0).files[0]; //$('input[name="file"]').get(0).files[0];
+    console.log(file);
+    //    file.name = document.docName;
+    //    console.log(file);
+    document.docName = file.name;
+    data.append('file', file);
+    var fileName = file.name;
+    var childDir = fileUploadUrl + fileBasePath + "/" + $("#UpdateDocument-child-name").html();
+    uploadDocument(data, childDir, saveCurrentDocumentDetails, document);
+
+}
+
+function saveCurrentDocumentDetails(document) {
     document.owner = $("#UpdateDocument-owner").val();
     document.status = $("#UpdateDocument-status").val();
     document.remarks += "; " + $("#UpdateDocument-remarks").val();
-
 
     $("#status-message").html("Updating Document...");
     $.ajax({
@@ -182,7 +195,6 @@ function saveCurrentDocument(document) {
         data: JSON.stringify(document)
     })
 }
-
 
 
 

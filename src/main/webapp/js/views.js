@@ -315,6 +315,21 @@ function showAddDocumentPage(childId, childName) {
     $("#AddDocument-Div").show();
 }
 
+function showUpdateDocumentPage(docId) {
+    $("#updateDocument-remarks").val("");
+    $("#UpdateDocument-file-input").val("");
+    for (i = 0; i < myDocuments.length; i++) {
+        if (myDocuments[i].docId == docId) {
+            updateDocumentControllerAngular.setDocumentDetail(myDocuments[i]);
+            updateDocumentControllerAngular.$apply();
+            break;
+        }
+    }
+    hideAllPages();
+    setPageHeading("Update document details");
+    $("#UpdateDocument-Div").show();
+}
+
 function showAddActionPage(docId, docName) {
     $("#AddAction-docId").html(docId);
     $("#AddAction-docName").html(docName);
@@ -341,18 +356,7 @@ function showUpdateChildPage(chidId) {
     $("#UpdateChild-Div").show();
 }
 
-function showUpdateDocumentPage(docId) {
-    for (i = 0; i < myDocuments.length; i++) {
-        if (myDocuments[i].docId == docId) {
-            updateDocumentControllerAngular.setDocumentDetail(myDocuments[i]);
-            updateDocumentControllerAngular.$apply();
-            break;
-        }
-    }
-    hideAllPages();
-    setPageHeading("Update document details");
-    $("#UpdateDocument-Div").show();
-}
+
 
 function showUpdateActionPage(actionId) {
 

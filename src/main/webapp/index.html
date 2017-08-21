@@ -428,7 +428,7 @@
                                     <tr>
                                         <td></td>
                                         <td>
-                                            <button type="button" class="btn btn-success" id="AddDocument-submit-button" onclick="uploadDocument()">Add Document
+                                            <button type="button" class="btn btn-success" id="AddDocument-submit-button" onclick="addDocument()">Add Document
                                             </button>
                                         </td>
                                     </tr>
@@ -444,7 +444,7 @@
 
                                     <tr>
                                         <td>Child Name : </td>
-                                        <td>{{document.childName}}</td>
+                                        <td id="UpdateDocument-child-name">{{document.childName}}</td>
                                     </tr>
                                     <tr>
                                         <td>Doc Owner : </td>
@@ -468,9 +468,17 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>Select the updated file to upload : </td>
+                                        <td>
+                                            <form method="POST" enctype="multipart/form-data" id="UpdateDocument-FileUploadForm">
+                                                <input id="UpdateDocument-file-input" type="file" name="file" />
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>Doc remarks : </td>
                                         <td>
-                                            <input type="text" name="UpdateDocument-remarks" class="" id="UpdateDocument-remarks" value="{{document.remarks}}" placeholder="{{document.remarks}}" />
+                                            <input type="text" name="UpdateDocument-remarks" class="" id="UpdateDocument-remarks" value="" placeholder="{{document.remarks}}" />
                                         </td>
                                     </tr>
                                     <tr>
