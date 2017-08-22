@@ -13,10 +13,18 @@ function initAllUsers() {
 
 function setStaffRoles() {
 
-    //TODO clear existing options first
+    $("#child-teacher").find('option').remove().end();
+    $("#child-councillor").find('option').remove().end();
+    $("#child-therapist").find('option').remove().end();
+    $("#UpdateDocument-owner").find('option').remove().end();
+    $("#AddDocument-owner").find('option').remove().end();
+    $("#UpdateChild-Teacher").find('option').remove().end();
+    $("#UpdateChild-Councillor").find('option').remove().end();
+    $("#UpdateChild-Therapist").find('option').remove().end();
+    $("#AddAction-owner").find('option').remove().end();
+
     var teachers = document.getElementById("child-teacher");
     var councillors = document.getElementById("child-councillor");
-    var therapists = document.getElementById("child-therapist");
     var therapists = document.getElementById("child-therapist");
     var updateDocumentOwner = document.getElementById("UpdateDocument-owner");
     var addDocumentOwner = document.getElementById("AddDocument-owner");
@@ -94,6 +102,7 @@ function addStaff() {
         success: function (response) {
             $("#status-message").html("Staff successfully added");
             sleep(2000);
+            initAllUsers();
             showWelcomePage();
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {

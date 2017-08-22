@@ -237,6 +237,12 @@ function showAddStaffPage() {
     hideAllPages();
     setPageHeading("Add Staff");
     $("#AddStaff-Div").show();
+    $("#staff-userId").val("");
+    $("#staff-name").val("");
+    $("#staff-about").val("");
+    $("#staff-email").val("");
+    $("#staff-phone").val("");
+    $("#staff-job-title").val("");
 }
 
 function showAddChildrenPage() {
@@ -316,7 +322,7 @@ function showAddDocumentPage(childId, childName) {
 }
 
 function showUpdateDocumentPage(docId) {
-    $("#updateDocument-remarks").val("");
+    $("#UpdateDocument-remarks").val("");
     $("#UpdateDocument-file-input").val("");
     for (i = 0; i < myDocuments.length; i++) {
         if (myDocuments[i].docId == docId) {

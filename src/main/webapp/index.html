@@ -139,7 +139,7 @@
         <div id="container-div" class="row">
             <div id="droppable-div" ondrop="drop(event)" ondragover="allowDrop(event)">
 
-                <div id="quicklinks-div" ondragstart="drag(event)" draggable="true" class="col-md-2 main-content-div">
+                <div id="quicklinks-div" ondragstart="drag(event)" draggable="false" class="col-md-2 main-content-div">
                     <div id="quick-links-draggable-div" class="affixed">
                         <div>
                             <div class="panel panel-info">
@@ -158,7 +158,7 @@
 
                     </div>
                 </div>
-                <div id="main-contents-div" ondragstart="drag(event)" draggable="true" class="col-md-10">
+                <div id="main-contents-div" ondragstart="drag(event)" draggable="false" class="col-md-10">
                     <div id="main-content-draggable-div">
                         <div id="main-page-div">
                             <div class="panel panel-info affixed">
@@ -478,7 +478,7 @@
                                     <tr>
                                         <td>Doc remarks : </td>
                                         <td>
-                                            <input type="text" name="UpdateDocument-remarks" class="" id="UpdateDocument-remarks" value="" placeholder="{{document.remarks}}" />
+                                            <input type="text" name="UpdateDocument-remarks" class="" id="UpdateDocument-remarks" placeholder="Specific remarks about the Document" />
                                         </td>
                                     </tr>
                                     <tr>
