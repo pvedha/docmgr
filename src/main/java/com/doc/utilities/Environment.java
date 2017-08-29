@@ -1,7 +1,11 @@
 package com.doc.utilities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.doc.api.Jobtitle;
 
 public class Environment {
 
@@ -12,6 +16,7 @@ public class Environment {
 	public static Map<String, String> actionStates = new HashMap<String, String>();
 	public static Map<String, String> docStates = new HashMap<String, String>();	
 	public static Map<String, String> properties = new HashMap<String, String>();
+	public static List<Jobtitle> jobTitles = new ArrayList<Jobtitle>();
 	
 	public static final String ADMIN_NAME = "admin";
 	public static final String ADMINISTRATOR = "Administrator"; 	
@@ -50,6 +55,10 @@ public class Environment {
 		docStates.put(DOCSTATE_FINAL, DOCSTATE_FINAL_REMARKS);
 		
 		properties.put(BASEPATH, BASEPATH_VALUE);
+		
+		jobTitles.add(new Jobtitle("Teacher", "Teacher", true, true, true, true, true, false, false));
+		jobTitles.add(new Jobtitle("Therapist", "Therapist", true, true, true, true, true, false, false));
+		jobTitles.add(new Jobtitle("Counsellor", "Counsellor", true, true, true, true, true, false, false));
 	}
 	
 }

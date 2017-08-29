@@ -180,6 +180,10 @@ public class UserDaoImpl extends DaoImpl {
 		for(Map.Entry<String,String> item : Environment.properties.entrySet()){
 			addProperties(item.getKey(), item.getValue());			
 		}
+		
+		for(Jobtitle title : Environment.jobTitles){
+			addJobTitle(title);
+		}
 	}
 	
 	public void addActionState(String state, String remarks){
@@ -205,6 +209,14 @@ public class UserDaoImpl extends DaoImpl {
 		Properties property = new Properties(key, value);
 		em.getTransaction().begin();
 		em.persist(property);
+		em.getTransaction().commit();
+		em.close();		
+	}
+	
+	public void addJobTitle(Jobtitle title){
+		EntityManager em = factory.createEntityManager();		
+		em.getTransaction().begin();
+		em.persist(title);
 		em.getTransaction().commit();
 		em.close();		
 	}
